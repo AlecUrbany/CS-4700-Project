@@ -4,62 +4,29 @@ using UnityEngine;
 
 public class Mover : MonoBehaviour
 {
-    //Fields for movement
-    [SerializeField] private Rigidbody playerRB;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float maxSpeed = 10f;
 
-    private Vector3 velocity;
+//All the commented out code involves moving where the character looks. Might implement back in
+	public float moveSpeed = 8;
 
-    //Input
-    private float xInput;
-    private float zInput;
+	Rigidbody rigidbody;
+	//Camera viewCamera;
+	Vector3 velocity;
 
-    // Start is called before the first frame update
-    void Start()
+	void Start ()
     {
+		rigidbody = GetComponent<Rigidbody> ();
+		//viewCamera = Camera.main;
+	}
 
-    }
-
-    // Update is called once per frame
-    void Update()
+	void Update ()
     {
-        MoveInput();
-    }
+		//Vector3 mousePos = viewCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, viewCamera.transform.position.y));
+		//transform.LookAt (mousePos + Vector3.up * transform.position.y);
+		velocity = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized * moveSpeed;
+	}
 
-    void FixedUpdate()
+	void FixedUpdate()
     {
-        Move(xInput, zInput);
-    }
-
-    //Movement
-    private void Move(float xMove, float zMove)
-    {
-        Vector3 direction = transform.right * xMove + transform.forward * zMove;
-        playerRB.AddForce(direction.normalized * speed * 10, ForceMode.Force);
-
-        ControlSpeed();
-
-    }
-    private void ControlSpeed()
-    {
-        Vector3 flatVelocity = new Vector3(playerRB.velocity.x, 0f, playerRB.velocity.z);
-        
-        if(flatVelocity.magnitude > maxSpeed) 
-        {
-            //recalculate speed to be within limits of maxSpeed;
-            Vector3 maxVelocity = flatVelocity.normalized * maxSpeed;
-
-            //set player x and z velocity to new limited velocity
-            playerRB.velocity = new Vector3(maxVelocity.x, playerRB.velocity.y, maxVelocity.z);
-        }
-    }
-
-    //Create Input
-    private void MoveInput()
-    {
-        xInput = Input.GetAxisRaw("Horizontal");
-        zInput = Input.GetAxisRaw("Vertical");
-    }
-
+		rigidbody.MovePosition (rigidbody.position + velocity * Time.fixedDeltaTime);
+	}
 }

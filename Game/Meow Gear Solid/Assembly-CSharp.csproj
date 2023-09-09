@@ -36,9 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Mover.cs" />
-     <Compile Include="Assets\PSXShaderKit\Scripts\PSXPostProcessEffect.cs" />
      <Compile Include="Assets\PSXShaderKit\Scripts\PSXShaderManager.cs" />
+     <Compile Include="Assets\PSXShaderKit\Scripts\PSXPostProcessEffect.cs" />
+     <Compile Include="Assets\Scripts\Mover.cs" />
+     <Compile Include="Assets\visionCone.cs" />
+     <Compile Include="Assets\Vision_Cone_Controller.cs" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-VertexLitTransparentCutout.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-UnlitTransparentCutout.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-Lite-UnlitTransparentCutout.shader" />
@@ -49,7 +51,6 @@
      <None Include="Assets\PSXShaderKit\Shaders\ImageEffects\PSX-Dithering.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\ImageEffects\PSX-PostProcess.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-Lite-VertexLitTransparentCutout.shader" />
-     <None Include="Assets\Shaders\PS1Affine.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-Lite-UnlitTransparent.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-VertexLitTransparent.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-ShaderSrc.cginc" />
