@@ -637,8 +637,14 @@
     <Reference Include="UnityEditor.TestRunner">
         <HintPath>C:\Users\Bugs\Documents\GitHub\CS-4700-Project\Game\Meow Gear Solid\Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>C:\Users\Bugs\Documents\GitHub\CS-4700-Project\Game\Meow Gear Solid\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>C:\Users\Bugs\Documents\GitHub\CS-4700-Project\Game\Meow Gear Solid\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>C:\Users\Bugs\Documents\GitHub\CS-4700-Project\Game\Meow Gear Solid\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>C:\Users\Bugs\Documents\GitHub\CS-4700-Project\Game\Meow Gear Solid\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
