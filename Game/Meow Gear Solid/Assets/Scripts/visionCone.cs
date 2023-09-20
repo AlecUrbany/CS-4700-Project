@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class visionCone : MonoBehaviour {
+public class visionCone : MonoBehaviour
+{
 
 	public float viewRadius;
 	[Range(0,360)]
@@ -33,7 +34,7 @@ public class visionCone : MonoBehaviour {
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
 
-		StartCoroutine ("FindTargetsWithDelay", .2f);
+		StartCoroutine ("FindTargetsWithDelay", .1f);
 	}
 
 
@@ -56,7 +57,8 @@ public class visionCone : MonoBehaviour {
 		visibleTargets.Clear ();
 		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
 
-		for (int i = 0; i < targetsInViewRadius.Length; i++) {
+		for (int i = 0; i < targetsInViewRadius.Length; i++)
+		{
 			Transform target = targetsInViewRadius [i].transform;
 			Vector3 dirToTarget = (target.position - transform.position).normalized;
 
@@ -75,6 +77,7 @@ public class visionCone : MonoBehaviour {
                     canSeePlayer = false;
                 }
 			}
+
             else
             {
                 canSeePlayer = false;
@@ -82,7 +85,8 @@ public class visionCone : MonoBehaviour {
 		}
 	}
 
-	void DrawFieldOfView() {
+	void DrawFieldOfView()
+	{
 		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
 		float stepAngleSize = viewAngle / stepCount;
 		List<Vector3> viewPoints = new List<Vector3> ();
@@ -95,10 +99,12 @@ public class visionCone : MonoBehaviour {
 				bool edgeDstThresholdExceeded = Mathf.Abs (oldViewCast.dst - newViewCast.dst) > edgeDstThreshold;
 				if (oldViewCast.hit != newViewCast.hit || (oldViewCast.hit && newViewCast.hit && edgeDstThresholdExceeded)) {
 					EdgeInfo edge = FindEdge (oldViewCast, newViewCast);
-					if (edge.pointA != Vector3.zero) {
+					if (edge.pointA != Vector3.zero)
+					{
 						viewPoints.Add (edge.pointA);
 					}
-					if (edge.pointB != Vector3.zero) {
+					if (edge.pointB != Vector3.zero)
+					{
 						viewPoints.Add (edge.pointB);
 					}
 				}
@@ -115,10 +121,12 @@ public class visionCone : MonoBehaviour {
 		int[] triangles = new int[(vertexCount-2) * 3];
 
 		vertices [0] = Vector3.zero;
-		for (int i = 0; i < vertexCount - 1; i++) {
+		for (int i = 0; i < vertexCount - 1; i++)
+		{
 			vertices [i + 1] = transform.InverseTransformPoint(viewPoints [i]) + Vector3.forward * maskCutawayDst;
 
-			if (i < vertexCount - 2) {
+			if (i < vertexCount - 2)
+			{
 				triangles [i * 3] = 0;
 				triangles [i * 3 + 1] = i + 1;
 				triangles [i * 3 + 2] = i + 2;
@@ -198,7 +206,8 @@ public class visionCone : MonoBehaviour {
 		}
 	}
 
-	public struct EdgeInfo {
+	public struct EdgeInfo
+	{
 		public Vector3 pointA;
 		public Vector3 pointB;
 
