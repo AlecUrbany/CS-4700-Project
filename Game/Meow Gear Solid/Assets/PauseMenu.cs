@@ -15,8 +15,8 @@ public class PauseMenu : MonoBehaviour
     }
     void Update()
     {
-        //Will preferrably change this later to take button input rather than read the keyboard
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //Takes pause button input
+        if (Input.GetButtonDown("Pause"))
         {
             TogglePause();
         }

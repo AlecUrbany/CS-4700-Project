@@ -39,10 +39,11 @@
      <Compile Include="Assets\PSXShaderKit\Scripts\PSXShaderManager.cs" />
      <Compile Include="Assets\PSXShaderKit\Scripts\PSXPostProcessEffect.cs" />
      <Compile Include="Assets\Scripts\visionCone.cs" />
+     <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\WeaponPickUp.cs" />
      <Compile Include="Assets\Scripts\Mover.cs" />
-     <Compile Include="Assets\PauseMenu.cs" />
+     <Compile Include="Assets\InventoryMenu.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-VertexLitTransparentCutout.shader" />
