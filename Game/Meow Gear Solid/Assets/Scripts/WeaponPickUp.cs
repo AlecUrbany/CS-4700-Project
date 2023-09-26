@@ -13,6 +13,8 @@ public class WeaponPickUp : MonoBehaviour
     
     public bool equipped;
     public static bool slotFull;
+    public GameObject bullet; 
+
 
     private void Start()
     {
@@ -40,11 +42,18 @@ public class WeaponPickUp : MonoBehaviour
         transform.position = playerMouth.position;
         rb.isKinematic = true;
         transform.localRotation = defaultRotation;
+        GunFunctions gunScript = bullet.GetComponent<GunFunctions>();
+        if (gunScript != null){
+                gunScript.enabled = true;
+        }
     }
     private void Drop()
     {
         equipped = false;
         rb.isKinematic = false;
-
+        GunFunctions gunScript = bullet.GetComponent<GunFunctions>();
+        if (gunScript != null){
+                gunScript.enabled = false;
+        }
     }
 }
