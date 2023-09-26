@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60704c86bfc03304bae739ef4607119c, type: 3}
+  m_Name: dummy gun
+  m_EditorClassIdentifier: 
+  name: SOCOM
+  description: Basic combat gun
+  icon: {fileID: 21300000, guid: fabafc99a8b4f104a842edfdd2028f62, type: 3}
+  prefab: {fileID: 919132149155446097, guid: 2aeed2ca159e24f4a981bfa4bba1429e, type: 3}
+  magazineSize: 25
+  ammoCount: 25
+  weaponType: 1
+  weaponIndex: 1
