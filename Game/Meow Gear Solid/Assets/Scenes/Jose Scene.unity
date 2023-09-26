@@ -1086,8 +1086,8 @@ GameObject:
   - component: {fileID: 1570888709}
   - component: {fileID: 1570888708}
   - component: {fileID: 1570888707}
-  - component: {fileID: 1570888706}
   - component: {fileID: 1570888705}
+  - component: {fileID: 1570888706}
   m_Layer: 9
   m_Name: weaponTemp
   m_TagString: Untagged
@@ -1131,6 +1131,7 @@ MonoBehaviour:
   pickUpRange: 5
   equipped: 0
   bullet: {fileID: 1159918971}
+  test: 0
 --- !u!65 &1570888707
 BoxCollider:
   m_ObjectHideFlags: 0

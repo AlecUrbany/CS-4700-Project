@@ -1,0 +1,122 @@
+[33mcommit f9fa7c029efe789dadf5d2fb44295207140127c2[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Merge: 0398fe2 2d2002a
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:29:34 2023 -0700
+
+    Merge branch 'main' of https://github.com/AlecUrbany/CS-4700-Project
+
+[33mcommit 0398fe2403d71287a264e58f1c094fee7f53ddac[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:23:46 2023 -0700
+
+    added bullets/health
+
+[33mcommit a7ded6d1876357bddba11a50882845673dd0e914[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:21:59 2023 -0700
+
+    enables/disables gun script when equipped
+
+[33mcommit ec179fac24772e44a9e7755666672437c6949b14[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:17:08 2023 -0700
+
+    adds player health fucntionality
+    Currently does not have a working death function
+
+[33mcommit 4f625e0e4d761b15d95b2b28e8f69d8e563c071b[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:14:22 2023 -0700
+
+    Adds ability for gun to shoot
+    Gun shoots a bullet that currently only interacts with enemy physics layer
+
+[33mcommit b88d908ebb6918d9424cf2c319aa7d20484e00f6[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:13:41 2023 -0700
+
+    Interface for health/death functions
+
+[33mcommit fc42ed0bdc6d607f790bcc716ac11d326a70b3b2[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:10:12 2023 -0700
+
+    Adds health/death for enemies
+    Differs from player health Script in the die funciton
+    Currently destroys the enemy on death
+
+[33mcommit bcbf14fd76598e0920f7af583d99d0c2e5d04734[m
+Author: Jose Pavon <RannerJP@gmail.com>
+Date:   Tue Sep 26 05:06:17 2023 -0700
+
+    Adds logic to checks if enemy is hit by bullet
+    When a bullet hits a collision, it destroys the bullet,
+    It then checks if what was hit is an enemy and applys the TakeDamage fucntion
+
+[33mcommit 2d2002a6bba0c56898bf9501f3c8e32ad4dff1fe[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Mon Sep 25 22:57:30 2023 -0700
+
+    Began HP implementation. Still working on inventory implementation.
+
+[33mcommit d846bb65752e1e5ce6744d7863cac16f95744e11[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Fri Sep 22 00:54:48 2023 -0700
+
+    Started implementing inventory function
+
+[33mcommit 1709282fb7b7e31f88d8a833ffde58c5f699a372[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Wed Sep 20 11:38:01 2023 -0700
+
+    added pause menu + cleaned some code
+
+[33mcommit 36b682974f39cde0d087c835680eb671ce8acb71[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Wed Sep 20 00:13:00 2023 -0700
+
+    minimap implemented
+
+[33mcommit 90d6a43e0866d729a55bdf82a77a8e7ec9104afa[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Tue Sep 19 20:33:40 2023 -0700
+
+    Added gitignore as well as scenes for the team to work in
+
+[33mcommit 55355e4b4894c2a401a5d1a8e3407774f3f2dc53[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Mon Sep 18 01:32:42 2023 -0700
+
+    added in item pickup
+
+[33mcommit 6e163bb9059c7871bc9e5dd3073f4d3e10301d92[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Mon Sep 18 01:14:39 2023 -0700
+
+    started implementing changes from gun pickup branch
+
+[33mcommit e32b1cc974254641e9817e004afcda6b2aca31b5[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Mon Sep 11 14:41:08 2023 -0700
+
+    Added main menu integration + started exterior level
+
+[33mcommit e67d750b71f5459800acf2b14384a94b8f678422[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Fri Sep 8 23:10:14 2023 -0700
+
+    small file structure reorganization
+
+[33mcommit f4dc650aaff750c28063584eb7d5c6c7653d02cb[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Fri Sep 8 22:25:59 2023 -0700
+
+    Implemented enemy field of view and camera movement
+
+[33mcommit 53b234c1f46e0651268189bcd80c86ba4a48243f[m
+Author: AlecUrbany <alecurbany@gmail.com>
+Date:   Fri Sep 8 03:37:31 2023 -0700
+
+    Start of the project
+    
+    This push contains the starting basis for our game project. It contains the game and company logo. It also contains basic logic for player movement, as well as tweaks to the game resolution + shaders to make it more similar to a ps1 game

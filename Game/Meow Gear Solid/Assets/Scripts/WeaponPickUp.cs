@@ -14,6 +14,7 @@ public class WeaponPickUp : MonoBehaviour
     public bool equipped;
     public static bool slotFull;
     public GameObject bullet; 
+    public int test;
 
 
     private void Start()
