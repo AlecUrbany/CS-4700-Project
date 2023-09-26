@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class InventoryMenu : MonoBehaviour
 {
+    /**
     [SerializeField] private GameObject inventoryViewObject;
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemDescText;
@@ -40,4 +41,6 @@ public class InventoryMenu : MonoBehaviour
         itemNameText.SetText(selectedSlot.itemData.Name);
         itemDescText.SetText(selectedSlot.itemData.Description[0]);
     }
+**/
+    
 }
