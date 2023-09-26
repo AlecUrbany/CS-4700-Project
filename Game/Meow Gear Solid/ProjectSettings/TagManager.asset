@@ -13,7 +13,11 @@ TagManager:
   - UI
   - Target
   - Obstruction
+<<<<<<< HEAD
   - Drops
+=======
+  - MiniMap
+>>>>>>> 2d2002a6bba0c56898bf9501f3c8e32ad4dff1fe
   - 
   - 
   - 
