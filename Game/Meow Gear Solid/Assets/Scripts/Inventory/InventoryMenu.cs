@@ -30,17 +30,39 @@ public class InventoryMenu : MonoBehaviour
         {
             if(inventoryViewObject.activeSelf == true)
             {
-                inventoryViewObject.SetActive(false);
+                EventBus.Instance.OpenInventory();
                 Time.timeScale = 1;
             }
             
             else
             {
-                inventoryViewObject.SetActive(true);
+                EventBus.Instance.CloseInventory();
                 Time.timeScale = 0;    
             }
+            inventoryViewObject.SetActive(!inventoryViewObject.activeSelf);
         }
                 
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Instance.onPickUpItem += OnItemPickedUp;
+    }
+    private void OnDisable()
+    {
+        EventBus.Instance.onPickUpItem -= OnItemPickedUp;
+    }
+
+    private void OnItemPickedUp(ItemData itemData)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.IsEmpty())
+            {
+                slot.itemData = itemData;
+                break;
+            }
+        }
     }
 
     public void OnSlotSelected(ItemSlot selectedSlot)

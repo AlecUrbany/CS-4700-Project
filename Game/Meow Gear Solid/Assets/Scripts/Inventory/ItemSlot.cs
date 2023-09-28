@@ -12,6 +12,8 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     private InventoryMenu viewController;
 
+    private Image spawnedItemSprite;
+
     //Will link the item name to the name section in the actual inventory slot
     [SerializeField] private TMP_Text itemNameText;
 
@@ -20,6 +22,31 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         Debug.Log("Item Selected");
         viewController.OnSlotSelected(this);
     }
+
+    public bool IsEmpty()
+    {
+        return itemData == null;
+    }
+
+    private void OnEnable()
+    {
+        viewController = FindObjectOfType<InventoryMenu>();
+        if (itemData == null)
+        {
+            return;
+        } 
+
+        var spawnedSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+    }
+    private void OnDisable()
+    {
+        if (spawnedItemSprite != null)
+        {
+            Destroy(spawnedItemSprite);
+        }
+    }
+
+
     private void Awake()
     {
         viewController = FindObjectOfType<InventoryMenu>();
@@ -30,7 +57,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
             return;
         }
 
-        var spawnedSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+        var spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
 
 
         if (itemData == null)
