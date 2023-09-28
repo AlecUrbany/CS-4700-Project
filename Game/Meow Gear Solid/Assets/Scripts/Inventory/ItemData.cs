@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class ItemData : ScriptableObject
 {
     public string Name => itemName;
+    public string ShortName => shortName;
     public List<string> Description => itemDesc;
     public Image Sprite => itemSprite;
+
+    [SerializeField] private string shortName;
     [SerializeField] private string itemName;
     [SerializeField] private List<string> itemDesc;
     [SerializeField] private Image itemSprite;
