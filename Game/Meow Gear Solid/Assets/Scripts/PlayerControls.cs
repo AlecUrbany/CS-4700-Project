@@ -43,11 +43,11 @@ public class PlayerControls : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(0, -_turnSpeed * Time.deltaTime, 0);
+            _cc.transform.Rotate(0, -_turnSpeed * Time.deltaTime, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(0, _turnSpeed * Time.deltaTime, 0);
+           _cc. transform.Rotate(0, _turnSpeed * Time.deltaTime, 0);
         }
 	}
 
