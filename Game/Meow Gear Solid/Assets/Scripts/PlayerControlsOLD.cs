@@ -42,8 +42,11 @@ public class PlayerControlsOLD : MonoBehaviour
 		rigid.MovePosition (rigid.position + velocity * Time.fixedDeltaTime);
 
 		//Handles Rotation
-		float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;
-		float SmoothRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, Angle, ref Myfloat, 0.1f);
-		transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
+		if(rotationVelo.magnitude >= 0.1f)
+		{
+			float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;
+			float SmoothRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, Angle, ref Myfloat, 0.1f);
+			transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
+		}
 	}
 }

@@ -4933,7 +4933,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030658466}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d377b7cc374ac94299b20e215222ed4, type: 3}
   m_Name: 
@@ -5036,7 +5036,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &2030658473
 MonoBehaviour:
@@ -5045,7 +5045,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030658466}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7560aafadc8dd940ab4adf738720b95, type: 3}
   m_Name: 
@@ -5061,7 +5061,7 @@ CharacterController:
   m_GameObject: {fileID: 2030658466}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
