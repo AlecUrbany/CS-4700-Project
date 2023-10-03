@@ -5144,7 +5144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 100
+  isInvulnerable: 0
   healthBar: {fileID: 929282110}
+  bodyRender: {fileID: 2030658469}
 --- !u!1 &2031989128
 GameObject:
   m_ObjectHideFlags: 0
