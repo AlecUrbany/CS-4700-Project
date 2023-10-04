@@ -9,8 +9,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public bool isInvulnerable;
     public HealthBar healthBar;
 
-    Color invisible;
-    public Renderer bodyRender;
+    public Renderer player;
+
 
     public float MaxHealth{
         get { return MaxHealth; }
@@ -20,10 +20,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
         
     }
     void Start(){
-        bodyRender = GetComponent<Renderer>();
-        bodyRender.enabled = true;
+        player = GetComponent<Renderer>();
+        player.enabled = true;
         isInvulnerable = false;
-        invisible = bodyRender.material.color;
         currentHealth = maxHealth;
         healthBar.SetHealth(currentHealth);
     }
@@ -70,18 +69,25 @@ public class PlayerHealth : MonoBehaviour, IHealth
     IEnumerator GetInvulnerable()
     {
         isInvulnerable = true;
-        bodyRender.enabled = false;
-        yield return new WaitForSeconds(.5f);
-        bodyRender.enabled = true;
-        yield return new WaitForSeconds(.5f);
-        bodyRender.enabled = false;
-        yield return new WaitForSeconds(.5f);
-        bodyRender.enabled = true;
-        yield return new WaitForSeconds(.5f);
-        bodyRender.enabled = false;
-        yield return new WaitForSeconds(.5f);
-        bodyRender.enabled = true;
-        yield return new WaitForSeconds(.5f);
+        StartCoroutine("FlashColor");
+        yield return new WaitForSeconds(2f);
+         StopCoroutine("FlashColor");
         isInvulnerable = false;
+    }
+    IEnumerator FlashColor()
+    {
+        Color invisible;
+        invisible = player.material.color;
+        int x = 0;
+        while(x <= 10)
+        {
+            invisible.a = .25f;
+            player.material.color = invisible;
+            yield return new WaitForSeconds(.25f);
+            invisible.a = 1f;
+            player.material.color = invisible;
+            yield return new WaitForSeconds(.25f);
+            x++;
+        }
     }
 }

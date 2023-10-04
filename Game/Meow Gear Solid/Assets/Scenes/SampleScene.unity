@@ -2427,7 +2427,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2473,7 +2473,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fill: {fileID: 0}
+  fill: {fileID: 631336438}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5143,10 +5143,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 100
+  currentHealth: 0
   isInvulnerable: 0
   healthBar: {fileID: 929282110}
-  bodyRender: {fileID: 2030658469}
+  player: {fileID: 2030658469}
 --- !u!1 &2031989128
 GameObject:
   m_ObjectHideFlags: 0

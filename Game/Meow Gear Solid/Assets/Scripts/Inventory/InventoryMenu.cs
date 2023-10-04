@@ -46,11 +46,17 @@ public class InventoryMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.Instance.onPickUpItem += OnItemPickedUp;
+        if(EventBus.Instance != null)
+        {
+            EventBus.Instance.onPickUpItem += OnItemPickedUp;
+        }
     }
     private void OnDisable()
     {
-        EventBus.Instance.onPickUpItem -= OnItemPickedUp;
+        if(EventBus.Instance != null)
+        {
+            EventBus.Instance.onPickUpItem -= OnItemPickedUp;
+        }
     }
 
     private void OnItemPickedUp(ItemData itemData)
