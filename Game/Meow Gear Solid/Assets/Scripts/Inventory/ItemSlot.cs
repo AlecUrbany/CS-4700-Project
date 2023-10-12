@@ -53,6 +53,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
                 equipped = true;
                 health.HealHealth(100);
                 Destroy(itemData);
+                equipped = false;
             }
         }
     }

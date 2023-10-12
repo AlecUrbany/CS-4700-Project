@@ -560,7 +560,8 @@ GameObject:
   - component: {fileID: 205724475}
   - component: {fileID: 205724474}
   - component: {fileID: 205724473}
-  m_Layer: 7
+  - component: {fileID: 205724472}
+  m_Layer: 6
   m_Name: Enemy Temp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,6 +584,20 @@ Transform:
   m_Father: {fileID: 1902939498}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &205724472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205724470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ce992524a36d74eb8b2cc5fa5bc7af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
 --- !u!54 &205724473
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2895,6 +2910,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: itemSlotPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315049962056952453, guid: 764f883a324a724419a601ea7c3df0b2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8315049962056952454, guid: 764f883a324a724419a601ea7c3df0b2,
         type: 3}
