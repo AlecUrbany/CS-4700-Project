@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemSlot.cs" />
      <Compile Include="Assets\Scripts\shooting.cs" />
+     <Compile Include="Assets\FollowPlayer.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-VertexLitTransparentCutout.shader" />

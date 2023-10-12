@@ -6,13 +6,25 @@ using UnityEngine.UI;
 
 public class ItemData : ScriptableObject
 {
-    public string Name => itemName;
     public string ShortName => shortName;
+    public string Name => itemName;
+    
     public List<string> Description => itemDesc;
     public Image Sprite => itemSprite;
+
+    public  int MaxAmmo => maxAmmo;
+    public  int CurrentAmmo => currentAmmo;
+
+    public GameObject ItemModel => itemModel;
 
     [SerializeField] private string shortName;
     [SerializeField] private string itemName;
     [SerializeField] private List<string> itemDesc;
     [SerializeField] private Image itemSprite;
+    
+    public int maxAmmo;
+
+    public int currentAmmo;
+
+    public GameObject itemModel;
 }
