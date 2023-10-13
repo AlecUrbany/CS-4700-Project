@@ -20,18 +20,18 @@ sysinfo.txt
 [Ee]xported[Oo]bj/
 .vs/
 .vscode/
-/*.userprefs
-/*.csproj
-/*.pidb
+*.userprefs
+*.csproj
+*.pidb
 *.pidb.meta
-/*.suo
-/*.sln*
-/*.user
-/*.unityproj
-/*.booproj
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
 .consulo/
-/*.tmp
-/*.svd
+*.tmp
+*.svd
  
 # ============ #
 # OS generated #
