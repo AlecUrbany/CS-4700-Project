@@ -37,13 +37,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Inventory\ItemData.cs" />
-     <Compile Include="Assets\ScreenFader.cs" />
+     <Compile Include="Assets\Scripts\ScreenFader.cs" />
      <Compile Include="Assets\Scripts\GunFunctions.cs" />
-     <Compile Include="Assets\Scripts\Inventory\EventBus.cs" />
      <Compile Include="Assets\Scripts\PlayerHealth.cs" />
-     <Compile Include="Assets\SaveOnLoad.cs" />
-     <Compile Include="Assets\LoadLevel.cs" />
+     <Compile Include="Assets\Scripts\SaveOnLoad.cs" />
+     <Compile Include="Assets\Scripts\LoadLevel.cs" />
      <Compile Include="Assets\PSXShaderKit\Scripts\PSXShaderManager.cs" />
+     <Compile Include="Assets\Scripts\Inventory\EventBus.cs" />
      <Compile Include="Assets\Scripts\Inventory\InventoryMenu.cs" />
      <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\PSXShaderKit\Scripts\PSXPostProcessEffect.cs" />
@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\Inventory\ItemPickUp.cs" />
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\IHealth.cs" />
+     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\PlayerControlsOLD.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
@@ -60,7 +61,6 @@
      <Compile Include="Assets\Scripts\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\Inventory\ItemSlot.cs" />
      <Compile Include="Assets\Scripts\shooting.cs" />
-     <Compile Include="Assets\FollowPlayer.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\PSXShaderKit\Shaders\PSX-VertexLitTransparentCutout.shader" />
