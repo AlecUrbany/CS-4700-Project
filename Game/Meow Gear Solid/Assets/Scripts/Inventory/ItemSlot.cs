@@ -43,9 +43,9 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
             {
                 Debug.Log("Equipped Item: " + itemData.ShortName);
                 equipped = true;
-                GameObject newBullet = Instantiate(itemModel);
-                itemData.itemModel.transform.position = playerMouth.position;
-                itemData.itemModel.transform.localRotation = defaultRotation;
+                GameObject newBullet = Instantiate(itemModel, playerMouth, false);
+                /*itemData.itemModel.transform.position = playerMouth.position;
+                itemData.itemModel.transform.localRotation = defaultRotation;*/
             }
             if(itemData.ShortName == "RATION")
             {
@@ -61,7 +61,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     {
         if(equipped == true)
         {
-            itemData.itemModel.transform.position = playerMouth.position;
+            //itemData.itemModel.transform.position = playerMouth.position;
         }
     }
 

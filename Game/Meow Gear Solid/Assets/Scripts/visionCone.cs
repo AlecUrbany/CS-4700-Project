@@ -57,7 +57,7 @@ public class visionCone : MonoBehaviour
     {
 		visibleTargets.Clear ();
 		Collider[] targetsInViewRadius = Physics.OverlapSphere (transform.position, viewRadius, targetMask);
-
+		canSeePlayer = false;
 		for (int i = 0; i < targetsInViewRadius.Length; i++)
 		{
 			Transform target = targetsInViewRadius [i].transform;
@@ -73,16 +73,10 @@ public class visionCone : MonoBehaviour
                     canSeePlayer = true;
 				}
 
-                else
-                {
-                    canSeePlayer = false;
-                }
+       
 			}
 
-            else
-            {
-                canSeePlayer = false;
-            }
+        
 		}
 		alertPhase.updateCanSeePlayer(canSeePlayer);
 	}
