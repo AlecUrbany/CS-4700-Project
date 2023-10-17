@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class visionCone : MonoBehaviour
 {
-
+	public AlertPhase alertPhase;
 	public float viewRadius;
 	[Range(0,360)]
 	public float viewAngle;
@@ -30,6 +30,7 @@ public class visionCone : MonoBehaviour
 
 	void Start()
     {
+		alertPhase = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>();
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
@@ -83,6 +84,7 @@ public class visionCone : MonoBehaviour
                 canSeePlayer = false;
             }
 		}
+		alertPhase.updateCanSeePlayer(canSeePlayer);
 	}
 
 	void DrawFieldOfView()
