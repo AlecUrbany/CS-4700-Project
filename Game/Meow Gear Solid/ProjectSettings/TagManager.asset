@@ -8,6 +8,7 @@ TagManager:
   - tranq bullet
   - bullet
   - Enemy
+  - GameStateManager
   layers:
   - Default
   - TransparentFX
