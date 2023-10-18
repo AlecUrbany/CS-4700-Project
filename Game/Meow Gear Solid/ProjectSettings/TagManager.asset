@@ -18,6 +18,8 @@ TagManager:
   - UI
   - Enemy
   - Bullet
+  - Obstacle
+  - Player
   - 
   - 
   - 
@@ -39,9 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - MiniMap
   m_SortingLayers:
   - name: Default
     uniqueID: 0
