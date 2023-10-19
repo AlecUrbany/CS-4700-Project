@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float maxHealth = 100f;
     public float currentHealth;
     public bool isInvulnerable;
-    public HealthBar healthBar;
 
     public Renderer player;
 
@@ -24,7 +23,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         player.enabled = true;
         isInvulnerable = false;
         currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth);
     }
     public void TakeDamage(float damageAmount)
     {
@@ -32,7 +30,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             StartCoroutine("GetInvulnerable");
             currentHealth -= damageAmount;
-            healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0){
                 onDeath();
@@ -43,11 +40,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void HealHealth(float healAmount){
         if(currentHealth + healAmount > maxHealth){
             currentHealth = maxHealth;
-            healthBar.SetHealth(currentHealth);
         }
         else{
             currentHealth += healAmount;
-            healthBar.SetHealth(currentHealth);
         }
     }
 

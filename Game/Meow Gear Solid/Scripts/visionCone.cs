@@ -18,7 +18,6 @@ public class visionCone : MonoBehaviour
 	public float meshResolution;
 	public int edgeResolveIterations;
 	public float edgeDstThreshold;
-	public float distance;
 
 	public float maskCutawayDst = .1f;
 
@@ -26,26 +25,16 @@ public class visionCone : MonoBehaviour
 
     public bool canSeePlayer;
     public bool visionObstructed;
-	public Transform player;
 
 	Mesh viewMesh;
-	void Awake() {
-    	player = GameObject.FindGameObjectWithTag("Player").transform;
-	}
 
 	void Start()
     {
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
-	}
-	void Update(){
-		Transform enemyTransform = transform.parent;
-        Vector3 enemyPosition = enemyTransform.position;
-		Vector3 distanceToPlayer = player.position - enemyPosition;
-		if(distanceToPlayer.magnitude < distance){
-			FindVisibleTargets();
-		}
+
+		StartCoroutine ("FindTargetsWithDelay", .1f);
 	}
 
 

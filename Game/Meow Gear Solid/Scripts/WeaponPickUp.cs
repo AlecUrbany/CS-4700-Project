@@ -13,8 +13,9 @@ public class WeaponPickUp : MonoBehaviour
     
     public bool equipped;
     public static bool slotFull;
-    public Material originalMaterial;
-    public Material highlightMaterial;
+    public GameObject bullet; 
+    public int test;
+
 
     private void Start()
     {
@@ -22,22 +23,18 @@ public class WeaponPickUp : MonoBehaviour
         coll.isTrigger = false;
         slotFull = false;
         defaultRotation = transform.localRotation;
-        originalMaterial = GetComponent<Renderer>().material;
     }
 
     private void Update()
     {
         //Check if player is in range and "E" is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange) GetComponent<Renderer>().material = highlightMaterial;
-        
         if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull) PickUp();
-        
+
+        //Drop if equipped and "Q" is pressed
         if (equipped && Input.GetKeyDown(KeyCode.Q)) Drop();
 
         if(equipped) transform.position = playerMouth.position;
-
-        if (!equipped && distanceToPlayer.magnitude > pickUpRange) GetComponent<Renderer>().material = originalMaterial;
     }
 
     private void PickUp()
@@ -46,11 +43,18 @@ public class WeaponPickUp : MonoBehaviour
         transform.position = playerMouth.position;
         rb.isKinematic = true;
         transform.localRotation = defaultRotation;
+        GunFunctions gunScript = bullet.GetComponent<GunFunctions>();
+        if (gunScript != null){
+                gunScript.enabled = true;
+        }
     }
     private void Drop()
     {
         equipped = false;
         rb.isKinematic = false;
-
+        GunFunctions gunScript = bullet.GetComponent<GunFunctions>();
+        if (gunScript != null){
+                gunScript.enabled = false;
+        }
     }
 }

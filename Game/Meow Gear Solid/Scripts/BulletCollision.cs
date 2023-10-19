@@ -7,7 +7,8 @@ public class BulletCollision : MonoBehaviour
 {
     public GameObject bullet;
     public float damage = 50f;
-        void OnCollisionEnter(Collision collision){
+    // Start is called before the first frame update
+    void OnCollisionEnter(Collision collision){
         Destroy(bullet);
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy")){
             EnemyHealth enemyScript = collision.gameObject.GetComponent<EnemyHealth>();
@@ -15,6 +16,5 @@ public class BulletCollision : MonoBehaviour
                 enemyScript.TakeDamage(damage);
             }
         }
-    
-}
+    }
 }
