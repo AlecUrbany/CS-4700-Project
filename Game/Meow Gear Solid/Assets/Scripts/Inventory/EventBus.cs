@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EventBus : MonoBehaviour
+public class EventBus
 {
-    public static EventBus Instance {get; private set; }
+    public static EventBus Instance { get { if (theInstance == null) theInstance = new EventBus(); return theInstance; } }
 
+    static EventBus theInstance;
     public event Action onOpenInventory;
     public event Action onCloseInventory;
 
     public event Action<ItemData> onPickUpItem;
     
-    private void Awake()
-    {
-        Instance = this;
-    }
     public void OpenInventory()
     {
         onOpenInventory?.Invoke();

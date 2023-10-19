@@ -32,6 +32,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     }
 
     public void onDeath(){
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

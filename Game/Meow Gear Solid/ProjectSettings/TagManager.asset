@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - lethal bullet
+  - tranq bullet
+  - bullet
+  - Enemy
+  - GameStateManager
   layers:
   - Default
   - TransparentFX
@@ -11,9 +16,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Target
-  - Obstruction
-  - MiniMap
+  - Enemy
+  - Bullet
+  - Obstacle
+  - Player
   - Drops
   - Projectiles
   - Player
@@ -35,8 +41,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - MiniMap
   m_SortingLayers:
   - name: Default
     uniqueID: 0

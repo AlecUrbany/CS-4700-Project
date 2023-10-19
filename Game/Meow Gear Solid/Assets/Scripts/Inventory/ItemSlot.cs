@@ -7,7 +7,15 @@ using TMPro;
 
 public class ItemSlot : MonoBehaviour, ISelectHandler
 {
+    //Item equpping
+    public bool equipped = false;
+    public Transform player, playerMouth;
+    public Quaternion defaultRotation;
+    public Rigidbody rb;
+    public PlayerHealth health;
 
+
+    //Item Data
     public ItemData itemData;
 
     private InventoryMenu viewController;
@@ -17,11 +25,46 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     //Will link the item name to the name section in the actual inventory slot
     [SerializeField] private TMP_Text itemNameText;
 
+    [SerializeField] private TMP_Text MaxAmmoText;
+    [SerializeField] private TMP_Text CurrentAmmoText;
+
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("Item Selected");
+        Debug.Log("Item Selected: " + itemData.ShortName);
         viewController.OnSlotSelected(this);
+        EquipItem(itemData.itemModel);
     }
+
+    public void EquipItem(GameObject itemModel)
+    {
+        if(equipped != true)
+        {
+            if(itemData.ShortName == "SOCOM")
+            {
+                Debug.Log("Equipped Item: " + itemData.ShortName);
+                equipped = true;
+                GameObject newBullet = Instantiate(itemModel, playerMouth, false);
+                /*itemData.itemModel.transform.position = playerMouth.position;
+                itemData.itemModel.transform.localRotation = defaultRotation;*/
+            }
+            if(itemData.ShortName == "RATION")
+            {
+                Debug.Log("Equipped Item: " + itemData.ShortName);
+                equipped = true;
+                health.HealHealth(100);
+                Destroy(itemData);
+                equipped = false;
+            }
+        }
+    }
+    private void Update()
+    {
+        if(equipped == true)
+        {
+            //itemData.itemModel.transform.position = playerMouth.position;
+        }
+    }
+
 
     public bool IsEmpty()
     {
@@ -37,6 +80,8 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         } 
 
         var spawnedSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+        MaxAmmoText.SetText(itemData.maxAmmo.ToString());
+        CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
     }
     private void OnDisable()
     {
@@ -45,6 +90,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
             Destroy(spawnedItemSprite);
         }
     }
+
 
 
     private void Awake()
@@ -58,7 +104,6 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         }
 
         var spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
-
 
         if (itemData == null)
         {
