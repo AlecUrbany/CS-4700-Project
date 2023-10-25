@@ -5318,10 +5318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3be84f0119651b4ba99d3fdccf743a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorImage: {fileID: 41538204}
-  actorName: {fileID: 1233854199}
-  messageText: {fileID: 1639866393}
-  backgroundBox: {fileID: 1940210182}
+  actorImage: {fileID: 0}
+  actorName: {fileID: 0}
+  messageText: {fileID: 0}
+  backgroundBox: {fileID: 0}
 --- !u!114 &1940210184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5528,10 +5528,12 @@ MonoBehaviour:
   meshResolution: 2.81
   edgeResolveIterations: 0
   edgeDstThreshold: 0
+  distance: 0
   maskCutawayDst: 0.1
   viewMeshFilter: {fileID: 1998883462}
   canSeePlayer: 0
   visionObstructed: 0
+  player: {fileID: 0}
 --- !u!135 &1998883460
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5756,8 +5758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7560aafadc8dd940ab4adf738720b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 8
-  _turnSpeed: 30
 --- !u!143 &2030658474
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5791,7 +5791,6 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   isInvulnerable: 0
-  healthBar: {fileID: 929282110}
   player: {fileID: 2030658469}
 --- !u!1 &2031989128
 GameObject:
