@@ -7,6 +7,8 @@ public class LoadLevel : MonoBehaviour
     public ScreenFader fader;
     public static bool isPaused;
     float previousTimeScale = 1;
+    public string targetSceneName; // Name of scene we want to switch to
+    public string spawnPointName; //Name of Portal to teleport to
     private void OnTriggerEnter(Collider other)
     {
         //Checks to see if object colliding has player tag
@@ -44,8 +46,10 @@ public class LoadLevel : MonoBehaviour
     private IEnumerator Delay(float duration)
     {
         yield return new WaitForSeconds(duration);
+        PlayerPrefs.SetString("TargetSpawnPoint", spawnPointName);
         Debug.Log("Entering next level");
         fader.FadeFromBlack(duration);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        SceneManager.LoadScene(targetSceneName);
     }
 }
