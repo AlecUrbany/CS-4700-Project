@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveLevelState : MonoBehaviour{
+/*public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
     public void Start(){
     LevelState state = new LevelState();
@@ -24,3 +24,4 @@ public class SaveLevelState : MonoBehaviour{
     }
 
 }
+*/
