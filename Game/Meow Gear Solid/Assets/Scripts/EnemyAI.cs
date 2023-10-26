@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum EnemyAIType{
+    leftRight,
+    UpDown,
+    Square
+}
 public class EnemyAI : MonoBehaviour
 {
     public Transform player;
@@ -10,13 +14,13 @@ public class EnemyAI : MonoBehaviour
     public GameObject childObject;
     public Rigidbody rb;
     public float moveSpeed;
-    public bool horizontalPatrol = true;
-    public float patrolDistanceX = 10.0f;
-    public float patrolDistanceZ = 10.0f;
-    private float currentPatrolDistanceX;
-    private float currentPatrolDistanceZ;
-    private bool movingRight = true;
-    private bool movingUp = true; 
+    public EnemyAIType aiType;
+    public float patrolDistance = 10.0f;
+    private float currentPatrolDistance;
+    private bool movingStage1 = false;
+    private bool movingStage2 = false;
+    private int phase = 1;
+
 
 
     // Update is called once per frame
@@ -31,8 +35,17 @@ public class EnemyAI : MonoBehaviour
             FollowPlayer(distanceFromPlayer);
         }
         else{
-            if(horizontalPatrol){ PatrolHorizontal(); }
-            else{ PatrolVertical(); }
+            switch(aiType){
+                case EnemyAIType.leftRight:
+                    PatrolHorizontal();
+                    break;
+                case EnemyAIType.UpDown:
+                    PatrolVertical();
+                    break;
+                case EnemyAIType.Square:
+                    PatrolSquare();
+                    break;
+            }
         }
          
     }
@@ -43,27 +56,59 @@ public class EnemyAI : MonoBehaviour
     }
     void PatrolHorizontal()
     {
-        Vector3 horizontalMovementDirection = movingRight ? Vector3.right : Vector3.left;
+        Vector3 horizontalMovementDirection = movingStage1 ? Vector3.right : Vector3.left;
         rb.velocity = horizontalMovementDirection * moveSpeed;
 
-        currentPatrolDistanceX += moveSpeed * Time.deltaTime;
+        currentPatrolDistance += moveSpeed * Time.deltaTime;
 
-        if (currentPatrolDistanceX >= patrolDistanceX)
+        if (currentPatrolDistance >= patrolDistance)
         {
-            movingRight = !movingRight;
-            currentPatrolDistanceX = 0.0f;
+            movingStage1 = !movingStage1;
+            currentPatrolDistance = 0.0f;
         }
     }
 
     void PatrolVertical(){
-        Vector3 verticalMovementDirection = movingUp ? Vector3.forward : Vector3.back;
+        Vector3 verticalMovementDirection = movingStage1 ? Vector3.forward : Vector3.back;
         rb.velocity = verticalMovementDirection * moveSpeed;
 
-        currentPatrolDistanceZ += moveSpeed * Time.deltaTime;
+        currentPatrolDistance += moveSpeed * Time.deltaTime;
 
-        if (currentPatrolDistanceZ >= patrolDistanceZ){
-            movingUp = !movingUp;
-            currentPatrolDistanceZ = 0.0f;
+        if (currentPatrolDistance >= patrolDistance){
+            movingStage1 = !movingStage1;
+            currentPatrolDistance = 0.0f;
+        }
+    }
+
+    void PatrolSquare(){
+        Vector3 verticalMovementDirection = (movingStage1 && movingStage2) ? Vector3.back : movingStage1 ? Vector3.left : movingStage2 ? Vector3.right : Vector3.forward;
+        rb.velocity = verticalMovementDirection * moveSpeed;
+
+        currentPatrolDistance += moveSpeed * Time.deltaTime;
+
+        if (currentPatrolDistance >= patrolDistance){
+            switch(phase){
+                case 1:
+                    movingStage1 = !movingStage1;
+                    currentPatrolDistance = 0.0f;
+                    phase++;
+                    break;
+                case 2:
+                    movingStage2 = !movingStage2;
+                    currentPatrolDistance = 0.0f;
+                    phase++;
+                    break;
+                case 3:
+                    movingStage1 = !movingStage1;
+                    currentPatrolDistance = 0.0f;
+                    phase++;
+                    break;
+                case 4:
+                    movingStage2 = !movingStage2;
+                    currentPatrolDistance = 0.0f;
+                    phase = 1;
+                    break;
+            }
         }
     }
 }
