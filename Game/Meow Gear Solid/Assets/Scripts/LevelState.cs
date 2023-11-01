@@ -4,7 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public class LevelState
 {
-    public Vector3 playerPosition;
-    public List<Vector3> enemyPositions;
+    public List<Vector3> position;
+    public List<float> health;
+    public List<EnemyAIType> aiState;
+    public List<Vector3> startPosition;
     public List<string> droppedItems;
 }
