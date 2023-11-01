@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed;
     public EnemyAIType aiType;
     public float patrolDistance = 10.0f;
+    public Vector3 startPosition;
     private float currentPatrolDistance;
     private bool movingStage1 = false;
     private bool movingStage2 = false;
@@ -26,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
+        startPosition = transform.position;
     }
     void Update()
     {
