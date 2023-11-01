@@ -1,26 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
-    public void Start(){
-    LevelState state = new LevelState();
-    state.enemyPositions = GetEnemyPositions();
-    state.collectedItems = GetDrops();
+    List<Vector3> enemyPositon = new List<Vector3>();
+    List<Vector3> enemyStartPosition = new List<Vector3>();
+    List<float> enemyHealth = new List<float>();
+    List<EnemyAIType> enemyAiType = new List<EnemyAIType>();
+    private void OnTriggerEnter(Collider other)
+    {
+        //Checks to see if object colliding has player tag
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+        LevelState state = new LevelState();
+        GetEnemyStates();
+        GetDrops();
+        state.position = enemyPositon;
+        state.health = enemyHealth;
+        state.aiState = enemyAiType;
+        state.startPosition = enemyStartPosition;
+        string jsonState = JsonUtility.ToJson(state);
+        string parentDirectory = Directory.GetParent(Application.dataPath).FullName;
+        string folderPath = Path.Combine(parentDirectory, "LevelStates");
+        Directory.CreateDirectory(folderPath);
+        string fileName = levelToSave + ".json";
+        string filePath = Path.Combine(folderPath, fileName);
+        Debug.Log(filePath);
 
-    string jsonState = JsonUtility.ToJson(state);
-    PlayerPrefs.SetString(levelToSave, jsonState);
-    PlayerPrefs.Save();
+        File.WriteAllText(filePath, jsonState); // Save the JSON data to a file
+
     }
 
-    public void GetEnemyPositions(){
-        List<Enemy> enemyPositions = new List<Vector3>();
-        foreach (Enemy enemy in enemiesInLevel)
-        {
-            enemyPositions.Add(enemy.transform.position);
+    private void GetEnemyStates(){
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
+            enemyPositon.Add(enemy.transform.position);
+            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
+            enemyHealth.Add(health.currentHealth);
+            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
+            enemyStartPosition.Add(enemyAI.startPosition);
+            enemyAiType.Add(enemyAI.aiType);
         }
-        return enemyPositions;
+    }
+
+    public void GetDrops(){
+        
     }
 
 }
+
