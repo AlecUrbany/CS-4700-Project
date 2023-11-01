@@ -11,10 +11,14 @@ public class GunFunctions : MonoBehaviour
     public float bulletSpeed = 10.0f;
     private GameObject currentBullet;
     private Rigidbody bulletRigidbody;
+
+    public ItemData itemData;
     void Update()
     {
-        if(Input.GetButtonDown("Fire1")){
+        if(Input.GetButtonDown("Fire1"))
+        {
             Shoot();
+            itemData.currentAmmo --;
         }
     }
 

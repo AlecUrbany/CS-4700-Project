@@ -16,6 +16,7 @@ public class PlayerControlsOLD : MonoBehaviour
 	public Vector3 rotationVelo;
 	float Myfloat;
 
+	public ItemData currentlyEquipped;
 
 	void Start ()
     {

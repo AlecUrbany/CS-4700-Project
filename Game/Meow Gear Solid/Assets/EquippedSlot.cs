@@ -5,19 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class ItemSlot : MonoBehaviour, ISelectHandler
+public class EquippedSlot : MonoBehaviour
 {
     //Item equpping
     public bool equipped = false;
-    public Transform player, playerMouth;
     public Quaternion defaultRotation;
-    public Rigidbody rb;
     public PlayerHealth health;
 
 
     //Item Data
     public ItemData itemData;
 
+    public ItemSlot equippedItem;
     private InventoryMenu viewController;
 
     private Image spawnedItemSprite;
@@ -28,52 +27,12 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     [SerializeField] private TMP_Text MaxAmmoText;
     [SerializeField] private TMP_Text CurrentAmmoText;
 
-    public void OnSelect(BaseEventData eventData)
-    {
-        Debug.Log("Item Selected: " + itemData.ShortName);
-        viewController.OnSlotSelected(this);
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Interact"))
-        {
-            EquipItem(itemData);
-        }
-            
-    }
-
     public void EquipItem(ItemData itemData)
     {
-            if(itemData.ShortName == "SOCOM")
-            {
-                Debug.Log("Equipped Item: " + itemData.ShortName);
-                equipped = true;
-                GameObject spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
-                if(equipped == false)
-                {
-                    Destroy(spawnedItem);
-                }
-
-            }
-            if(itemData.ShortName == "RATION")
-            {
-                Debug.Log("Equipped Item: " + itemData.ShortName);
-                equipped = true;
-                health.HealHealth(100);
-                Destroy(spawnedItemSprite);
-                equipped = false;
-            }
-            
-            if(itemData.ShortName == "none")
-            {
-                Debug.Log("unequipped");
-                equipped = false;
-
-            }
     }
     private void Update()
     {
-        if(equipped == true)
-        {
-            //itemData.itemModel.transform.position = playerMouth.position;
-        }
+
     }
 
 
