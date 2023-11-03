@@ -4,7 +4,8 @@ using UnityEngine;
 public enum EnemyAIType{
     leftRight,
     UpDown,
-    Square
+    Square,
+    Stationary
 }
 public class EnemyAI : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class EnemyAI : MonoBehaviour
     public EnemyAIType aiType;
     public float patrolDistance = 10.0f;
     public Vector3 startPosition;
+    public int rotationSpeed;
     private float currentPatrolDistance;
     private bool movingStage1 = false;
     private bool movingStage2 = false;
     private int phase = 1;
+
 
 
 
@@ -47,6 +50,8 @@ public class EnemyAI : MonoBehaviour
                 case EnemyAIType.Square:
                     PatrolSquare();
                     break;
+                case EnemyAIType.Stationary:
+                    break;
             }
         }
          
@@ -55,6 +60,10 @@ public class EnemyAI : MonoBehaviour
     void FollowPlayer(Vector3 distanceFromPlayer){
         distanceFromPlayer.Normalize();
         rb.velocity = distanceFromPlayer * moveSpeed;
+        if (rb.velocity != Vector3.zero){
+            Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);        }
+
     }
     void PatrolHorizontal()
     {
