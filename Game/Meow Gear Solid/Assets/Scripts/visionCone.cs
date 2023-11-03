@@ -39,6 +39,7 @@ public class visionCone : MonoBehaviour
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
+		Debug.Log("Hello!");
 	}
 	void Update(){
 		Transform enemyTransform = transform.parent;
@@ -50,18 +51,9 @@ public class visionCone : MonoBehaviour
 	}
 
 
-	IEnumerator FindTargetsWithDelay(float delay)
-    {
-		while (true)
-        {
-			yield return new WaitForSeconds (delay);
-			FindVisibleTargets ();
-		}
-	}
-
 	void LateUpdate()
     {
-		DrawFieldOfView ();
+		DrawFieldOfView();
 	}
 
 	void FindVisibleTargets()
@@ -140,7 +132,7 @@ public class visionCone : MonoBehaviour
 			}
 		}
 
-		viewMesh.Clear ();
+		viewMesh.Clear();
 
 		viewMesh.vertices = vertices;
 		viewMesh.triangles = triangles;
