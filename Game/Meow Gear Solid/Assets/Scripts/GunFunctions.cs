@@ -15,7 +15,7 @@ public class GunFunctions : MonoBehaviour
     public ItemData itemData;
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
             itemData.currentAmmo --;
