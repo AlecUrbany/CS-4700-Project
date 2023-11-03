@@ -13,6 +13,11 @@ public class GunFunctions : MonoBehaviour
     private Rigidbody bulletRigidbody;
 
     public ItemData itemData;
+
+    void Start() {
+        itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
@@ -30,13 +35,11 @@ public class GunFunctions : MonoBehaviour
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.velocity = barrel.forward * bulletSpeed;
         StartCoroutine(BulletLife(2, newBullet));
-
-
     }
     IEnumerator BulletLife(float timer, GameObject newBullet)
     {
         yield return new WaitForSeconds(timer);
         Destroy(newBullet);
-    }
+  }
 
 }

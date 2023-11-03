@@ -7,9 +7,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float maxHealth = 100f;
     public float currentHealth;
     public bool isInvulnerable;
-
     public Renderer player;
-
+    public HealthBar healthBar;
 
     public float MaxHealth{
         get { return MaxHealth; }
@@ -23,13 +22,16 @@ public class PlayerHealth : MonoBehaviour, IHealth
         player.enabled = true;
         isInvulnerable = false;
         currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
     public void TakeDamage(float damageAmount)
     {
+        // Debug.Log("TakeDamage(): " + isInvulnerable);
         if(isInvulnerable == false)
         {
             StartCoroutine("GetInvulnerable");
             currentHealth -= damageAmount;
+            healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0){
                 onDeath();
@@ -40,9 +42,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void HealHealth(float healAmount){
         if(currentHealth + healAmount > maxHealth){
             currentHealth = maxHealth;
+            healthBar.SetHealth(currentHealth);
         }
         else{
             currentHealth += healAmount;
+            healthBar.SetHealth(currentHealth);
         }
     }
 
@@ -50,6 +54,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         currentHealth = 200;
         Debug.Log("GAME OVER");
     }
+
     void Update()
     {//tests our damage function. Must remove later
 		if (Input.GetKeyDown(KeyCode.G))
@@ -66,7 +71,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         isInvulnerable = true;
         StartCoroutine("FlashColor");
         yield return new WaitForSeconds(2f);
-         StopCoroutine("FlashColor");
+        StopCoroutine("FlashColor");
         isInvulnerable = false;
     }
     IEnumerator FlashColor()

@@ -46,6 +46,8 @@ public class visionCone : MonoBehaviour
 		Vector3 distanceToPlayer = player.position - enemyPosition;
 		if(distanceToPlayer.magnitude < viewRadius) {
 			FindVisibleTargets();
+		} else {
+			canSeePlayer = false;
 		}
 	}
 

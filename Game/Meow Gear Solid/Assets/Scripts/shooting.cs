@@ -6,10 +6,11 @@ public class shooting : MonoBehaviour
 {
     public visionCone vision;
     public PlayerHealth player;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
