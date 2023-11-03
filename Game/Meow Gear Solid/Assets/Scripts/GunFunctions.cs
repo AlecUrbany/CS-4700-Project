@@ -22,8 +22,10 @@ public class GunFunctions : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Shoot();
-            itemData.currentAmmo --;
+            if (itemData.currentAmmo > 0) {
+                Shoot();
+                itemData.currentAmmo --;
+            }
         }
     }
 
