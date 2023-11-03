@@ -18,7 +18,6 @@ public class visionCone : MonoBehaviour
 	public float meshResolution;
 	public int edgeResolveIterations;
 	public float edgeDstThreshold;
-	public float distance;
 
 	public float maskCutawayDst = .1f;
 
@@ -39,13 +38,13 @@ public class visionCone : MonoBehaviour
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
-		Debug.Log("Hello!");
 	}
-	void Update(){
+
+	void Update() {
 		Transform enemyTransform = transform.parent;
         Vector3 enemyPosition = enemyTransform.position;
 		Vector3 distanceToPlayer = player.position - enemyPosition;
-		if(distanceToPlayer.magnitude < distance){
+		if(distanceToPlayer.magnitude < viewRadius) {
 			FindVisibleTargets();
 		}
 	}
@@ -74,12 +73,8 @@ public class visionCone : MonoBehaviour
                 {
 					visibleTargets.Add (target);
                     canSeePlayer = true;
-				}
-
-       
+				}       
 			}
-
-        
 		}
 		alertPhase.updateCanSeePlayer(canSeePlayer);
 	}

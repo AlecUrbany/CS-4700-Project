@@ -15,13 +15,17 @@ public class AlertPhase : MonoBehaviour
     {
         if (canSeePlayer) 
         {
+            // if (inAlertPhase == false) {
+            //     // We are entering alert phase
+            //     // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
+            // }
+
             inAlertPhase = true;
             miniMap.SetActive(false);
             AlertInfo.SetActive(true);
             // Maybe set timeRemaining with a constant variable (useful for multiple game difficulties)
             timeRemaining = 5;
             TimerText.text = string.Format("{0:00}", timeRemaining);
-            // TimerText.SetText(string.Format("{0:00}", timeRemaining));
         }
     }
 
@@ -40,8 +44,6 @@ public class AlertPhase : MonoBehaviour
             {
                 timeRemaining -= Time.deltaTime;
                 TimerText.text = string.Format("{0:00}", timeRemaining);
-                // TimerText.SetText(string.Format("{0:00}", timeRemaining));
-                // TODO: DO Stuff!
             }
             else
             {
