@@ -40,7 +40,7 @@ public class SaveLevelState : MonoBehaviour{
             EnemyHealth health = enemy.GetComponent<EnemyHealth>();
             enemyHealth.Add(health.currentHealth);
             EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
-            enemyStartPosition.Add(enemyAI.startPosition);
+            enemyStartPosition.Add(enemyAI.chaseStartPosition);
             enemyAiType.Add(enemyAI.aiType);
         }
     }
