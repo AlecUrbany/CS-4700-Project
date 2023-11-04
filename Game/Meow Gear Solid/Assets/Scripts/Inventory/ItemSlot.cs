@@ -34,47 +34,61 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         viewController.OnSlotSelected(this);
         if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Interact"))
         {
-            EquipItem(itemData);
+            EquipItem();
         }
-            
     }
 
-    public void EquipItem(ItemData itemData)
+    public void EquipItem()
     {
+            Debug.Log("Equipped Item: " + itemData.ShortName);
+
             if(itemData.ShortName == "SOCOM")
             {
-                Debug.Log("Equipped Item: " + itemData.ShortName);
-                equipped = true;
-                GameObject spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
-                if(equipped == false)
+                if(viewController.equipedItem != itemData)
                 {
-                    Destroy(spawnedItem);
+                    // This gun is not yet equiped, so we need to create it
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.equipedItem = itemData;
+                }
+                equipped = true;
+
+            } else 
+            {
+                // We're not equiping a gun, so destroy it if equiped
+                if (viewController.spawnedItem != null) 
+                {
+                    Destroy(viewController.spawnedItem);
+                    viewController.spawnedItem = null;
+                    viewController.equipedItem = null;
                 }
 
-            }
-            if(itemData.ShortName == "RATION")
-            {
-                Debug.Log("Equipped Item: " + itemData.ShortName);
-                equipped = true;
-                health.HealHealth(100);
-                Destroy(spawnedItemSprite);
-                equipped = false;
-            }
-            
-            if(itemData.ShortName == "none")
-            {
-                Debug.Log("unequipped");
-                equipped = false;
-
+                if(itemData.ShortName == "RATION")
+                {
+                    // TODO: I don't think this implementation works
+                    //  - Figure out some way to implement consumable rations
+                    if (itemData.currentAmmo > 0) {
+                        health.HealHealth(100);
+                        itemData.currentAmmo--;
+                    }
+                    // Destroy(spawnedItemSprite);
+                    // itemData = null;
+                    equipped = false;
+                }
+                
+                if(itemData.ShortName == "none")
+                {
+                    equipped = false;
+                }
             }
     }
-    private void Update()
-    {
-        if(equipped == true)
-        {
-            //itemData.itemModel.transform.position = playerMouth.position;
-        }
-    }
+    
+    // private void Update()
+    // {
+    //     if(equipped == true)
+    //     {
+    //         //itemData.itemModel.transform.position = playerMouth.position;
+    //     }
+    // }
 
 
     public bool IsEmpty()
@@ -84,44 +98,34 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     private void OnEnable()
     {
-        viewController = FindObjectOfType<InventoryMenu>();
         if (itemData == null)
         {
+            itemNameText.ClearMesh();
             return;
         } 
-
-        var spawnedSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+        if (spawnedItemSprite == null) {
+            spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+        }
         MaxAmmoText.SetText(itemData.maxAmmo.ToString());
         CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
     }
-    private void OnDisable()
-    {
-        if (spawnedItemSprite != null)
-        {
-            Destroy(spawnedItemSprite);
-        }
-    }
 
-
+    // private void OnDisable()
+    // {
+        
+    // }
 
     private void Awake()
     {
-        viewController = FindObjectOfType<InventoryMenu>();
+        viewController = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>();
 
         //Handles our item slot. If there's no item, its null. Otherwise, we bring in the item icon
-        if (itemData == null)
-        {
-            return;
-        }
-
-        var spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
-
         if (itemData == null)
         {
             itemNameText.ClearMesh();
             return;
         }
+
         itemNameText.SetText(itemData.ShortName);
-        
     }
 }

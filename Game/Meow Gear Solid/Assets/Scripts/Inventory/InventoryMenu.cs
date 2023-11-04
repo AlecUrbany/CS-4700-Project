@@ -8,7 +8,7 @@ using UnityEngine;
 public class InventoryMenu : MonoBehaviour
 {
 
-    //Handles inventory basics - names, descriptions, etc.
+    // Handles inventory basics - names, descriptions, etc.
     [SerializeField] private GameObject inventoryViewObject;
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemDescText;
@@ -17,11 +17,16 @@ public class InventoryMenu : MonoBehaviour
     [SerializeField] private PlayerControls playerControls;
     [SerializeField] private List<ItemSlot> slots;
 
+    // Handles equiping and unequiping of the gun
+    public ItemData equipedItem;
+    public GameObject spawnedItem;
+
     //Makes sure inventory doesnt spawn in when we start the game
     void Start()
     {
         inventoryViewObject.SetActive(false);
     }
+    
     // Update is called once per frame
     void Update()
     {
@@ -82,7 +87,5 @@ public class InventoryMenu : MonoBehaviour
         itemNameText.SetText(selectedSlot.itemData.Name);
         itemDescText.SetText(selectedSlot.itemData.Description[0]);
     }
-    
-
     
 }

@@ -15,6 +15,7 @@ public class ItemPickUp : MonoBehaviour
         if (Input.GetButton("Interact"))
         {
             Debug.Log("picked up " + itemData.ShortName);
+            itemData.currentAmmo = itemData.maxAmmo;
             EventBus.Instance.PickUpItem(itemData);
             Destroy(gameObject);
         }
