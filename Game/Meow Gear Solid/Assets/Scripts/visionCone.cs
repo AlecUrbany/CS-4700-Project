@@ -39,7 +39,6 @@ public class visionCone : MonoBehaviour
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
-		Debug.Log("Hello!");
 	}
 	void Update(){
 		Transform enemyTransform = transform.parent;
