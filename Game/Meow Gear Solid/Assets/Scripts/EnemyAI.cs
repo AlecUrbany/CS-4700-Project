@@ -70,10 +70,13 @@ public class EnemyAI : MonoBehaviour
         Vector3 horizontalMovementDirection = movingStage1 ? Vector3.right : Vector3.left;
         rb.velocity = horizontalMovementDirection * moveSpeed;
 
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 8f);
+
         currentPatrolDistance += moveSpeed * Time.deltaTime;
 
-        if (currentPatrolDistance >= patrolDistance)
-        {
+        if (currentPatrolDistance >= patrolDistance){
             movingStage1 = !movingStage1;
             currentPatrolDistance = 0.0f;
         }
@@ -82,6 +85,9 @@ public class EnemyAI : MonoBehaviour
     void PatrolVertical(){
         Vector3 verticalMovementDirection = movingStage1 ? Vector3.forward : Vector3.back;
         rb.velocity = verticalMovementDirection * moveSpeed;
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 2f);
 
         currentPatrolDistance += moveSpeed * Time.deltaTime;
 
@@ -94,6 +100,9 @@ public class EnemyAI : MonoBehaviour
     void PatrolSquare(){
         Vector3 verticalMovementDirection = (movingStage1 && movingStage2) ? Vector3.back : movingStage1 ? Vector3.left : movingStage2 ? Vector3.right : Vector3.forward;
         rb.velocity = verticalMovementDirection * moveSpeed;
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 5f);
 
         currentPatrolDistance += moveSpeed * Time.deltaTime;
 
