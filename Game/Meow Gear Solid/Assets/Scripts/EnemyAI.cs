@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 public enum EnemyAIType{
     leftRight,
     UpDown,
@@ -17,12 +18,23 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed;
     public EnemyAIType aiType;
     public float patrolDistance = 10.0f;
-    public Vector3 startPosition;
+    public Vector3 chaseStartPosition;
     public int rotationSpeed;
+    public NavMeshAgent agent;
     private float currentPatrolDistance;
     private bool movingStage1 = false;
     private bool movingStage2 = false;
     private int phase = 1;
+    private bool patrol = true;
+    private bool alert = false;
+    private bool chasing = false;
+    private bool coroutineRunning = false;
+    private Coroutine chaseCoroutine;
+    public Quaternion startRotation;
+
+
+
+
 
 
 
@@ -30,16 +42,40 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
-        startPosition = transform.position;
+    }
+    void Start(){
+        chaseStartPosition = transform.position;
+        startRotation = transform.rotation;
     }
     void Update()
     {
         Vector3 distanceFromPlayer = player.position - transform.position;
         bool canSeePlayer = childObject.GetComponentInChildren<visionCone>().canSeePlayer;
         if(distanceFromPlayer.magnitude <playerRange && canSeePlayer){
+            if(!chasing && !alert){
+                chaseStartPosition = transform.position;
+            }
+            chasing = true;
+            patrol = false;
             FollowPlayer(distanceFromPlayer);
         }
-        else{
+        else if(chasing && canSeePlayer){
+            chasing = true;
+            FollowPlayer(distanceFromPlayer);
+        }
+        else if(chasing && !canSeePlayer){
+            if (chaseCoroutine != null){
+                StopCoroutine(chaseCoroutine);
+            }
+            alert = true;
+            chasing = false;
+            chaseCoroutine = StartCoroutine(ContinueChase());
+        }
+        else if(alert){
+            FollowPlayer(distanceFromPlayer);
+        }
+        else if (patrol){
+            patrol = true;
             switch(aiType){
                 case EnemyAIType.leftRight:
                     PatrolHorizontal();
@@ -54,15 +90,26 @@ public class EnemyAI : MonoBehaviour
                     break;
             }
         }
+        else{
+            agent.SetDestination(chaseStartPosition);
+            if(chaseStartPosition.x == transform.position.x && chaseStartPosition.z == transform.position.z){
+                transform.rotation = startRotation;
+                patrol = true;
+                agent.ResetPath();
+            }
+        }
          
     }
+
 
     void FollowPlayer(Vector3 distanceFromPlayer){
         distanceFromPlayer.Normalize();
         rb.velocity = distanceFromPlayer * moveSpeed;
         if (rb.velocity != Vector3.zero){
             Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);        }
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);        
+        }
+
 
     }
     void PatrolHorizontal()
@@ -70,20 +117,15 @@ public class EnemyAI : MonoBehaviour
         Vector3 horizontalMovementDirection = movingStage1 ? Vector3.right : Vector3.left;
         rb.velocity = horizontalMovementDirection * moveSpeed;
 
-        currentPatrolDistance += moveSpeed * Time.deltaTime;
 
-        if (currentPatrolDistance >= patrolDistance)
-        {
-            movingStage1 = !movingStage1;
-            currentPatrolDistance = 0.0f;
-        }
-    }
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
 
-    void PatrolVertical(){
-        Vector3 verticalMovementDirection = movingStage1 ? Vector3.forward : Vector3.back;
-        rb.velocity = verticalMovementDirection * moveSpeed;
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 8f);
+
 
         currentPatrolDistance += moveSpeed * Time.deltaTime;
+
 
         if (currentPatrolDistance >= patrolDistance){
             movingStage1 = !movingStage1;
@@ -91,11 +133,37 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+
+    void PatrolVertical(){
+        Vector3 verticalMovementDirection = movingStage1 ? Vector3.forward : Vector3.back;
+        rb.velocity = verticalMovementDirection * moveSpeed;
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 2f);
+
+
+        currentPatrolDistance += moveSpeed * Time.deltaTime;
+
+
+        if (currentPatrolDistance >= patrolDistance){
+            movingStage1 = !movingStage1;
+            currentPatrolDistance = 0.0f;
+        }
+    }
+
+
     void PatrolSquare(){
         Vector3 verticalMovementDirection = (movingStage1 && movingStage2) ? Vector3.back : movingStage1 ? Vector3.left : movingStage2 ? Vector3.right : Vector3.forward;
         rb.velocity = verticalMovementDirection * moveSpeed;
+        Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 5f);
+
 
         currentPatrolDistance += moveSpeed * Time.deltaTime;
+
 
         if (currentPatrolDistance >= patrolDistance){
             switch(phase){
@@ -122,4 +190,16 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
+    IEnumerator ContinueChase(){
+        yield return new WaitForSeconds(5f);
+        if(!chasing){
+            alert = false;
+        }
+        chaseCoroutine = null;
+    }
 }
+
+
+
+
+
