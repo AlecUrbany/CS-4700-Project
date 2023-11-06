@@ -54,9 +54,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
     }
 
-    public void onDeath(){
+    public void onDeath(){ 
         GameOverScreen.SetActive(true);
         Debug.Log("GAME OVER");
+        
 
     }
 

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MiniMap Obstacle
-  m_Shader: {fileID: 4800000, guid: 12779ca7a374ca24da44accca8f439a0, type: 3}
+  m_Shader: {fileID: 4800000, guid: 90cadb91a7902754f9fe5b4563306677, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,6 +64,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _MaxTriSize: 200
     - _Metallic: 0
     - _Mode: 0
     - _ObjectDithering: 1
@@ -73,8 +74,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _WireSmoothness: 0
+    - _WireThickness: 750
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 0, g: 0.13207549, b: 0.046650473, a: 0}
     - _Color: {r: 0, g: 0.745283, b: 0.1357159, a: 0.62352943}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _WireColor: {r: 0, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
