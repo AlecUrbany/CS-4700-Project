@@ -30,6 +30,8 @@ public class PlayerControls : MonoBehaviour
 
 	void Update ()
     {
+		if (DialogueManager.isActive == true)
+			return;
 		//float horizInput = Input.GetAxisRaw ("Horizontal");
 		//float vertInput = Input.GetAxisRaw ("Vertical");
 		//velocity = new Vector3 (horizInput, 0, vertInput).normalized * moveSpeed;
