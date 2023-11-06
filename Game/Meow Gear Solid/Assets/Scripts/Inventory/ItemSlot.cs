@@ -52,7 +52,8 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
                 }
                 equipped = true;
 
-            } else 
+            }
+            else 
             {
                 // We're not equiping a gun, so destroy it if equiped
                 if (viewController.spawnedItem != null) 
@@ -81,14 +82,14 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
                 }
             }
     }
-    
-    // private void Update()
-    // {
-    //     if(equipped == true)
-    //     {
-    //         //itemData.itemModel.transform.position = playerMouth.position;
-    //     }
-    // }
+    public void UnequipItem()
+    {
+        if(itemData.ShortName == "none")
+        {
+            equipped = false;
+        }        
+    }
+
 
 
     public bool IsEmpty()

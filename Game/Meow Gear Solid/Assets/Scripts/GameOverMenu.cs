@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class GameOverMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject GameOverScreen;
     public void StartGame ()
     {
         Debug.Log("Loading Next Level");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
+        GameOverScreen.SetActive(false);
+
     }
     public void QuitGame ()
     {

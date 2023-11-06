@@ -8,8 +8,10 @@ public enum EnemyAIType{
     Square,
     Stationary
 }
+
 public class EnemyAI : MonoBehaviour
 {
+    
     public Transform player;
     public float playerRange;
     private Vector3 distanceFromPlayer;
@@ -32,7 +34,13 @@ public class EnemyAI : MonoBehaviour
     private Coroutine chaseCoroutine;
     public Quaternion startRotation;
 
-
+//These six lines are for the exclamation point upon noticing the player
+    public Transform enemyMouth;
+    [SerializeField] private GameObject floatingTextBox;
+    public float nameLifeSpan = .5f;
+    public AudioSource source;
+    public AudioClip alertSound;
+    public bool hasBeenAlerted = false;
 
 
 
@@ -51,7 +59,13 @@ public class EnemyAI : MonoBehaviour
     {
         Vector3 distanceFromPlayer = player.position - transform.position;
         bool canSeePlayer = childObject.GetComponentInChildren<visionCone>().canSeePlayer;
-        if(distanceFromPlayer.magnitude <playerRange && canSeePlayer){
+        if(distanceFromPlayer.magnitude <playerRange && canSeePlayer)
+        {
+            if(!hasBeenAlerted)
+            {
+                ShowAlertSound();
+                hasBeenAlerted = true;
+            }
             if(!chasing && !alert){
                 chaseStartPosition = transform.position;
             }
@@ -59,10 +73,12 @@ public class EnemyAI : MonoBehaviour
             patrol = false;
             FollowPlayer(distanceFromPlayer);
         }
+
         else if(chasing && canSeePlayer){
             chasing = true;
             FollowPlayer(distanceFromPlayer);
         }
+
         else if(chasing && !canSeePlayer){
             if (chaseCoroutine != null){
                 StopCoroutine(chaseCoroutine);
@@ -71,9 +87,11 @@ public class EnemyAI : MonoBehaviour
             chasing = false;
             chaseCoroutine = StartCoroutine(ContinueChase());
         }
+
         else if(alert){
             FollowPlayer(distanceFromPlayer);
         }
+
         else if (patrol){
             patrol = true;
             switch(aiType){
@@ -98,7 +116,6 @@ public class EnemyAI : MonoBehaviour
                 agent.ResetPath();
             }
         }
-         
     }
 
 
@@ -196,6 +213,16 @@ public class EnemyAI : MonoBehaviour
             alert = false;
         }
         chaseCoroutine = null;
+        hasBeenAlerted = false;
+    }
+    void ShowAlertSound()
+    {
+        if(floatingTextBox)
+        {
+            GameObject prefab = Instantiate(floatingTextBox, enemyMouth, false);
+            source.PlayOneShot(alertSound);
+            Destroy(prefab, nameLifeSpan);
+        }
     }
 }
 

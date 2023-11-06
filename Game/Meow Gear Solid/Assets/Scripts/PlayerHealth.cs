@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public Renderer player;
     public HealthBar healthBar;
 
+    [SerializeField] private GameObject GameOverScreen;
+
     public float MaxHealth{
         get { return MaxHealth; }
     }
@@ -23,6 +25,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         isInvulnerable = false;
         currentHealth = maxHealth;
         healthBar.SetHealth(currentHealth);
+        GameOverScreen.SetActive(false);
+
     }
     public void TakeDamage(float damageAmount)
     {
@@ -51,8 +55,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
     }
 
     public void onDeath(){
-        currentHealth = 200;
+        GameOverScreen.SetActive(true);
         Debug.Log("GAME OVER");
+
     }
 
     void Update()
