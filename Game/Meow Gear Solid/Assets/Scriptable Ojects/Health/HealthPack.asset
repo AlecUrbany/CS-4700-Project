@@ -18,7 +18,7 @@ MonoBehaviour:
   - Restores life. Use by pressing [Action Button] while menu is open.
   itemSprite: {fileID: 2818511917865484967, guid: 071848ea78f6b2b47bc9444d81074b22,
     type: 3}
-  maxAmmo: 1
+  maxAmmo: 3
   currentAmmo: 1
   itemModel: {fileID: 7966922977636807793, guid: 1506e71efd099484aa39267f8829748a,
     type: 3}

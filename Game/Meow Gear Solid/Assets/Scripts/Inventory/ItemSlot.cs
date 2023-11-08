@@ -9,7 +9,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 {
     //Item equpping
     public bool equipped = false;
-    public Transform player, playerMouth;
+    public Transform player, playerMouth, itemSpriteHere;
     public Quaternion defaultRotation;
     public Rigidbody rb;
     public PlayerHealth health;
@@ -18,21 +18,28 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     //Item Data
     public ItemData itemData;
 
+    //Reminder that this communicates with the greater inventory menu via InventoryMenu.cs
     private InventoryMenu viewController;
 
     private Image spawnedItemSprite;
 
     //Will link the item name to the name section in the actual inventory slot
+    
     [SerializeField] private TMP_Text itemNameText;
 
     [SerializeField] private TMP_Text MaxAmmoText;
+    [SerializeField] private TMP_Text divided;
     [SerializeField] private TMP_Text CurrentAmmoText;
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("Item Selected: " + itemData.ShortName);
+        if (itemData != null)
+        {
+            Debug.Log("Item Selected: " + itemData.ShortName);
+        }
+
         viewController.OnSlotSelected(this);
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact") || Input.GetButtonDown("Fire1"))
         {
             EquipItem();
         }
@@ -40,58 +47,80 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     public void EquipItem()
     {
-            Debug.Log("Equipped Item: " + itemData.ShortName);
-
-            if(itemData.ShortName == "SOCOM")
-            {
-                if(viewController.equipedItem != itemData)
+            if (itemData != null)
+            {            
+                Debug.Log("Equipped Item: " + itemData.ShortName);
+                if(itemData.ShortName == "SOCOM")
                 {
                     // This gun is not yet equiped, so we need to create it
                     viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
                     viewController.equipedItem = itemData;
-                }
-                equipped = true;
-
-            }
-            else 
-            {
-                // We're not equiping a gun, so destroy it if equiped
-                if (viewController.spawnedItem != null) 
-                {
-                    Destroy(viewController.spawnedItem);
-                    viewController.spawnedItem = null;
-                    viewController.equipedItem = null;
+                    equipped = true;
                 }
 
-                if(itemData.ShortName == "RATION")
+
+                //Handles non physical items (items with no view model)
+                else 
                 {
-                    // TODO: I don't think this implementation works
-                    //  - Figure out some way to implement consumable rations
-                    if (itemData.currentAmmo > 0) {
-                        health.HealHealth(100);
-                        itemData.currentAmmo--;
+                    if(itemData.ShortName == "RATION")
+                    {
+                        viewController.equipedItem = itemData;
+                        equipped = true;
+                            // TODO: I don't think this implementation works
+                            //  - Figure out some way to implement consumable rations
+                        if (itemData.currentAmmo > 0 && health.currentHealth < 100)
+                        {
+                            health.HealHealth(100);
+                            itemData.currentAmmo--;
+                            if (itemData.currentAmmo == 0)
+                            {
+                                Destroy(spawnedItemSprite);
+                                itemData = null;
+                                RemoveItemData();
+                            }
+                        }
                     }
-                    // Destroy(spawnedItemSprite);
-                    // itemData = null;
-                    equipped = false;
-                }
-                
-                if(itemData.ShortName == "none")
-                {
-                    equipped = false;
+                    //We're not equiping a gun, so destroy it if equiped
+                    if (viewController.spawnedItem != null) 
+                    {
+                        Destroy(viewController.spawnedItem);
+                        viewController.spawnedItem = null;
+                        viewController.equipedItem = null;
+                    }
+                    
+                    if(itemData.ShortName == "NONE" || itemData.ShortName == null)
+                    {
+                        equipped = false;
+                    }
                 }
             }
+            //Will unequip any item if you select a blank slot
+            else if (itemData == null)
+            {
+                    viewController.equipedItem = null;
+                    //We're not equiping a gun, so destroy it if equiped
+                    if (viewController.spawnedItem != null) 
+                    {
+                        Destroy(viewController.spawnedItem);
+                        viewController.spawnedItem = null;
+                        viewController.equipedItem = null;
+                    }
+                    
+                    if(itemData.ShortName == "NONE" || itemData.ShortName == null)
+                    {
+                        equipped = false;
+                    }
+            }
     }
-    public void UnequipItem()
+
+
+    public void RemoveItemData()
     {
-        if(itemData.ShortName == "none")
-        {
-            equipped = false;
-        }        
+        itemNameText.SetText("NONE");
+        MaxAmmoText.SetText("");
+        CurrentAmmoText.SetText("");
+        divided.SetText("");
     }
-
-
-
     public bool IsEmpty()
     {
         return itemData == null;
@@ -104,11 +133,17 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
             itemNameText.ClearMesh();
             return;
         } 
-        if (spawnedItemSprite == null) {
-            spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, transform);
+        if (spawnedItemSprite == null)
+        {
+            spawnedItemSprite = Instantiate<Image>(itemData.Sprite, transform.position, Quaternion.identity, itemSpriteHere);
         }
         MaxAmmoText.SetText(itemData.maxAmmo.ToString());
         CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
+        if (MaxAmmoText && CurrentAmmoText != null)
+        {
+            divided.SetText("/");
+        }
+        itemNameText.SetText(itemData.ShortName);
     }
 
     // private void OnDisable()
