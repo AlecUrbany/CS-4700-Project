@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
@@ -9,7 +10,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public bool isInvulnerable;
     public Renderer player;
     public HealthBar healthBar;
-
+    public VideoFader fader;
     [SerializeField] private GameObject GameOverScreen;
 
     public float MaxHealth{
@@ -54,8 +55,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
         }
     }
 
-    public void onDeath(){ 
+    public void onDeath()
+    {
+        float timer = 1f;
         GameOverScreen.SetActive(true);
+        fader.FadeToBlack(timer);
         Debug.Log("GAME OVER");
         
 
@@ -65,7 +69,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     {//tests our damage function. Must remove later
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			TakeDamage(20);
+			TakeDamage(100);
 		}
         if (Input.GetKeyDown(KeyCode.H))
 		{
@@ -96,4 +100,6 @@ public class PlayerHealth : MonoBehaviour, IHealth
             x++;
         }
     }
+
+    
 }

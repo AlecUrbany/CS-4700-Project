@@ -104,12 +104,9 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
                         Destroy(viewController.spawnedItem);
                         viewController.spawnedItem = null;
                         viewController.equipedItem = null;
+                        
                     }
-                    
-                    if(itemData.ShortName == "NONE" || itemData.ShortName == null)
-                    {
-                        equipped = false;
-                    }
+                    equipped = false;
             }
     }
 
