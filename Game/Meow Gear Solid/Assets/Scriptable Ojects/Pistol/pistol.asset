@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421b056e97d8a29439cdb455c430ac74, type: 3}
   m_Name: pistol
   m_EditorClassIdentifier: 
+  weaponType: 1
   shortName: SOCOM
   itemName: '{{SOCOM Pistol}}'
   itemDesc:
@@ -20,6 +21,7 @@ MonoBehaviour:
   itemSprite: {fileID: 1763987814343528802, guid: 9a250fb858385a345a19de7769fd79d5,
     type: 3}
   maxAmmo: 45
-  currentAmmo: 6
+  currentAmmo: 42
+  magazineSize: 12
   itemModel: {fileID: 4607290202981604355, guid: 4742579957b0c3b4b9732282ab053754,
     type: 3}

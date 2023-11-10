@@ -12,19 +12,26 @@ public class GunFunctions : MonoBehaviour
     private GameObject currentBullet;
     private Rigidbody bulletRigidbody;
 
-    public ItemData itemData;
+    [SerializeField] private ItemData pistolData;
+    public List<Transform> playerMagazine = new List<Transform>();
+    private Transform playerBulletIcon;
 
-    void Start() {
-        itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
+    void Start()
+    {
+        pistolData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
+        playerMagazine = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>().magazineCount;
+        playerBulletIcon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>().newBullet;
+
     }
 
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            if (itemData.currentAmmo > 0) {
+            if (pistolData.currentAmmo > 0) {
                 Shoot();
-                itemData.currentAmmo --;
+                pistolData.currentAmmo --;
+                playerMagazine.Remove(playerBulletIcon);
             }
         }
     }

@@ -12,7 +12,7 @@ public class Weapon : Item
     public WeaponIndex weaponIndex;
 }
 
-public enum WeaponType
+public enum WeaponTypee
 {
     Melee, Pistol, Tranquilizer, Throwable, Healing
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ItemData : ScriptableObject
 {
+    public WeaponType weaponType;
     public string ShortName => shortName;
     public string Name => itemName;
     
@@ -14,6 +15,8 @@ public class ItemData : ScriptableObject
 
     public  int MaxAmmo => maxAmmo;
     public  int CurrentAmmo => currentAmmo;
+
+    public  int MagazineSize => magazineSize;
 
     public GameObject ItemModel => itemModel;
 
@@ -25,6 +28,13 @@ public class ItemData : ScriptableObject
     public int maxAmmo;
 
     public int currentAmmo;
+    public int magazineSize;
 
     public GameObject itemModel;
+    
+}
+
+public enum WeaponType
+{
+    Melee, Pistol, Tranquilizer, Throwable, Healing, Wearable, Consumable
 }

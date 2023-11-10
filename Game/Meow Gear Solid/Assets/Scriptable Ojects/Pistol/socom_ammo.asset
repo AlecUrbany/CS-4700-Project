@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421b056e97d8a29439cdb455c430ac74, type: 3}
   m_Name: socom_ammo
   m_EditorClassIdentifier: 
+  weaponType: 6
   shortName: SOCOM/AMMO + 15
   itemName: 
   itemDesc: []
   itemSprite: {fileID: 0}
   maxAmmo: 0
   currentAmmo: 15
+  magazineSize: 0
   itemModel: {fileID: 0}

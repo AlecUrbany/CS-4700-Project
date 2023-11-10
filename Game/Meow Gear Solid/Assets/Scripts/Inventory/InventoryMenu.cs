@@ -87,7 +87,6 @@ public class InventoryMenu : MonoBehaviour
             itemDescText.ClearMesh();
             inventoryTextBox.SetActive(false);
             return;
-
         }
         //Set the item name
         itemNameText.SetText(selectedSlot.itemData.Name);
