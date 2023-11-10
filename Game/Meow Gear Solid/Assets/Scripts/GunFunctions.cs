@@ -19,9 +19,6 @@ public class GunFunctions : MonoBehaviour
     void Start()
     {
         pistolData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
-        playerMagazine = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>().magazineCount;
-        playerBulletIcon = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>().newBullet;
-
     }
 
     void Update()
@@ -31,7 +28,6 @@ public class GunFunctions : MonoBehaviour
             if (pistolData.currentAmmo > 0) {
                 Shoot();
                 pistolData.currentAmmo --;
-                playerMagazine.Remove(playerBulletIcon);
             }
         }
     }

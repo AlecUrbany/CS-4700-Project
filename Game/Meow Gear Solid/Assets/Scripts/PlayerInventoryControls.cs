@@ -11,7 +11,7 @@ public class PlayerInventoryControls : MonoBehaviour
     public bool itemGone;
 
     public bool hasBullets;
-    public ItemData itemData;
+    public ItemData itemData, displayData;
 
     //Reminder that this communicates with the greater inventory menu via InventoryMenu.cs
     private InventoryMenu viewController;
@@ -34,12 +34,13 @@ public class PlayerInventoryControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        itemDisplay.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         if(itemData != null)
         {
             itemDisplay.SetActive(true);
@@ -54,41 +55,47 @@ public class PlayerInventoryControls : MonoBehaviour
                 divided.SetText("/");
             }
             CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
+            dispalyIcon.texture = itemData.Sprite.mainTexture;
+            dispalyIcon.color = new Color(255,255,255, 1);
+
+           if(Input.GetButtonDown("Fire1"))
+            {
+                Debug.Log("Removing bullet");
+                Destroy(magazineCount[magazineCount.Count-1].gameObject);
+            }
+            
         }
         
     }
     public void DisplayItem(ItemData itemData, bool hasBullets)
     {
-            if(itemData != null)
-            {
-                itemDisplay.SetActive(true);
-                if (MaxAmmoText == null || itemData == null)
-                {
-                    return;
-                }
-                MaxAmmoText.SetText(itemData.maxAmmo.ToString());
-                if (MaxAmmoText && CurrentAmmoText != null)
-                {
-                    divided.SetText("/");
-                }
-            CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
-            }
-            dispalyIcon.texture = itemData.Sprite.mainTexture;
-            dispalyIcon.color = new Color(255,255,255, 1);
+        if(itemData != null)
+        {
+            itemDisplay.SetActive(true);
             if(hasBullets == true)
             {
                 itemNameText.SetText("");
                 for (int i = 0; i < itemData.MagazineSize; i++)
                 {
+                    Debug.Log("Adding bullet");
                     newBullet = Instantiate(bulletIcon.transform, bulletGrid.transform, false);
                     magazineCount.Add(newBullet);
                 }
             }
             else
             {
-                itemNameText.SetText(itemData.ShortName);
+                foreach (Transform newBullet in magazineCount)
+                {
+                    Destroy(newBullet.gameObject);
+                }
+            }            
+        }
 
-            }
+
+        else
+        {
+            itemDisplay.SetActive(false);
+        }
     }
     public void EquipItem(ItemData itemData)
     {
@@ -114,6 +121,7 @@ public class PlayerInventoryControls : MonoBehaviour
                     viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
                     viewController.equipedItem = itemData;
                     equipped = true;
+                    hasBullets = false;
                     if (itemGone == true)
                     {
                         itemData = null;
@@ -147,6 +155,6 @@ public class PlayerInventoryControls : MonoBehaviour
     private void Awake()
     {
         viewController = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>();
+
     }    
 }
-
