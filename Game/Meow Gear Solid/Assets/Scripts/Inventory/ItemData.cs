@@ -17,6 +17,7 @@ public class ItemData : ScriptableObject
     public  int CurrentAmmo => currentAmmo;
 
     public  int MagazineSize => magazineSize;
+    public  int Magazine => magazine;
 
     public GameObject ItemModel => itemModel;
 
@@ -29,6 +30,7 @@ public class ItemData : ScriptableObject
 
     public int currentAmmo;
     public int magazineSize;
+    public int magazine;
 
     public GameObject itemModel;
     

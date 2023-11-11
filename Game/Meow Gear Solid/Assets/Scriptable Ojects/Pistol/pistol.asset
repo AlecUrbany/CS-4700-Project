@@ -21,7 +21,8 @@ MonoBehaviour:
   itemSprite: {fileID: 1763987814343528802, guid: 9a250fb858385a345a19de7769fd79d5,
     type: 3}
   maxAmmo: 45
-  currentAmmo: 42
+  currentAmmo: 11
   magazineSize: 12
+  magazine: 8
   itemModel: {fileID: 4607290202981604355, guid: 4742579957b0c3b4b9732282ab053754,
     type: 3}

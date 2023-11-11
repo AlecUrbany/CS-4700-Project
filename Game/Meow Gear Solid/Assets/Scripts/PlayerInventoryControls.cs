@@ -15,6 +15,7 @@ public class PlayerInventoryControls : MonoBehaviour
 
     //Reminder that this communicates with the greater inventory menu via InventoryMenu.cs
     private InventoryMenu viewController;
+    private GameObject intentoryMenu;
 
     public PlayerInventoryControls playerControls;
     public PlayerHealth health;
@@ -24,9 +25,9 @@ public class PlayerInventoryControls : MonoBehaviour
     [SerializeField] private TMP_Text itemNameText;
     public RawImage dispalyIcon;
     public RawImage bulletIcon;
-    public Transform newBullet;
+    public RawImage newBullet;
     public GridLayoutGroup bulletGrid;
-    public List<Transform> magazineCount = new List<Transform>();
+    public List<RawImage> magazineCount = new List<RawImage>();
 
     [SerializeField] private TMP_Text MaxAmmoText;
     [SerializeField] private TMP_Text divided;
@@ -40,6 +41,7 @@ public class PlayerInventoryControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        intentoryMenu = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().inventoryViewObject;
         itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         if(itemData != null)
         {
@@ -58,14 +60,46 @@ public class PlayerInventoryControls : MonoBehaviour
             dispalyIcon.texture = itemData.Sprite.mainTexture;
             dispalyIcon.color = new Color(255,255,255, 1);
 
-           if(Input.GetButtonDown("Fire1"))
+            if(hasBullets == false && magazineCount.Capacity > 0 )
             {
-                Debug.Log("Removing bullet");
-                Destroy(magazineCount[magazineCount.Count-1].gameObject);
+                for (var i = bulletGrid.transform.childCount - 1; i >= 0; i--)
+                {
+                    Object.Destroy(bulletGrid.transform.GetChild(i).gameObject);
+                }
             }
             
         }
+        if(intentoryMenu.activeSelf == true)
+        {
+            itemDisplay.SetActive(false);
+        }
         
+    }
+
+    public void DecreaseMagazine()
+    {
+        if(bulletGrid.transform.childCount > 0)
+        {       
+            Debug.Log("Removing bullet");
+            var i = bulletGrid.transform.childCount - 1;
+            Object.Destroy(bulletGrid.transform.GetChild(i).gameObject);
+        }
+    }
+    public void ReloadMagazine()
+    {
+        if(bulletGrid.transform.childCount != itemData.magazine)
+        {        
+            for (var i = bulletGrid.transform.childCount - 1; i >= 0; i--)
+            {
+                Object.Destroy(bulletGrid.transform.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < itemData.magazine; i++)
+            {
+                Debug.Log("Adding bullet");
+                newBullet = Instantiate(bulletIcon, bulletGrid.transform, false);
+                magazineCount.Add(newBullet);    
+            }           
+        }
     }
     public void DisplayItem(ItemData itemData, bool hasBullets)
     {
@@ -75,20 +109,17 @@ public class PlayerInventoryControls : MonoBehaviour
             if(hasBullets == true)
             {
                 itemNameText.SetText("");
-                for (int i = 0; i < itemData.MagazineSize; i++)
+                for (int i = 0; i < itemData.magazine; i++)
                 {
                     Debug.Log("Adding bullet");
-                    newBullet = Instantiate(bulletIcon.transform, bulletGrid.transform, false);
-                    magazineCount.Add(newBullet);
-                }
+                    newBullet = Instantiate(bulletIcon, bulletGrid.transform, false);
+                    magazineCount.Add(newBullet);    
+                }   
             }
             else
             {
-                foreach (Transform newBullet in magazineCount)
-                {
-                    Destroy(newBullet.gameObject);
-                }
-            }            
+                itemNameText.SetText(itemData.ShortName);
+            }
         }
 
 
@@ -103,7 +134,7 @@ public class PlayerInventoryControls : MonoBehaviour
             {
                 Debug.Log("Equipped Item: " + itemData.ShortName);
 
-                if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Pistol))
+                if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
                 {
                     Destroy(viewController.spawnedItem);
                     // This gun is not yet equiped, so we need to create it

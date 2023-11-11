@@ -8,27 +8,52 @@ public class GunFunctions : MonoBehaviour
     public LayerMask obstacleMask;
     public GameObject bulletPrefab;
     public Transform barrel;
-    public float bulletSpeed = 10.0f;
+    public float reloadSpeed = 1.5f;
+    public float bulletSpeed = 25.0f;
     private GameObject currentBullet;
     private Rigidbody bulletRigidbody;
 
-    [SerializeField] private ItemData pistolData;
-    public List<Transform> playerMagazine = new List<Transform>();
-    private Transform playerBulletIcon;
+    [SerializeField] private ItemData gunData;
+    public PlayerInventoryControls gunMagazine;
+    public bool isReloading;
 
     void Start()
     {
-        pistolData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
+        gunData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
+        gunMagazine = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>();
+        
     }
 
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1")&& isReloading == false)
         {
-            if (pistolData.currentAmmo > 0) {
-                Shoot();
-                pistolData.currentAmmo --;
+            if (gunData.currentAmmo > 0)
+            {
+                if (gunData.magazine > 0)
+                {
+                    Shoot();
+                    gunMagazine.DecreaseMagazine();
+                    gunData.magazine --;
+                    gunData.currentAmmo --;
+                }
+                else
+                {
+                    isReloading = true;
+                    Reload(reloadSpeed);
+
+                }
             }
+            else
+            {
+                //add a blank cartridge sfx here
+            }
+        }
+        if(Input.GetButtonDown("Reload"))
+        {
+                    isReloading = true;
+                    Reload(reloadSpeed);
+                    
         }
     }
 
@@ -41,10 +66,31 @@ public class GunFunctions : MonoBehaviour
         bulletRigidbody.velocity = barrel.forward * bulletSpeed;
         StartCoroutine(BulletLife(2, newBullet));
     }
+    
+    void Reload(float reloadSpeed)
+    {
+        StartCoroutine(ReloadTime(reloadSpeed));
+    }
     IEnumerator BulletLife(float timer, GameObject newBullet)
     {
         yield return new WaitForSeconds(timer);
         Destroy(newBullet);
-  }
+    }
+
+    IEnumerator ReloadTime(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+
+        if(gunData.currentAmmo >= gunData.magazineSize)
+        {
+            gunData.magazine = gunData.magazineSize;
+        }
+        else
+        {
+            gunData.magazine = gunData.currentAmmo;
+        }
+        gunMagazine.ReloadMagazine();
+        isReloading = false;
+    }
 
 }

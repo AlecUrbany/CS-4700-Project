@@ -9,7 +9,7 @@ public class InventoryMenu : MonoBehaviour
 {
 
     // Handles inventory basics - names, descriptions, etc.
-    [SerializeField] private GameObject inventoryViewObject;
+    [SerializeField] public GameObject inventoryViewObject;
     [SerializeField] private GameObject inventoryTextBox;
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text itemDescText;

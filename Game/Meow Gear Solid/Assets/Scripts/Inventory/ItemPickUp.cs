@@ -21,12 +21,39 @@ public class ItemPickUp : MonoBehaviour
         }
         if (Input.GetButton("Interact"))
         {
-            Debug.Log("picked up " + itemData.ShortName);
-            itemData.currentAmmo = itemData.maxAmmo;
-            itemNameText = itemData.ShortName;
-            ShowText(itemNameText);
-            EventBus.Instance.PickUpItem(itemData);
-            Destroy(gameObject);
+            if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
+            {
+                Debug.Log("picked up " + itemData.ShortName);
+                itemData.currentAmmo = itemData.maxAmmo;
+                itemData.magazine = itemData.magazineSize;
+                itemNameText = itemData.ShortName;
+                ShowText(itemNameText);
+                EventBus.Instance.PickUpItem(itemData);
+                Destroy(gameObject);
+            }
+            if((itemData.weaponType == WeaponType.Healing) || (itemData.weaponType == WeaponType.Throwable) || (itemData.weaponType == WeaponType.Consumable))
+            {
+                Debug.Log("picked up " + itemData.ShortName);
+                if (itemData.currentAmmo < itemData.MaxAmmo)
+                {
+                    itemData.currentAmmo += 1;
+                }
+                itemNameText = itemData.ShortName;
+                ShowText(itemNameText);
+                EventBus.Instance.PickUpItem(itemData);
+                Destroy(gameObject);
+            }
+            if(itemData.weaponType == WeaponType.Wearable)
+            {
+                Debug.Log("picked up " + itemData.ShortName);
+                itemData.currentAmmo = itemData.maxAmmo;
+                itemData.magazine = itemData.magazineSize;
+                itemNameText = itemData.ShortName;
+                ShowText(itemNameText);
+                EventBus.Instance.PickUpItem(itemData);
+                Destroy(gameObject);
+            }
+
         }
     }
     void ShowText(string itemNameText)

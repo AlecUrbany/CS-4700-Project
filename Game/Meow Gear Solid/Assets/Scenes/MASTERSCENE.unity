@@ -4399,6 +4399,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameOverScreen: {fileID: 1023474659}
+--- !u!1001 &618332168
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7966922977636807792, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: nameLifeSpan
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807792, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: floatingTextBox
+      value: 
+      objectReference: {fileID: 2868122478263234400, guid: 34a214471047c574d997b93c5d72d736,
+        type: 3}
+    - target: {fileID: 7966922977636807793, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_Name
+      value: Ration (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6110511
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.9357653
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7966922977636807796, guid: 1506e71efd099484aa39267f8829748a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1506e71efd099484aa39267f8829748a, type: 3}
 --- !u!1 &630811859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6291,6 +6371,7 @@ MonoBehaviour:
   itemGone: 0
   hasBullets: 0
   itemData: {fileID: 0}
+  displayData: {fileID: 0}
   playerControls: {fileID: 1241731427}
   health: {fileID: 1241731420}
   player: {fileID: 1241731419}
@@ -6379,6 +6460,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1683950427866627695}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1254462577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7966922977636807793, guid: 1506e71efd099484aa39267f8829748a,
+    type: 3}
+  m_PrefabInstance: {fileID: 618332168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254462578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254462577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7104775703f262e448deaf332d3ed965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 50
 --- !u!114 &1259913572 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6352339387475681392, guid: 2f800f5e4ef113340aca4d5469ec7480,
@@ -9840,7 +9940,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -249.20001, y: 257.7}
+  m_AnchoredPosition: {x: -244.8, y: 0}
   m_SizeDelta: {x: -100, y: -42.23001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2006708294

@@ -227,5 +227,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3533862758537535927, guid: 4f79f34b4d6ccd148a930e878d92f1ad,
     type: 3}
   barrel: {fileID: 8001698467897490275}
-  bulletSpeed: 10
-  pistolData: {fileID: 11400000, guid: 07b658069e18bf74098a7851cfbd3874, type: 2}
+  reloadSpeed: 1.5
+  bulletSpeed: 25
+  gunData: {fileID: 0}
+  gunMagazine: {fileID: 0}

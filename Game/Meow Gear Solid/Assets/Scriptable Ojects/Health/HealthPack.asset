@@ -20,6 +20,6 @@ MonoBehaviour:
   itemSprite: {fileID: 2818511917865484967, guid: 071848ea78f6b2b47bc9444d81074b22,
     type: 3}
   maxAmmo: 3
-  currentAmmo: 0
+  currentAmmo: 3
   magazineSize: 0
   itemModel: {fileID: 48142499693109796, guid: 2b3f10f82f6c4fb4da3eab2d7714f778, type: 3}
