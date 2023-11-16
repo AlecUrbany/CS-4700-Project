@@ -12,6 +12,7 @@ public class EnemyBulletCollision : MonoBehaviour
             Destroy(bullet);
             if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
+                Debug.Log("BANG1");
                 PlayerHealth playerScript = collision.gameObject.GetComponent<PlayerHealth>();
                 if(playerScript != null)
                 {

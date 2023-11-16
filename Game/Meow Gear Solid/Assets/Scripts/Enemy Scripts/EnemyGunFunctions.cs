@@ -10,7 +10,7 @@ public class EnemyGunFunctions : MonoBehaviour
     public Transform barrel;
     public float reloadSpeed = 2f;
     public float bulletSpeed = 25.0f;
-    public float burstSpeed = .5f;
+    public float burstSpeed = .01f;
 
     public bool isReloading;
     public GameObject sightline;
@@ -25,40 +25,38 @@ public class EnemyGunFunctions : MonoBehaviour
         bool canSeePlayer = sightline.GetComponent<visionCone>().canSeePlayer;
         if(canSeePlayer == true && isReloading == false)
         {
-            Shoot();
-            Reload(burstSpeed);
-            Shoot();
-            Reload(burstSpeed);
-            Shoot();
-            Reload(reloadSpeed);
+            StartCoroutine(Shoot3());
             isReloading = true;
+            
         }
+    }
+
+    IEnumerator Shoot3()
+    {
+        Shoot();
+        yield return new WaitForSeconds(burstSpeed);
+        Shoot();
+        yield return new WaitForSeconds(burstSpeed);
+        Shoot();
+        yield return new WaitForSeconds(reloadSpeed);
+        isReloading = false;
     }
 
     void Shoot()
     {
         GameObject newBullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
-        Destroy(newBullet.GetComponent<EnemyGunFunctions>());
+        //Destroy(newBullet.GetComponent<EnemyGunFunctions>());
         Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.velocity = barrel.forward * bulletSpeed;
         StartCoroutine(BulletLife(2, newBullet));
     }
     
-    void Reload(float reloadSpeed)
-    {
-        StartCoroutine(ReloadTime(reloadSpeed));
-    }
     IEnumerator BulletLife(float timer, GameObject newBullet)
     {
         yield return new WaitForSeconds(timer);
         Destroy(newBullet);
     }
 
-    IEnumerator ReloadTime(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        isReloading = false;
-    }
 
 }

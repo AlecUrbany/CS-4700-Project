@@ -576,19 +576,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96439367}
   m_CullTransparentMesh: 1
---- !u!1 &120251309 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8315049962056952453, guid: 764f883a324a724419a601ea7c3df0b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 272951466}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &120251310 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6907834668979943978, guid: 764f883a324a724419a601ea7c3df0b2,
     type: 3}
   m_PrefabInstance: {fileID: 272951466}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120251309}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cdb947e61fa5af2429810f0e94b3f060, type: 3}
@@ -6194,9 +6188,9 @@ GameObject:
   - component: {fileID: 1241731425}
   - component: {fileID: 1241731424}
   - component: {fileID: 1241731423}
-  - component: {fileID: 1241731422}
   - component: {fileID: 1241731421}
   - component: {fileID: 1241731420}
+  - component: {fileID: 1241731422}
   - component: {fileID: 1241731427}
   m_Layer: 9
   m_Name: Player Temp
@@ -8478,7 +8472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 120251309}
+  m_FirstSelected: {fileID: 647884169}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!224 &1673214606 stripped

@@ -36,12 +36,12 @@ public class PlayerInventoryControls : MonoBehaviour
     void Start()
     {
         itemDisplay.SetActive(false);
+        intentoryMenu = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().inventoryViewObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        intentoryMenu = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().inventoryViewObject;
         itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         if(itemData != null)
         {
@@ -60,7 +60,7 @@ public class PlayerInventoryControls : MonoBehaviour
             dispalyIcon.texture = itemData.Sprite.mainTexture;
             dispalyIcon.color = new Color(255,255,255, 1);
 
-            if(hasBullets == false && magazineCount.Capacity > 0 )
+            if((hasBullets == false && magazineCount.Capacity > 0) || itemData == null)
             {
                 for (var i = bulletGrid.transform.childCount - 1; i >= 0; i--)
                 {
@@ -118,6 +118,7 @@ public class PlayerInventoryControls : MonoBehaviour
             }
             else
             {
+                Debug.Log("setting item name");
                 itemNameText.SetText(itemData.ShortName);
             }
         }
@@ -153,6 +154,7 @@ public class PlayerInventoryControls : MonoBehaviour
                     viewController.equipedItem = itemData;
                     equipped = true;
                     hasBullets = false;
+                    DisplayItem(itemData, hasBullets);
                     if (itemGone == true)
                     {
                         itemData = null;
@@ -178,6 +180,13 @@ public class PlayerInventoryControls : MonoBehaviour
                         Destroy(viewController.spawnedItem);
                         viewController.spawnedItem = null;
                         viewController.equipedItem = null;
+                        if(bulletGrid.transform.childCount > 0)
+                        {
+                            for (var i = bulletGrid.transform.childCount - 1; i >= 0; i--)
+                            {
+                                Object.Destroy(bulletGrid.transform.GetChild(i).gameObject);
+                            }                            
+                        }
                         itemDisplay.SetActive(false);
                     }
                     equipped = false;

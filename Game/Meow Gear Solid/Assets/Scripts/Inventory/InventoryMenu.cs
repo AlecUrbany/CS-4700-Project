@@ -36,15 +36,16 @@ public class InventoryMenu : MonoBehaviour
         {
             if(inventoryViewObject.activeSelf == true)
             {
-                EventBus.Instance.OpenInventory();
+                EventBus.Instance.CloseInventory();
                 Time.timeScale = 1;
                 
             }
             
             else
             {
-                EventBus.Instance.CloseInventory();
-                Time.timeScale = 0;    
+                EventBus.Instance.OpenInventory();
+                Time.timeScale = 0;
+                slots[0].OnSelect(null);
             }
             inventoryViewObject.SetActive(!inventoryViewObject.activeSelf);
         }
