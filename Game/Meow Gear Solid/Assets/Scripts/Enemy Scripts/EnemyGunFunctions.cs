@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyGunFunctions : MonoBehaviour
 {
     //Need to implement bullet destruction when colliding with walls
-    public LayerMask obstacleMask;
     public GameObject bulletPrefab;
     public Transform barrel;
     public float reloadSpeed = 2f;

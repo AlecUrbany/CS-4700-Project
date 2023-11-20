@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 421b056e97d8a29439cdb455c430ac74, type: 3}
-  m_Name: HealthPack
+  m_Name: Macguffin
   m_EditorClassIdentifier: 
-  weaponType: 4
-  shortName: RATION
-  itemName: '{{RATION}}'
+  weaponType: 5
+  shortName: Heart
+  itemName: '{{HEART OF HUMANITY}}'
   itemDesc:
-  - Restores life. Use by pressing [Action Button] while menu is open.
-  itemSprite: {fileID: 2818511917865484967, guid: 071848ea78f6b2b47bc9444d81074b22,
+  - Get the macguffin and get out of here NOW!
+  itemSprite: {fileID: 2495372278839892240, guid: c7881a7167ee50f4d9abb1fda080b0fa,
     type: 3}
   inInventory: 0
-  maxAmmo: 3
+  maxAmmo: 0
   currentAmmo: 0
   magazineSize: 0
   magazine: 0
-  itemModel: {fileID: 48142499693109796, guid: 2b3f10f82f6c4fb4da3eab2d7714f778, type: 3}
+  itemModel: {fileID: 0}

@@ -9,12 +9,14 @@ public class healingFunction : MonoBehaviour
 
     public PlayerHealth playerHealth;
     public PlayerInventoryControls inventoryControls;
+    public ItemSlot itemSlot;
     public float healthRestored = 50;
     void Start()
     {
         healData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         inventoryControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>();
+        itemSlot = GameObject.FindGameObjectWithTag("HUD").GetComponent<ItemSlot>();
     }
 
     void Update()
@@ -25,13 +27,18 @@ public class healingFunction : MonoBehaviour
             {
                 playerHealth.HealHealth(healthRestored);
                 healData.currentAmmo --;
-                if (healData.currentAmmo == 0)
-                {
-                    healData = null;
-                    inventoryControls.itemGone = true;
-                }
-            }
-            
+            } 
         }
+        if(healData != null)
+        {
+            if (healData.currentAmmo == 0)
+            {
+                    healData.inInventory = false;
+                    itemSlot.itemData = null;
+                    inventoryControls.itemGone = true;
+                    inventoryControls.EquipItem(null);
+                    itemSlot.RemoveItemData();
+            }
+        }        
     }
 }

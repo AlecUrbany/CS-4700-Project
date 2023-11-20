@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ItemData : ScriptableObject
 {
     public WeaponType weaponType;
+    public bool InInventory => inInventory;
     public string ShortName => shortName;
     public string Name => itemName;
     
@@ -26,6 +27,7 @@ public class ItemData : ScriptableObject
     [SerializeField] private List<string> itemDesc;
     [SerializeField] private Image itemSprite;
     
+    public bool inInventory;
     public int maxAmmo;
 
     public int currentAmmo;

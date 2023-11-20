@@ -12,6 +12,10 @@ public class ItemPickUp : MonoBehaviour
 
     public float nameLifeSpan = .5f;
     [SerializeField] private ItemData itemData;
+    void Start()
+    {
+        itemData.inInventory = false;
+    }
     private void OnTriggerStay(Collider other)
     {
         //Checks to see if object colliding has player tag
@@ -31,24 +35,38 @@ public class ItemPickUp : MonoBehaviour
                 EventBus.Instance.PickUpItem(itemData);
                 Destroy(gameObject);
             }
+
             if((itemData.weaponType == WeaponType.Healing) || (itemData.weaponType == WeaponType.Throwable) || (itemData.weaponType == WeaponType.Consumable))
             {
                 Debug.Log("picked up " + itemData.ShortName);
-                if (itemData.currentAmmo < itemData.MaxAmmo)
+                if(itemData.inInventory == true)
                 {
-                    itemData.currentAmmo += 1;
+                    if (itemData.currentAmmo < itemData.MaxAmmo)
+                    {
+                        itemData.currentAmmo += 1;
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        itemNameText = "full";
+                        ShowText(itemNameText);
+                    }
                 }
-                itemNameText = itemData.ShortName;
-                ShowText(itemNameText);
-                EventBus.Instance.PickUpItem(itemData);
-                Destroy(gameObject);
+                else
+                {
+                    itemData.currentAmmo = 1;
+                    itemNameText = itemData.ShortName;
+                    ShowText(itemNameText);
+                    EventBus.Instance.PickUpItem(itemData);
+                    itemData.inInventory = true;
+                    Destroy(gameObject);
+                }
             }
             if(itemData.weaponType == WeaponType.Wearable)
             {
                 Debug.Log("picked up " + itemData.ShortName);
-                itemData.currentAmmo = itemData.maxAmmo;
-                itemData.magazine = itemData.magazineSize;
                 itemNameText = itemData.ShortName;
+                itemData.inInventory = true;
                 ShowText(itemNameText);
                 EventBus.Instance.PickUpItem(itemData);
                 Destroy(gameObject);

@@ -47,6 +47,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
 
     public void RemoveItemData()
     {
+        itemData = null;
         itemNameText.SetText("NONE");
         MaxAmmoText.SetText("");
         CurrentAmmoText.SetText("");

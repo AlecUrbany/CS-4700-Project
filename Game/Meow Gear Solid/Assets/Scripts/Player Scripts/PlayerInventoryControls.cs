@@ -45,6 +45,7 @@ public class PlayerInventoryControls : MonoBehaviour
         itemData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         if(itemData != null)
         {
+            itemData.inInventory = true;
             itemDisplay.SetActive(true);
             if (MaxAmmoText == null || itemData == null)
             {
@@ -146,6 +147,17 @@ public class PlayerInventoryControls : MonoBehaviour
                     DisplayItem(itemData, hasBullets);
 
                 }
+
+                if(itemData.weaponType == WeaponType.Wearable)
+                {
+                    Destroy(viewController.spawnedItem);
+                    // This gun is not yet equiped, so we need to create it
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.equipedItem = itemData;
+                    equipped = true;
+                    DisplayItem(itemData, hasBullets);
+
+                }
                 
                 if(itemData.weaponType == WeaponType.Healing)
                 {
@@ -155,13 +167,6 @@ public class PlayerInventoryControls : MonoBehaviour
                     equipped = true;
                     hasBullets = false;
                     DisplayItem(itemData, hasBullets);
-                    if (itemGone == true)
-                    {
-                        itemData = null;
-                        Destroy(viewController.spawnedItem);
-                        itemGone = false;
-                        equipped = false;
-                    }
 
                 }
 
