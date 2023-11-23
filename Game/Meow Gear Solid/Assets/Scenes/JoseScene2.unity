@@ -3455,6 +3455,7 @@ MonoBehaviour:
   moveSpeed: 8
   rotationSpeed: 720
   rotationVelo: {x: 0, y: 0, z: 0}
+  currentlyEquipped: {fileID: 0}
 --- !u!114 &1627427460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3471,6 +3472,7 @@ MonoBehaviour:
   currentHealth: 100
   isInvulnerable: 0
   player: {fileID: 1627427463}
+  healthBar: {fileID: 0}
 --- !u!54 &1627427461
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4019,7 +4021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 1763256965}
   targetSceneName: Jose Scene
-  spawnPointName: PORTAL TO ANOTHER WORLD
+  targetPortal: PORTAL TO ANOTHER WORLD
 --- !u!65 &1961753360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4334,6 +4336,8 @@ MonoBehaviour:
   - {fileID: 974510899}
   - {fileID: 1278969364}
   - {fileID: 726598612}
+  equipedItem: {fileID: 0}
+  spawnedItem: {fileID: 0}
 --- !u!114 &2027900613
 MonoBehaviour:
   m_ObjectHideFlags: 0
