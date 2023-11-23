@@ -2,12 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+[System.Serializable]
+public class LevelState
+{
+    public List<EnemyData> enemies = new List<EnemyData>();
+    // Other level state properties...
+}
+
+[System.Serializable]
+public class EnemyData{
+    public Vector3 position;
+    public float health;
+    public int aiState;
+    public Vector3 startPosition;
+    public float moveSpeed;
+    public float patrolDistance;
+    public float viewRadius;
+}
 public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
     List<Vector3> enemyPositon = new List<Vector3>();
     List<Vector3> enemyStartPosition = new List<Vector3>();
     List<float> enemyHealth = new List<float>();
     List<EnemyAIType> enemyAiType = new List<EnemyAIType>();
+    private LevelState state;
+
     private void OnTriggerEnter(Collider other)
     {
         //Checks to see if object colliding has player tag
@@ -15,13 +34,9 @@ public class SaveLevelState : MonoBehaviour{
         {
             return;
         }
-        LevelState state = new LevelState();
+        state = new LevelState();
         GetEnemyStates();
         GetDrops();
-        state.position = enemyPositon;
-        state.health = enemyHealth;
-        state.aiState = enemyAiType;
-        state.startPosition = enemyStartPosition;
         string jsonState = JsonUtility.ToJson(state);
         string parentDirectory = Directory.GetParent(Application.dataPath).FullName;
         string folderPath = Path.Combine(parentDirectory, "LevelStates");
@@ -36,12 +51,17 @@ public class SaveLevelState : MonoBehaviour{
 
     private void GetEnemyStates(){
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
-            enemyPositon.Add(enemy.transform.position);
-            EnemyHealth health = enemy.GetComponent<EnemyHealth>();
-            enemyHealth.Add(health.currentHealth);
-            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
-            enemyStartPosition.Add(enemyAI.chaseStartPosition);
-            enemyAiType.Add(enemyAI.aiType);
+            visionCone cone = enemy.GetComponentInChildren<visionCone>();
+            EnemyData enemyData = new EnemyData{
+                position = enemy.transform.position,
+                health = enemy.GetComponent<EnemyHealth>().currentHealth,
+                startPosition = enemy.GetComponent<EnemyAI>().chaseStartPosition,
+                aiState = (int)enemy.GetComponent<EnemyAI>().aiType,
+                moveSpeed = enemy.GetComponent<EnemyAI>().moveSpeed,
+                patrolDistance = enemy.GetComponent<EnemyAI>().patrolDistance,
+                viewRadius = cone.viewRadius
+            };
+            state.enemies.Add(enemyData);
         }
     }
 
