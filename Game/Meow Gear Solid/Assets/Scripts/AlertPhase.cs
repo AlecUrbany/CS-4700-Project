@@ -8,7 +8,7 @@ public class AlertPhase : MonoBehaviour
     public GameObject miniMap;
     public GameObject AlertInfo;
     public TextMeshProUGUI TimerText;
-    private bool inAlertPhase;
+    public bool inAlertPhase;
     public float timeRemaining = 0;
 
     public void updateCanSeePlayer(bool canSeePlayer) 
