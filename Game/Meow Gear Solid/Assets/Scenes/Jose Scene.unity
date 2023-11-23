@@ -577,12 +577,18 @@ MonoBehaviour:
   childObject: {fileID: 1998883457}
   rb: {fileID: 205724473}
   moveSpeed: 3
-  aiType: 2
+  aiType: 0
   patrolDistance: 5
   chaseStartPosition: {x: 0, y: 0, z: 0}
   rotationSpeed: 5
   agent: {fileID: 205724478}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  enemyMouth: {fileID: 0}
+  floatingTextBox: {fileID: 0}
+  nameLifeSpan: 0.5
+  source: {fileID: 0}
+  alertSound: {fileID: 0}
+  hasBeenAlerted: 0
 --- !u!54 &205724473
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2404,6 +2410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpawnPointName: DefaultSpawn
   player: {fileID: 2030658471}
+  enemyPrefab: {fileID: 3980568658035178430, guid: f3bf2986cb2204840ad990373ccb7a0b,
+    type: 3}
 --- !u!4 &933661787
 Transform:
   m_ObjectHideFlags: 0
@@ -2990,6 +2998,12 @@ MonoBehaviour:
   rotationSpeed: 5
   agent: {fileID: 1215438881}
   startRotation: {x: 0, y: 0, z: 0, w: 0}
+  enemyMouth: {fileID: 0}
+  floatingTextBox: {fileID: 0}
+  nameLifeSpan: 0.5
+  source: {fileID: 0}
+  alertSound: {fileID: 0}
+  hasBeenAlerted: 0
 --- !u!54 &1215438877
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3911,8 +3925,11 @@ MonoBehaviour:
     m_Bits: 0
   bulletPrefab: {fileID: 413859659}
   barrel: {fileID: 1570888710}
+  reloadSpeed: 1.5
   bulletSpeed: 10
-  itemData: {fileID: 0}
+  gunData: {fileID: 0}
+  gunMagazine: {fileID: 0}
+  isReloading: 0
 --- !u!1 &1578784503
 GameObject:
   m_ObjectHideFlags: 0
@@ -4038,6 +4055,7 @@ MonoBehaviour:
   miniMap: {fileID: 1861044283}
   AlertInfo: {fileID: 725574441}
   TimerText: {fileID: 2065310750}
+  inAlertPhase: 0
   timeRemaining: 5
 --- !u!114 &1620844964
 MonoBehaviour:
@@ -4052,6 +4070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryViewObject: {fileID: 1009451486}
+  inventoryTextBox: {fileID: 0}
   itemNameText: {fileID: 1858954591}
   itemDescText: {fileID: 1681715490}
   playerControls: {fileID: 0}
@@ -5346,6 +5365,8 @@ MonoBehaviour:
   isInvulnerable: 0
   player: {fileID: 2030658469}
   healthBar: {fileID: 375192533}
+  fader: {fileID: 0}
+  GameOverScreen: {fileID: 0}
 --- !u!1 &2039860162
 GameObject:
   m_ObjectHideFlags: 0
