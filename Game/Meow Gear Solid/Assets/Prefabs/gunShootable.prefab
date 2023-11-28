@@ -205,7 +205,7 @@ BoxCollider:
   m_GameObject: {fileID: 4607290202981604355}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.69, y: 2.43, z: 3.84}
   m_Center: {x: 0, y: 0, z: 0}
@@ -231,3 +231,4 @@ MonoBehaviour:
   bulletSpeed: 25
   gunData: {fileID: 0}
   gunMagazine: {fileID: 0}
+  isReloading: 0

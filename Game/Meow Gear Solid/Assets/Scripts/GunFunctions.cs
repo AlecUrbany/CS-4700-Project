@@ -60,7 +60,6 @@ public class GunFunctions : MonoBehaviour
     void Shoot()
     {
         GameObject newBullet = Instantiate(bulletPrefab, barrel.position, barrel.rotation);
-        Destroy(newBullet.GetComponent<GunFunctions>());
         Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.velocity = barrel.forward * bulletSpeed;

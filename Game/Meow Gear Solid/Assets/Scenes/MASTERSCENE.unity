@@ -3756,7 +3756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fader: {fileID: 0}
   targetSceneName: 
-  spawnPointName: 
+  targetPortal: 
 --- !u!1 &495588451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,7 +3883,7 @@ Transform:
   m_LocalScale: {x: 0.20316, y: 0.5, z: 0.20316}
   m_Children: []
   m_Father: {fileID: 1241731419}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &521314453
 BoxCollider:
@@ -4813,6 +4813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSpawnPointName: DefaultSpawn
   player: {fileID: 0}
+  enemyPrefab: {fileID: 0}
 --- !u!4 &703677159
 Transform:
   m_ObjectHideFlags: 0
@@ -6260,8 +6261,8 @@ Transform:
   m_Children:
   - {fileID: 588566566}
   - {fileID: 495588452}
-  - {fileID: 521314452}
   - {fileID: 1404168567}
+  - {fileID: 521314452}
   m_Father: {fileID: 907335224}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7650,11 +7651,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404168566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.023452759, y: -1.08, z: 5.16}
+  m_LocalPosition: {x: 0.023452759, y: -1.08, z: 5.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1241731419}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1404168568
 BoxCollider:
@@ -7664,7 +7665,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404168566}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
