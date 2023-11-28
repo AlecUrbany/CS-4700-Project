@@ -40,7 +40,7 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         viewController.OnSlotSelected(this);
         if (Input.GetButton("Interact") || Input.GetButton("Fire1"))
         {
-            playerControls.EquipItem(itemData);
+            playerControls.EquipItem(this);
         }
     }
 

@@ -130,10 +130,13 @@ public class PlayerInventoryControls : MonoBehaviour
             itemDisplay.SetActive(false);
         }
     }
-    public void EquipItem(ItemData itemData)
+    public void EquipItem(ItemSlot item)
     {
-            if (itemData != null)
+        
+        
+            if (item != null)
             {
+                ItemData itemData = item.itemData;
                 Debug.Log("Equipped Item: " + itemData.ShortName);
 
                 if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
@@ -163,6 +166,7 @@ public class PlayerInventoryControls : MonoBehaviour
                 {
                     Destroy(viewController.spawnedItem);
                     viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.spawnedItem.GetComponent<healingFunction>().itemSlot = item;
                     viewController.equipedItem = itemData;
                     equipped = true;
                     hasBullets = false;
@@ -176,7 +180,7 @@ public class PlayerInventoryControls : MonoBehaviour
                 }
                
             }
-            else if (itemData == null)
+            else if (item == null)
             {
                     viewController.equipedItem = null;
                     //We're not equiping a gun, so destroy it if equiped

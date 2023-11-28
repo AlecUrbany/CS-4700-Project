@@ -16,7 +16,8 @@ public class healingFunction : MonoBehaviour
         healData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
         inventoryControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>();
-        itemSlot = GameObject.FindGameObjectWithTag("HUD").GetComponent<ItemSlot>();
+       // itemSlot = GameObject.FindGameObjectWithTag("HUD").GetComponent<ItemSlot>();
+        
     }
 
     void Update()

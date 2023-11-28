@@ -7,12 +7,12 @@ public class EnemyBulletCollision : MonoBehaviour
 {
     public GameObject bullet;
     public float damage = 20f;
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
             Destroy(bullet);
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                PlayerHealth playerScript = collision.gameObject.GetComponent<PlayerHealth>();
+                PlayerHealth playerScript = other.gameObject.GetComponent<PlayerHealth>();
                 if(playerScript != null)
                 {
                     playerScript.TakeDamage(damage);
