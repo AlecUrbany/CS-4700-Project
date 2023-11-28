@@ -3659,6 +3659,7 @@ GameObject:
   - component: {fileID: 443398191}
   - component: {fileID: 443398190}
   - component: {fileID: 443398194}
+  - component: {fileID: 443398195}
   m_Layer: 0
   m_Name: PORTAL TO ANOTHER WORLD
   m_TagString: Untagged
@@ -3754,9 +3755,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42a7691d04e7844f8a9b9336e8871c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fader: {fileID: 0}
-  targetSceneName: 
-  targetPortal: 
+  fader: {fileID: 583523282}
+  targetSceneName: InteriorFirstFloor
+  targetPortal: LevelEntrance
+--- !u!114 &443398195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 443398189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c0b733048a5eb2438b0955736b7f21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelToSave: MASTERSCENE
 --- !u!1 &495588451
 GameObject:
   m_ObjectHideFlags: 0
