@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: e7586c1d500e069489ed3a826dc2978b
+=======
+<<<<<<<< Updated upstream:Game/Meow Gear Solid/Assets/Models/Cat Player Model FInalized/Mixamo Animations + Models/Punching (1).fbx.meta
+guid: 13fd4cc2ca0db354da001df296e553af
+========
+guid: c77fec0cb58e7cc4b943f8638e080008
+>>>>>>>> Stashed changes:Game/Meow Gear Solid/Assets/Models/Cat Player Model FInalized/Mixamo Animations + Models/Walking (2).fbx.meta
+>>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
