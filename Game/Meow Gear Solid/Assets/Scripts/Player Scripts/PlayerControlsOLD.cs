@@ -6,6 +6,8 @@ public class PlayerControlsOLD : MonoBehaviour
 {
 
 //All the commented out code involves moving where the character looks. Might implement back in
+	public Animator animator;
+	public bool isMoving;
 	public float moveSpeed = 8;
 	public float rotationSpeed = 720;
 
@@ -29,12 +31,17 @@ public class PlayerControlsOLD : MonoBehaviour
 		rotationVelo = new Vector3(Input.GetAxisRaw ("Horizontal"), 0 , Input.GetAxisRaw ("Vertical"));
 		float horizInput = Input.GetAxisRaw ("Horizontal");
 		float vertInput = Input.GetAxisRaw ("Vertical");
-		if (Input.GetButton("Aim"))
-		{
-
-		} 
-
 		velocity = new Vector3 (horizInput, 0, vertInput).normalized * moveSpeed;
+		if(horizInput > 0 || horizInput < 0 || vertInput > 0 || vertInput < 0)
+		{
+			isMoving = true;
+			animator.SetBool("IsMoving", isMoving);
+		}
+		else
+		{
+			isMoving = false;
+			animator.SetBool("IsMoving", isMoving);
+		}
 	}
 
 	void FixedUpdate()
