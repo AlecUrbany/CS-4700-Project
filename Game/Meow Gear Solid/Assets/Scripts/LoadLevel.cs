@@ -19,7 +19,6 @@ public class LoadLevel : MonoBehaviour
 
         //PS1 style fade to black. Will need to implement method to freeze the player later on.
         float timer = 2;
-        fader.FadeToBlack(timer);
         StartCoroutine(Delay(timer));
 
     }
@@ -45,11 +44,11 @@ public class LoadLevel : MonoBehaviour
     //Actual move to next level. Will need to make prope code later.
     private IEnumerator Delay(float duration)
     {
+        fader.FadeToBlack(duration);
         yield return new WaitForSeconds(duration);
         PlayerPrefs.SetString("TargetSpawnPoint", targetPortal);
         Debug.Log("Entering next level");
         fader.FadeFromBlack(duration);
-
         SceneManager.LoadScene(targetSceneName);
     }
 }

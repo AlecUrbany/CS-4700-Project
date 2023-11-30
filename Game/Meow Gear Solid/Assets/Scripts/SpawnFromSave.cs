@@ -61,7 +61,7 @@ public class SpawnFromSave : MonoBehaviour{
         }
         string targetSpawnPointName = PlayerPrefs.GetString("TargetSpawnPoint", defaultSpawnPointName);
         Transform targetSpawnPoint = GameObject.Find(targetSpawnPointName).transform;
-        player.position = targetSpawnPoint.position - new Vector3(3, 0.75f, 0);
+        player.position = targetSpawnPoint.position - new Vector3(0, 0, 3);
     }
 
     void DestroyGameObjectsWithTag(string tag){

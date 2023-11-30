@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 39ac436b82890474c84b3ca51b026422, type: 2}
 --- !u!1 &53801418
 GameObject:
   m_ObjectHideFlags: 0
@@ -3660,7 +3660,7 @@ GameObject:
   - component: {fileID: 443398190}
   - component: {fileID: 443398194}
   m_Layer: 0
-  m_Name: PORTAL TO ANOTHER WORLD
+  m_Name: SPAWN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3736,11 +3736,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443398189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.49, y: 1.1444597, z: -1.944787}
+  m_LocalPosition: {x: -23.9, y: 2.18, z: -10.72}
   m_LocalScale: {x: 1.29, y: 3.54, z: 2.55}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &443398194
 MonoBehaviour:
@@ -3754,9 +3754,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42a7691d04e7844f8a9b9336e8871c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fader: {fileID: 0}
-  targetSceneName: 
-  targetPortal: 
+  fader: {fileID: 583523282}
+  targetSceneName: InteriorFirstFloor
+  targetPortal: InteriorEntrance1
 --- !u!1 &526079412
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,8 +4527,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSpawnPointName: DefaultSpawn
-  player: {fileID: 0}
-  enemyPrefab: {fileID: 0}
+  player: {fileID: 1241731419}
+  enemyPrefab: {fileID: 3980568658035178430, guid: f3bf2986cb2204840ad990373ccb7a0b,
+    type: 3}
 --- !u!4 &703677159
 Transform:
   m_ObjectHideFlags: 0
@@ -4541,7 +4542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -6400,8 +6401,8 @@ GameObject:
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1339471759
 BoxCollider:
@@ -8814,7 +8815,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &1813361466
 MeshCollider:
