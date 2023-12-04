@@ -54,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     void Start(){
         chaseStartPosition = transform.position;
         startRotation = transform.rotation;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
     void Update()
     {

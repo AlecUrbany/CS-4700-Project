@@ -30,6 +30,11 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
     [SerializeField] private TMP_Text divided;
     [SerializeField] private TMP_Text CurrentAmmoText;
 
+    private void Start()
+    {
+        health = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        playerControls = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>();
+    }
     public void OnSelect(BaseEventData eventData)
     {
         if (itemData != null)

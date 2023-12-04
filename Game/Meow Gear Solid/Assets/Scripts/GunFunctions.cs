@@ -21,7 +21,6 @@ public class GunFunctions : MonoBehaviour
     {
         gunData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
         gunMagazine = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryControls>();
-        
     }
 
     void Update()

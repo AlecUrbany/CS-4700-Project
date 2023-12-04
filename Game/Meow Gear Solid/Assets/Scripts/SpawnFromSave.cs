@@ -31,8 +31,9 @@ public class SpawnFromSave : MonoBehaviour{
     public GameObject enemyPrefab;
 
     private void Start(){
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         if(GameObject.FindGameObjectsWithTag("Player").Length > 1){
-            Destroy(gameObject); //Check if the player from the last scene is in this one and destories
+            
         }
         string sceneName = SceneManager.GetActiveScene().name;
         string folderPath = Path.Combine(Application.dataPath, "../LevelStates");

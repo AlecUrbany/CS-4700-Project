@@ -151,15 +151,15 @@ public class PlayerInventoryControls : MonoBehaviour
 
                 }
 
-                if(itemData.weaponType == WeaponType.Wearable)
+                if((itemData.weaponType == WeaponType.Wearable) || (itemData.weaponType == WeaponType.Wearable))
                 {
                     Destroy(viewController.spawnedItem);
                     // This gun is not yet equiped, so we need to create it
                     viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
                     viewController.equipedItem = itemData;
                     equipped = true;
+                    hasBullets = false;
                     DisplayItem(itemData, hasBullets);
-
                 }
                 
                 if(itemData.weaponType == WeaponType.Healing)

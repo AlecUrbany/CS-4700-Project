@@ -11,6 +11,10 @@ TagManager:
   - GameStateManager
   - HUD
   - Key1
+  - HandRight
+  - HandLeft
+  - LegRight
+  - Head
   layers:
   - Default
   - TransparentFX
