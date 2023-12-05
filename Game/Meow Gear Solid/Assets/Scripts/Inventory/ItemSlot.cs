@@ -42,10 +42,23 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
             Debug.Log("Item Selected: " + itemData.ShortName);
         }
 
+        if (itemData == null)
+        {
+            Debug.Log("Nothing in this slot!");
+        }
+
         viewController.OnSlotSelected(this);
         if (Input.GetButton("Interact") || Input.GetButton("Fire1"))
         {
-            playerControls.EquipItem(this);
+            if (itemData != null)
+            {
+                playerControls.EquipItem(this);
+            }
+            else
+            {
+                playerControls.UnEquipItem();
+            }
+
         }
     }
 

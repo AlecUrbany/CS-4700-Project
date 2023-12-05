@@ -7,11 +7,14 @@ using TMPro;
 
 public class PlayerInventoryControls : MonoBehaviour
 {
+    public Animator playerAnimator;
+    [SerializeField] private ItemData defaultWeapon;
     public bool equipped;
+    public bool wearingBox;
     public bool itemGone;
 
     public bool hasBullets;
-    public ItemData itemData, displayData;
+    public ItemData itemData;
 
     //Reminder that this communicates with the greater inventory menu via InventoryMenu.cs
     private InventoryMenu viewController;
@@ -20,7 +23,7 @@ public class PlayerInventoryControls : MonoBehaviour
     public PlayerInventoryControls playerControls;
     public PlayerHealth health;
 
-    public Transform player, playerMouth, itemSpriteHere;
+    public Transform player, playerHand, playerHead, itemSpriteHere;
     [SerializeField] private GameObject itemDisplay;
     [SerializeField] private TMP_Text itemNameText;
     public RawImage dispalyIcon;
@@ -37,6 +40,8 @@ public class PlayerInventoryControls : MonoBehaviour
     {
         itemDisplay.SetActive(false);
         intentoryMenu = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().inventoryViewObject;
+        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
+        viewController.spawnedItem = Instantiate(defaultWeapon.itemModel, playerHand, false);
     }
 
     // Update is called once per frame
@@ -138,12 +143,13 @@ public class PlayerInventoryControls : MonoBehaviour
             {
                 ItemData itemData = item.itemData;
                 Debug.Log("Equipped Item: " + itemData.ShortName);
+                wearingBox = false;
 
                 if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
                 {
                     Destroy(viewController.spawnedItem);
                     // This gun is not yet equiped, so we need to create it
-                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerHand, false);
                     viewController.equipedItem = itemData;
                     equipped = true;
                     hasBullets = true;
@@ -151,13 +157,15 @@ public class PlayerInventoryControls : MonoBehaviour
 
                 }
 
-                if((itemData.weaponType == WeaponType.Wearable) || (itemData.weaponType == WeaponType.Wearable))
+                if(itemData.weaponType == WeaponType.Wearable)
                 {
                     Destroy(viewController.spawnedItem);
                     // This gun is not yet equiped, so we need to create it
-                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerHead, false);
                     viewController.equipedItem = itemData;
                     equipped = true;
+                    wearingBox = true;
+                    playerAnimator.SetBool("WearingBox", wearingBox);
                     hasBullets = false;
                     DisplayItem(itemData, hasBullets);
                 }
@@ -165,7 +173,7 @@ public class PlayerInventoryControls : MonoBehaviour
                 if(itemData.weaponType == WeaponType.Healing)
                 {
                     Destroy(viewController.spawnedItem);
-                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerMouth, false);
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerHand, false);
                     viewController.spawnedItem.GetComponent<healingFunction>().itemSlot = item;
                     viewController.equipedItem = itemData;
                     equipped = true;
@@ -173,14 +181,10 @@ public class PlayerInventoryControls : MonoBehaviour
                     DisplayItem(itemData, hasBullets);
 
                 }
-
-                if(itemData.weaponType == WeaponType.Consumable)
-                {
-
-                }
                
             }
-            else if (item == null)
+
+            else
             {
                     viewController.equipedItem = null;
                     //We're not equiping a gun, so destroy it if equiped
@@ -199,7 +203,31 @@ public class PlayerInventoryControls : MonoBehaviour
                         itemDisplay.SetActive(false);
                     }
                     equipped = false;
+                    wearingBox = false;
             }
+    }
+    public void UnEquipItem()
+    {
+                    viewController.equipedItem = null;
+                    //We're not equiping a gun, so destroy it if equiped
+                    if (viewController.spawnedItem != null) 
+                    {
+                        Destroy(viewController.spawnedItem);
+                        viewController.spawnedItem = null;
+                        viewController.equipedItem = null;
+                        if(bulletGrid.transform.childCount > 0)
+                        {
+                            for (var i = bulletGrid.transform.childCount - 1; i >= 0; i--)
+                            {
+                                Object.Destroy(bulletGrid.transform.GetChild(i).gameObject);
+                            }                            
+                        }
+                        itemDisplay.SetActive(false);
+                    }
+                    equipped = false;
+                    wearingBox = false;
+                    viewController.spawnedItem = Instantiate(defaultWeapon.itemModel, playerHand, false);
+            
     }
     private void Awake()
     {

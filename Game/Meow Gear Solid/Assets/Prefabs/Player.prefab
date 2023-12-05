@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7512705634530181919}
   - component: {fileID: 1547137608108106264}
   m_Layer: 9
-  m_Name: PlayerLeg
-  m_TagString: Player
+  m_Name: LegRight
+  m_TagString: LegRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4822609704266513071}
-  m_LocalRotation: {x: 0.029435199, y: -0.43889493, z: -0.89800465, w: -0.009620796}
+  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: -0.29883623, w: 0.64085644}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8711532420223361261}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 90, z: 0}
 --- !u!33 &9102477446496112421
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -216,13 +216,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4999419159930791164}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.38, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 7575346173871864153}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &4999419159930791152
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -471,15 +471,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c110ac71e4b71146a739efaa59150d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultWeapon: {fileID: 11400000, guid: 8de17a331bbd9b749920ac94466b7a79, type: 2}
   equipped: 0
   itemGone: 0
   hasBullets: 0
   itemData: {fileID: 0}
-  displayData: {fileID: 0}
   playerControls: {fileID: 4999419160338783465}
   health: {fileID: 4999419160338783446}
   player: {fileID: 4999419160338783441}
-  playerMouth: {fileID: 4999419159930791165}
+  playerHand: {fileID: 9212213211920739550}
+  playerHead: {fileID: 0}
   itemSpriteHere: {fileID: 0}
   itemDisplay: {fileID: 0}
   itemNameText: {fileID: 0}
@@ -613,13 +614,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8511992010633471145}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.38, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 3073919125059687250}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &5612321597675617784
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -763,6 +764,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cat Rigged
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7c9838cba6d09e845ae3712157fe6029,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerModel
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 7c9838cba6d09e845ae3712157fe6029,
         type: 3}

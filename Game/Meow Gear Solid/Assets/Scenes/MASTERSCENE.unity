@@ -577,6 +577,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96439367}
   m_CullTransparentMesh: 1
+--- !u!4 &120143901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9212213211920739550, guid: 7f52275b96233d8498eac4a12906ba70,
+    type: 3}
+  m_PrefabInstance: {fileID: 4999419159097183626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &120251310 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6907834668979943978, guid: 764f883a324a724419a601ea7c3df0b2,
@@ -2770,8 +2776,7 @@ PrefabInstance:
         type: 3}
       propertyPath: itemData
       value: 
-      objectReference: {fileID: 11400000, guid: 8de17a331bbd9b749920ac94466b7a79,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6907834668979943978, guid: 764f883a324a724419a601ea7c3df0b2,
         type: 3}
       propertyPath: playerMouth
@@ -10659,6 +10664,16 @@ PrefabInstance:
       propertyPath: bulletGrid
       value: 
       objectReference: {fileID: 1531299107}
+    - target: {fileID: 4999419160338783465, guid: 7f52275b96233d8498eac4a12906ba70,
+        type: 3}
+      propertyPath: playerHand
+      value: 
+      objectReference: {fileID: 1404168567}
+    - target: {fileID: 4999419160338783465, guid: 7f52275b96233d8498eac4a12906ba70,
+        type: 3}
+      propertyPath: playerHead
+      value: 
+      objectReference: {fileID: 120143901}
     - target: {fileID: 4999419160338783465, guid: 7f52275b96233d8498eac4a12906ba70,
         type: 3}
       propertyPath: MaxAmmoText
