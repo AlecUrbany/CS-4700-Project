@@ -5,6 +5,10 @@ using UnityEngine.Video;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
+    [SerializeField] private GameObject bloodSplat;
+    private GameObject splatter;
+    public Transform playerStatic;
+    
     public float maxHealth = 100f;
     public float currentHealth;
     public bool isInvulnerable;
@@ -21,7 +25,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         
     }
     void Start(){
-        player = GetComponent<Renderer>();
+        player = GetComponentInChildren<SkinnedMeshRenderer>();
         player.enabled = true;
         isInvulnerable = false;
         currentHealth = maxHealth;
@@ -36,6 +40,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             StartCoroutine("GetInvulnerable");
             currentHealth -= damageAmount;
+            splatter = Instantiate(bloodSplat, playerStatic, false);
+            StartCoroutine(BloodTimer(splatter));
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0){
@@ -99,6 +105,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
             yield return new WaitForSeconds(.25f);
             x++;
         }
+    }
+    IEnumerator BloodTimer(GameObject splatter)
+    {
+        yield return new WaitForSeconds(.5f);
+        Destroy(splatter);
     }
 
     

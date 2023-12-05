@@ -40,7 +40,7 @@ public class PlayerInventoryControls : MonoBehaviour
     {
         itemDisplay.SetActive(false);
         intentoryMenu = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().inventoryViewObject;
-        playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
+        playerAnimator = GetComponentInChildren<Animator>();
         viewController.spawnedItem = Instantiate(defaultWeapon.itemModel, playerHand, false);
     }
 
@@ -144,6 +144,7 @@ public class PlayerInventoryControls : MonoBehaviour
                 ItemData itemData = item.itemData;
                 Debug.Log("Equipped Item: " + itemData.ShortName);
                 wearingBox = false;
+                playerAnimator.SetBool("WearingBox", wearingBox);
 
                 if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
                 {
@@ -164,10 +165,10 @@ public class PlayerInventoryControls : MonoBehaviour
                     viewController.spawnedItem = Instantiate(itemData.itemModel, playerHead, false);
                     viewController.equipedItem = itemData;
                     equipped = true;
-                    wearingBox = true;
-                    playerAnimator.SetBool("WearingBox", wearingBox);
                     hasBullets = false;
                     DisplayItem(itemData, hasBullets);
+                    wearingBox = true;
+                    playerAnimator.SetBool("WearingBox", wearingBox);
                 }
                 
                 if(itemData.weaponType == WeaponType.Healing)
@@ -204,6 +205,7 @@ public class PlayerInventoryControls : MonoBehaviour
                     }
                     equipped = false;
                     wearingBox = false;
+                    playerAnimator.SetBool("WearingBox", wearingBox);
             }
     }
     public void UnEquipItem()
@@ -226,6 +228,7 @@ public class PlayerInventoryControls : MonoBehaviour
                     }
                     equipped = false;
                     wearingBox = false;
+                    playerAnimator.SetBool("WearingBox", wearingBox);
                     viewController.spawnedItem = Instantiate(defaultWeapon.itemModel, playerHand, false);
             
     }

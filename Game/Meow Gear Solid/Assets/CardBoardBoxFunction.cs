@@ -5,6 +5,9 @@ using UnityEngine;
 public class CardBoardBoxFunction : MonoBehaviour
 {
     public Animator playerAnimator;
+    public Transform box;
+    public Transform playerHead;
+    public Transform playerStatic;
     public bool wearingBox;
     public bool isMoving;
     public bool isVisible;
@@ -21,6 +24,8 @@ public class CardBoardBoxFunction : MonoBehaviour
             transform.gameObject.layer = 9; //player layer
             isMoving = true;
             playerAnimator.SetBool("IsMoving", isMoving);
+            box.transform.parent = playerHead;
+            box.transform.position = playerStatic.position;
         }
 
         else
@@ -29,6 +34,9 @@ public class CardBoardBoxFunction : MonoBehaviour
             {
                 transform.gameObject.layer = 9; //player layer 
                 isMoving = false;
+                box.transform.parent = playerStatic;
+                box.transform.position = playerStatic.position;
+                box.transform.localRotation = Quaternion.Euler(0, 0, 0);
             }
 
             else
@@ -36,12 +44,17 @@ public class CardBoardBoxFunction : MonoBehaviour
                 transform.gameObject.layer = 8; //obstacle layer
                 isMoving = false;
                 playerAnimator.SetBool("IsMoving", isMoving);
+                box.transform.parent = playerStatic;
+                box.transform.position = playerStatic.position;
+                box.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
             }
         }
     }
     void Start()
     {
-        wearingBox = true;
+       playerHead = GameObject.FindGameObjectWithTag("Head").GetComponent<Transform>();
+       playerStatic = GameObject.FindGameObjectWithTag("PlayerStatic").GetComponent<Transform>();
     }
 
 }

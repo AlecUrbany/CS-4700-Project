@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 0}
+  box: {fileID: 7842406822450713197}
+  playerHead: {fileID: 0}
+  playerStatic: {fileID: 0}
   wearingBox: 0
   isMoving: 0
   isVisible: 0

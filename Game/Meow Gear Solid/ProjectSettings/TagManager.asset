@@ -16,6 +16,7 @@ TagManager:
   - LegRight
   - Head
   - PlayerModel
+  - PlayerStatic
   layers:
   - Default
   - TransparentFX
