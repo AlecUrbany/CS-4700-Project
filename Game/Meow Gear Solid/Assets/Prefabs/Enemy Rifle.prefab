@@ -59,9 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f98bc0dab8af254eb258e48ea2ff428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 0
   bulletPrefab: {fileID: 3533862758537535927, guid: 8d09858f74b2278449d99641e82459a5,
     type: 3}
   barrel: {fileID: 5204199675535234074}
@@ -129,7 +126,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 247853260c4607c4aad2ba304abfba19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +207,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 247853260c4607c4aad2ba304abfba19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

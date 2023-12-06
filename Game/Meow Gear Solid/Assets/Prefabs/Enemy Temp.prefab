@@ -355,6 +355,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ce992524a36d74eb8b2cc5fa5bc7af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplat: {fileID: 2599874350400582794, guid: 44489d2be0ab58040bed91b2a8af2069,
+    type: 3}
+  enemyHead: {fileID: 4717897988250688780}
   maxHealth: 100
   currentHealth: 0
 --- !u!114 &3980568658035178421
