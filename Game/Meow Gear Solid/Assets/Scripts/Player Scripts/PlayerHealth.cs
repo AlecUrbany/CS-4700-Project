@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private GameObject bloodSplat;
     private GameObject splatter;
-    public Transform playerStatic;
+    public Transform playerHead;
     
     public float maxHealth = 100f;
     public float currentHealth;
@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             StartCoroutine("GetInvulnerable");
             currentHealth -= damageAmount;
-            splatter = Instantiate(bloodSplat, playerStatic, false);
+            splatter = Instantiate(bloodSplat, playerHead, false);
             StartCoroutine(BloodTimer(splatter));
             healthBar.SetHealth(currentHealth);
 

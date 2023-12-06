@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHealth
 {
+    [SerializeField] private GameObject bloodSplat;
+    private GameObject splatter;
+    public Transform enemyHead;
     public float maxHealth = 100f;
     public float currentHealth;
     public float MaxHealth{
@@ -17,6 +20,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     }
     public void TakeDamage(float damageAmount){
         currentHealth -= damageAmount;
+        splatter = Instantiate(bloodSplat, enemyHead, false);
+        StartCoroutine(BloodTimer(splatter));
         if(currentHealth <= 0){
             onDeath();
         }
@@ -34,5 +39,10 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void onDeath(){
         //gameObject.SetActive(false);
         Destroy(gameObject);
+    }
+    IEnumerator BloodTimer(GameObject splatter)
+    {
+        yield return new WaitForSeconds(.5f);
+        Destroy(splatter);
     }
 }

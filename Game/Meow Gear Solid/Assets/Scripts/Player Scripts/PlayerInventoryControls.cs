@@ -11,6 +11,8 @@ public class PlayerInventoryControls : MonoBehaviour
     [SerializeField] private ItemData defaultWeapon;
     public bool equipped;
     public bool wearingBox;
+    public bool holdingGun;
+
     public bool itemGone;
 
     public bool hasBullets;
@@ -145,6 +147,8 @@ public class PlayerInventoryControls : MonoBehaviour
                 Debug.Log("Equipped Item: " + itemData.ShortName);
                 wearingBox = false;
                 playerAnimator.SetBool("WearingBox", wearingBox);
+                holdingGun = false;
+                playerAnimator.SetBool("HoldingGun", holdingGun);
 
                 if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
                 {
@@ -155,6 +159,8 @@ public class PlayerInventoryControls : MonoBehaviour
                     equipped = true;
                     hasBullets = true;
                     DisplayItem(itemData, hasBullets);
+                    holdingGun = true;
+                    playerAnimator.SetBool("HoldingGun", holdingGun);
 
                 }
 
@@ -206,6 +212,8 @@ public class PlayerInventoryControls : MonoBehaviour
                     equipped = false;
                     wearingBox = false;
                     playerAnimator.SetBool("WearingBox", wearingBox);
+                    holdingGun = false;
+                    playerAnimator.SetBool("HoldingGun", holdingGun);
             }
     }
     public void UnEquipItem()
@@ -229,6 +237,8 @@ public class PlayerInventoryControls : MonoBehaviour
                     equipped = false;
                     wearingBox = false;
                     playerAnimator.SetBool("WearingBox", wearingBox);
+                    holdingGun = false;
+                    playerAnimator.SetBool("HoldingGun", holdingGun);
                     viewController.spawnedItem = Instantiate(defaultWeapon.itemModel, playerHand, false);
             
     }
