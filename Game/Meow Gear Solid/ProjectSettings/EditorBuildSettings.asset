@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MASTERSCENE.unity
     guid: 5e528cf83e6ff244f879a806e95d9514
   - enabled: 1
-    path: Assets/Scenes/Interior First Floor/Interior&Exterior.unity
+    path: Assets/Scenes/Exterior/Interior&Exterior.unity
     guid: cc24ea671728c194a905752de957dff2
   - enabled: 1
     path: Assets/Scenes/Interior Second Floor/InteriorSecondFloor.unity

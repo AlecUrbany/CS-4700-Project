@@ -5,7 +5,7 @@ using UnityEngine;
 public class PunchFunction : MonoBehaviour
 {
     public Animator playerAnimator;
-    public GameObject bulletPrefab;
+    public GameObject HitBoxPrefab;
     public Transform rightArm;
     public Transform leftArm;
     public Transform rightLeg;
@@ -13,7 +13,7 @@ public class PunchFunction : MonoBehaviour
     public int punchNumber;
     public bool IsAttacking;
     public bool inAnimation;
-    public float attackTime = 4f;
+    public bool hasHitBoxOut;
 
     [SerializeField] private ItemData gunData;
     public PlayerInventoryControls gunMagazine;
@@ -29,31 +29,30 @@ public class PunchFunction : MonoBehaviour
         rightLeg = GameObject.FindGameObjectWithTag("LegRight").GetComponent<Transform>();
         punchNumber = 1;
         inAnimation = false;
+        hasHitBoxOut = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1") && IsAttacking == false && inAnimation == false)
         {
-            IsAttacking = true;
-            if((punchNumber == 1) && inAnimation == false)
+            if((punchNumber == 1) && inAnimation == false && hasHitBoxOut == false)
             {
-                playerAnimator.SetBool("IsAttacking", IsAttacking);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(rightArm);
                 punchNumber = 2;
+                StartCoroutine(Timeout());
             }
             if((punchNumber == 2) && inAnimation == false)
             {
-                playerAnimator.SetBool("IsAttacking", IsAttacking);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(leftArm);
+                StartCoroutine(Timeout());
                 punchNumber = 3;
             }
             if((punchNumber == 3) && inAnimation == false)
             {
-                playerAnimator.SetBool("IsAttacking", IsAttacking);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(rightLeg);
                 punchNumber = 1;
@@ -63,22 +62,34 @@ public class PunchFunction : MonoBehaviour
     }
     void Punch(Transform limb)
     {
+        StopCoroutine("Timeout");
         inAnimation = true;
-        GameObject hitBox = Instantiate(bulletPrefab, limb.position, limb.rotation);
-        hitBox.transform.parent = limb;
-        StartCoroutine(BulletLife(1f, hitBox));
+        IsAttacking = true;
+        playerAnimator.SetBool("IsAttacking", IsAttacking);
+        if(hasHitBoxOut == false)
+        {
+            hasHitBoxOut = true;
+            GameObject hitBox = Instantiate(HitBoxPrefab, limb.position, limb.rotation);
+            hitBox.transform.parent = limb;
+            StartCoroutine(HitBoxLife(1f, hitBox));
+        }
+
     }
-    IEnumerator BulletLife(float timer, GameObject hitBox)
+    IEnumerator HitBoxLife(float timer, GameObject hitBox)
     {
         yield return new WaitForSeconds(timer);
         Destroy(hitBox);
+        hasHitBoxOut = false;
         inAnimation = false;
         IsAttacking = false;
+        playerAnimator.SetBool("IsAttacking", IsAttacking);
     }
-    IEnumerator AnimationWindow(float timer)
+    IEnumerator Timeout()
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(2.5f);
+        inAnimation = false;
         IsAttacking = false;
+        playerAnimator.SetBool("IsAttacking", IsAttacking);
         punchNumber = 1;
     }
 }

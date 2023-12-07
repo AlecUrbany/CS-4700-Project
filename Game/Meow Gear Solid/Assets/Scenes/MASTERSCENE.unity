@@ -6278,6 +6278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb947e61fa5af2429810f0e94b3f060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1212918528 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2449448393841605376, guid: 7f52275b96233d8498eac4a12906ba70,
+    type: 3}
+  m_PrefabInstance: {fileID: 4999419159097183626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1213856191 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8315049962056952452, guid: 764f883a324a724419a601ea7c3df0b2,
@@ -10704,6 +10710,11 @@ PrefabInstance:
       propertyPath: itemSpriteHere
       value: 
       objectReference: {fileID: 926635847}
+    - target: {fileID: 4999419160338783465, guid: 7f52275b96233d8498eac4a12906ba70,
+        type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 1212918528}
     - target: {fileID: 4999419160338783465, guid: 7f52275b96233d8498eac4a12906ba70,
         type: 3}
       propertyPath: CurrentAmmoText

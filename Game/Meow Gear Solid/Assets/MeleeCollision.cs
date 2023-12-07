@@ -9,10 +9,13 @@ public class MeleeCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy")){
+        if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
             EnemyHealth enemyScript = other.gameObject.GetComponent<EnemyHealth>();
-            if(enemyScript != null){
+            if(enemyScript != null)
+            {
                 enemyScript.TakeDamage(damage);
+                Destroy(bullet);
             }
         }
     

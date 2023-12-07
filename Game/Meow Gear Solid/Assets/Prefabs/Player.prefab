@@ -531,7 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodSplat: {fileID: 2599874350400582794, guid: 44489d2be0ab58040bed91b2a8af2069,
     type: 3}
-  playerStatic: {fileID: 9212213211920739550}
+  playerHead: {fileID: 9212213211920739550}
   maxHealth: 100
   currentHealth: 0
   isInvulnerable: 0
@@ -573,6 +573,7 @@ MonoBehaviour:
   defaultWeapon: {fileID: 11400000, guid: 8de17a331bbd9b749920ac94466b7a79, type: 2}
   equipped: 0
   wearingBox: 0
+  holdingGun: 0
   itemGone: 0
   hasBullets: 0
   itemData: {fileID: 0}

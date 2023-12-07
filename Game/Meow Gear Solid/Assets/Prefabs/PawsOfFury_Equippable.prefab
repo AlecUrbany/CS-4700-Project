@@ -108,15 +108,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc6ffb07663e4d49849e8965cadb92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 0
-  bulletPrefab: {fileID: 591172589875485061, guid: c9448c0727e61524b8a50c294ec40379,
+  playerAnimator: {fileID: 0}
+  HitBoxPrefab: {fileID: 591172589875485061, guid: c9448c0727e61524b8a50c294ec40379,
     type: 3}
   rightArm: {fileID: 0}
   leftArm: {fileID: 0}
   rightLeg: {fileID: 0}
   punchNumber: 0
+  IsAttacking: 0
+  inAnimation: 0
+  hasHitBoxOut: 0
   gunData: {fileID: 0}
   gunMagazine: {fileID: 0}
   isReloading: 0
