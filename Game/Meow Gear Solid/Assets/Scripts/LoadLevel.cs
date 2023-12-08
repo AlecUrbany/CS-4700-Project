@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+public enum SpawnSide{
+    Left,
+    Right,
+    Behind,
+    Front
+}
 public class LoadLevel : MonoBehaviour
 {
     public ScreenFader fader;
@@ -9,6 +15,8 @@ public class LoadLevel : MonoBehaviour
     float previousTimeScale = 1;
     public string targetSceneName; // Name of scene we want to switch to
     public string targetPortal; //Name of Portal to teleport to
+    public SpawnSide spawnSide;
+    public float spawnOffset;
     private void OnTriggerEnter(Collider other)
     {
         //Checks to see if object colliding has player tag
