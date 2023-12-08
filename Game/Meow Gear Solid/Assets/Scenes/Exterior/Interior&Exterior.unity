@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3200,6 +3200,8 @@ MonoBehaviour:
   fader: {fileID: 0}
   targetSceneName: EXTERIOR
   targetPortal: 
+  spawnSide: 0
+  spawnOffset: 0
 --- !u!65 &797137293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3501,6 +3503,8 @@ MonoBehaviour:
   fader: {fileID: 1445790779}
   targetSceneName: InteriorSecondFloor
   targetPortal: InteriorEntrance2
+  spawnSide: 0
+  spawnOffset: 4
 --- !u!65 &814345861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8791,7 +8795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0b733048a5eb2438b0955736b7f21c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToSave: InteriorFirstFloor
+  levelToSave: Interior&Exterior
 --- !u!114 &1615732468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8807,6 +8811,8 @@ MonoBehaviour:
   fader: {fileID: 1445790779}
   targetSceneName: MASTERSCENE
   targetPortal: SPAWN
+  spawnSide: 2
+  spawnOffset: 20
 --- !u!65 &1615732469
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8877,7 +8883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615732466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.67, y: 2.19, z: -28.77}
+  m_LocalPosition: {x: 0.67, y: 2.19, z: -33.43}
   m_LocalScale: {x: 3.94, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

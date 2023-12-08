@@ -3249,6 +3249,8 @@ MonoBehaviour:
   fader: {fileID: 0}
   targetSceneName: 
   targetPortal: 
+  spawnSide: 0
+  spawnOffset: 0
 --- !u!1 &444560214
 GameObject:
   m_ObjectHideFlags: 0
@@ -4527,6 +4529,8 @@ MonoBehaviour:
   fader: {fileID: 0}
   targetSceneName: InteriorFirstFloor
   targetPortal: 
+  spawnSide: 0
+  spawnOffset: 0
 --- !u!65 &732819140
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5255,6 +5259,8 @@ MonoBehaviour:
   fader: {fileID: 1445790779}
   targetSceneName: InteriorFirstFloor
   targetPortal: InteriorExit1
+  spawnSide: 0
+  spawnOffset: 4
 --- !u!65 &814345861
 BoxCollider:
   m_ObjectHideFlags: 0
