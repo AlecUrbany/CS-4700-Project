@@ -13,7 +13,6 @@ public class PunchFunction : MonoBehaviour
     public int punchNumber;
     public bool IsAttacking;
     public bool inAnimation;
-    public bool hasHitBoxOut;
 
     [SerializeField] private ItemData gunData;
     public PlayerInventoryControls gunMagazine;
@@ -29,26 +28,30 @@ public class PunchFunction : MonoBehaviour
         rightLeg = GameObject.FindGameObjectWithTag("LegRight").GetComponent<Transform>();
         punchNumber = 1;
         inAnimation = false;
-        hasHitBoxOut = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(EventBus.Instance.canMove == false)
+        {
+            return;
+        }
+
         if(Input.GetButtonDown("Fire1") && IsAttacking == false && inAnimation == false)
         {
-            if((punchNumber == 1) && inAnimation == false && hasHitBoxOut == false)
+            if((punchNumber == 1) && inAnimation == false)
             {
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(rightArm);
                 punchNumber = 2;
-                StartCoroutine(Timeout());
+                StartCoroutine("Timeout");
             }
             if((punchNumber == 2) && inAnimation == false)
             {
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(leftArm);
-                StartCoroutine(Timeout());
+                StartCoroutine("Timeout");
                 punchNumber = 3;
             }
             if((punchNumber == 3) && inAnimation == false)
@@ -66,20 +69,17 @@ public class PunchFunction : MonoBehaviour
         inAnimation = true;
         IsAttacking = true;
         playerAnimator.SetBool("IsAttacking", IsAttacking);
-        if(hasHitBoxOut == false)
-        {
-            hasHitBoxOut = true;
-            GameObject hitBox = Instantiate(HitBoxPrefab, limb.position, limb.rotation);
-            hitBox.transform.parent = limb;
-            StartCoroutine(HitBoxLife(1f, hitBox));
-        }
+        GameObject hitBox = Instantiate(HitBoxPrefab, limb.position, limb.rotation);
+        hitBox.transform.parent = limb;
+        StartCoroutine(HitBoxLife(.75f, hitBox));
+
 
     }
     IEnumerator HitBoxLife(float timer, GameObject hitBox)
     {
+        
         yield return new WaitForSeconds(timer);
         Destroy(hitBox);
-        hasHitBoxOut = false;
         inAnimation = false;
         IsAttacking = false;
         playerAnimator.SetBool("IsAttacking", IsAttacking);

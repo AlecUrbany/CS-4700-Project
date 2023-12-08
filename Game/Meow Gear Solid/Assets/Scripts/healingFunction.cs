@@ -22,6 +22,11 @@ public class healingFunction : MonoBehaviour
 
     void Update()
     {
+        if(EventBus.Instance.canMove == false)
+        {
+            return;
+        }
+        
         if(Input.GetButtonDown("Fire1"))
         {
             if (healData.currentAmmo > 0 && playerHealth.currentHealth < 100)

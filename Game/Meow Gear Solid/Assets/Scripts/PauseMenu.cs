@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
             AudioListener.pause = true;
             isPaused = true;
             pauseMenu.SetActive(true);
+            EventBus.Instance.OpenInventory();
         }
         else if (Time.timeScale == 0)
         {
@@ -38,6 +39,7 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = previousTimeScale;
             AudioListener.pause = false;
             isPaused = false;
+            EventBus.Instance.CloseInventory();
         }
     }
 }

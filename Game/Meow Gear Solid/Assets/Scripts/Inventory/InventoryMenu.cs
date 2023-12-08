@@ -36,6 +36,7 @@ public class InventoryMenu : MonoBehaviour
         {
             if(inventoryViewObject.activeSelf == true)
             {
+                
                 EventBus.Instance.CloseInventory();
                 Time.timeScale = 1;
                 

@@ -32,6 +32,10 @@ public class PlayerControlsOLD : MonoBehaviour
 		float horizInput = Input.GetAxisRaw ("Horizontal");
 		float vertInput = Input.GetAxisRaw ("Vertical");
 		velocity = new Vector3 (horizInput, 0, vertInput).normalized * moveSpeed;
+		if(EventBus.Instance.enemyCanMove == false)
+        {
+            return;
+        }
 		if(horizInput > 0 || horizInput < 0 || vertInput > 0 || vertInput < 0)
 		{
 			isMoving = true;
@@ -46,6 +50,10 @@ public class PlayerControlsOLD : MonoBehaviour
 
 	void FixedUpdate()
     {
+		if(EventBus.Instance.enemyCanMove == false)
+        {
+            return;
+        }
 		//Handles rigid body movement
 		rigid.MovePosition (rigid.position + velocity * Time.fixedDeltaTime);
 

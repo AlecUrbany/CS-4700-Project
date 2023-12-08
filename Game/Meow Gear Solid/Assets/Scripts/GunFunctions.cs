@@ -25,6 +25,11 @@ public class GunFunctions : MonoBehaviour
 
     void Update()
     {
+        if(EventBus.Instance.canMove == false)
+        {
+            return;
+        }
+        
         if(Input.GetButtonDown("Fire1")&& isReloading == false)
         {
             if (gunData.currentAmmo > 0)

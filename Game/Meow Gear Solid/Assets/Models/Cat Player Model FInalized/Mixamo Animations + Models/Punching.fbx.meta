@@ -38,10 +38,10 @@ ModelImporter:
       name: punch 1
       takeName: mixamo.com
       internalID: 0
-      firstFrame: 0
-      lastFrame: 31
+      firstFrame: 3.8
+      lastFrame: 27.6
       wrapMode: 0
-      orientationOffsetY: -55
+      orientationOffsetY: -12.6
       level: 0
       cycleOffset: 0
       loop: 0

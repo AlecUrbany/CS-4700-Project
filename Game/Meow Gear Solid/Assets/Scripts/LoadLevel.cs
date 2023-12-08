@@ -19,27 +19,11 @@ public class LoadLevel : MonoBehaviour
 
         //PS1 style fade to black. Will need to implement method to freeze the player later on.
         float timer = 2;
+        EventBus.Instance.LevelLoadStart();
         StartCoroutine(Delay(timer));
 
     }
 
-    void TogglePause()
-    {
-        if (Time.timeScale > 0)
-        {
-            Debug.Log("PAUSING");
-            Time.timeScale = 0;
-            AudioListener.pause = true;
-            isPaused = true;
-            previousTimeScale = Time.timeScale;
-        }
-        else if (Time.timeScale == 0)
-        {
-            Time.timeScale = previousTimeScale;
-            AudioListener.pause = false;
-            isPaused = false;
-        }
-    }
     
     //Actual move to next level. Will need to make prope code later.
     private IEnumerator Delay(float duration)
@@ -49,6 +33,7 @@ public class LoadLevel : MonoBehaviour
         PlayerPrefs.SetString("TargetSpawnPoint", targetPortal);
         Debug.Log("Entering next level");
         fader.FadeFromBlack(duration);
+        EventBus.Instance.LevelLoadEnd();
         SceneManager.LoadScene(targetSceneName);
     }
 }

@@ -58,6 +58,10 @@ public class EnemyAI : MonoBehaviour
     }
     void Update()
     {
+        if(EventBus.Instance.enemyCanMove == false)
+        {
+            return;
+        }
         Vector3 distanceFromPlayer = player.position - transform.position;
         bool canSeePlayer = childObject.GetComponentInChildren<visionCone>().canSeePlayer;
         if(distanceFromPlayer.magnitude <playerRange && canSeePlayer)
