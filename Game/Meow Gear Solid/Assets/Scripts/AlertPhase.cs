@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -9,7 +10,8 @@ public class AlertPhase : MonoBehaviour
     public GameObject AlertInfo;
     public TextMeshProUGUI TimerText;
     public bool inAlertPhase;
-    public float timeRemaining = 0;
+    public double timeRemaining = 0;
+    private double alertDuration = 5;
 
     public void updateCanSeePlayer(bool canSeePlayer) 
     {
@@ -24,7 +26,7 @@ public class AlertPhase : MonoBehaviour
             miniMap.SetActive(false);
             AlertInfo.SetActive(true);
             // Maybe set timeRemaining with a constant variable (useful for multiple game difficulties)
-            timeRemaining = 5;
+            timeRemaining = Math.Max(timeRemaining, alertDuration);
             TimerText.text = string.Format("{0:00}", timeRemaining);
         }
     }
