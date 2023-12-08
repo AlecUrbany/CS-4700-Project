@@ -29,6 +29,9 @@ public class SpawnFromSave : MonoBehaviour{
     public string defaultSpawnPointName = "DefaultSpawn"; //Default location
     public Transform player;
     public GameObject enemyPrefab;
+    private SpawnSide spawnSide;
+    private float spawnOffset;
+
 
     private void Start(){
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
@@ -62,7 +65,23 @@ public class SpawnFromSave : MonoBehaviour{
         }
         string targetSpawnPointName = PlayerPrefs.GetString("TargetSpawnPoint", defaultSpawnPointName);
         Transform targetSpawnPoint = GameObject.Find(targetSpawnPointName).transform;
-        player.position = targetSpawnPoint.position - new Vector3(0, 0, 3);
+        LoadLevel loadLevelScript = GameObject.Find(targetSpawnPointName).GetComponent<LoadLevel>();
+        spawnSide = loadLevelScript.spawnSide;
+        spawnOffset = loadLevelScript.spawnOffset;
+        switch (spawnSide){
+            case SpawnSide.Left:
+                player.position = targetSpawnPoint.position - new Vector3(spawnOffset, 0, 0);
+                break;
+            case SpawnSide.Right:
+                player.position = targetSpawnPoint.position - new Vector3(-spawnOffset, 0, 0);
+                break;
+            case SpawnSide.Behind:
+                player.position = targetSpawnPoint.position - new Vector3(0, 0, -spawnOffset);
+                break;
+            case SpawnSide.Front:
+                player.position = targetSpawnPoint.position - new Vector3(0, 0, spawnOffset);
+                break;
+        }
     }
 
     void DestroyGameObjectsWithTag(string tag){
