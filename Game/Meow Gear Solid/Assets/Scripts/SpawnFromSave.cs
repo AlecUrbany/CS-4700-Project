@@ -31,6 +31,7 @@ public class SpawnFromSave : MonoBehaviour{
     public GameObject enemyPrefab;
     private SpawnSide spawnSide;
     private float spawnOffset;
+    private float hortizontalOffset;
 
 
     private void Start(){
@@ -66,20 +67,21 @@ public class SpawnFromSave : MonoBehaviour{
         string targetSpawnPointName = PlayerPrefs.GetString("TargetSpawnPoint", defaultSpawnPointName);
         Transform targetSpawnPoint = GameObject.Find(targetSpawnPointName).transform;
         LoadLevel loadLevelScript = GameObject.Find(targetSpawnPointName).GetComponent<LoadLevel>();
-        spawnSide = loadLevelScript.spawnSide;
-        spawnOffset = loadLevelScript.spawnOffset;
+        spawnSide = loadLevelScript.thisPortalsSpawnSide;
+        spawnOffset = loadLevelScript.thisPortalsSpawnOffset;
+        hortizontalOffset = loadLevelScript.thisPortalsHortizontalOffset;
         switch (spawnSide){
             case SpawnSide.Left:
-                player.position = targetSpawnPoint.position - new Vector3(spawnOffset, 0, 0);
+                player.position = targetSpawnPoint.position - new Vector3(spawnOffset, hortizontalOffset, 0);
                 break;
             case SpawnSide.Right:
-                player.position = targetSpawnPoint.position - new Vector3(-spawnOffset, 0, 0);
+                player.position = targetSpawnPoint.position - new Vector3(-spawnOffset, hortizontalOffset, 0);
                 break;
             case SpawnSide.Behind:
-                player.position = targetSpawnPoint.position - new Vector3(0, 0, -spawnOffset);
+                player.position = targetSpawnPoint.position - new Vector3(0, hortizontalOffset, -spawnOffset);
                 break;
             case SpawnSide.Front:
-                player.position = targetSpawnPoint.position - new Vector3(0, 0, spawnOffset);
+                player.position = targetSpawnPoint.position - new Vector3(0, hortizontalOffset, spawnOffset);
                 break;
         }
     }

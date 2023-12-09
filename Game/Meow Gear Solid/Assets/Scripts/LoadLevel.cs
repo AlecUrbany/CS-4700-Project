@@ -15,8 +15,9 @@ public class LoadLevel : MonoBehaviour
     float previousTimeScale = 1;
     public string targetSceneName; // Name of scene we want to switch to
     public string targetPortal; //Name of Portal to teleport to
-    public SpawnSide spawnSide;
-    public float spawnOffset;
+    public SpawnSide thisPortalsSpawnSide;
+    public float thisPortalsSpawnOffset = 3;
+    public float thisPortalsHortizontalOffset = 0;
     private void OnTriggerEnter(Collider other)
     {
         //Checks to see if object colliding has player tag

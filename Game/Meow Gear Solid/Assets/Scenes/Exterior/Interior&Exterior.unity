@@ -3200,8 +3200,9 @@ MonoBehaviour:
   fader: {fileID: 0}
   targetSceneName: EXTERIOR
   targetPortal: 
-  spawnSide: 0
-  spawnOffset: 0
+  thisPortalsSpawnSide: 0
+  thisPortalsSpawnOffset: 3
+  thisPortalsHortizontalOffset: 0
 --- !u!65 &797137293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3503,8 +3504,9 @@ MonoBehaviour:
   fader: {fileID: 1445790779}
   targetSceneName: InteriorSecondFloor
   targetPortal: InteriorEntrance2
-  spawnSide: 0
-  spawnOffset: 4
+  thisPortalsSpawnSide: 0
+  thisPortalsSpawnOffset: 14
+  thisPortalsHortizontalOffset: 5
 --- !u!65 &814345861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8811,8 +8813,9 @@ MonoBehaviour:
   fader: {fileID: 1445790779}
   targetSceneName: MASTERSCENE
   targetPortal: SPAWN
-  spawnSide: 2
-  spawnOffset: 20
+  thisPortalsSpawnSide: 2
+  thisPortalsSpawnOffset: 10
+  thisPortalsHortizontalOffset: 0
 --- !u!65 &1615732469
 BoxCollider:
   m_ObjectHideFlags: 0
