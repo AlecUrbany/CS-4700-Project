@@ -173,6 +173,7 @@ MonoBehaviour:
   TimerText: {fileID: 1442995385}
   inAlertPhase: 0
   timeRemaining: 5
+  lastKnownPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &53801421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,8 +3765,9 @@ MonoBehaviour:
   fader: {fileID: 583523282}
   targetSceneName: Interior&Exterior
   targetPortal: InteriorEntrance1
-  spawnSide: 0
-  spawnOffset: 3
+  thisPortalsSpawnSide: 0
+  thisPortalsSpawnOffset: 3
+  thisPortalsHortizontalOffset: 0
 --- !u!114 &443398195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10535,7 +10537,7 @@ PrefabInstance:
     - target: {fileID: 3980568658035178431, guid: f3bf2986cb2204840ad990373ccb7a0b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.9
+      value: 34.18
       objectReference: {fileID: 0}
     - target: {fileID: 3980568658035178431, guid: f3bf2986cb2204840ad990373ccb7a0b,
         type: 3}

@@ -53,7 +53,7 @@ public class SpawnFromSave : MonoBehaviour{
                 GameObject enemy = Instantiate(enemyPrefab, enemyData.position, Quaternion.identity);
                 EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
                 enemyAI.player = player;
-                enemyAI.chaseStartPosition = enemyData.startPosition;
+                enemyAI.startPosition = enemyData.startPosition;
                 enemyAI.aiType = (EnemyAIType)enemyData.aiState;
                 enemyAI.patrolDistance = enemyData.patrolDistance;
                 enemyAI.moveSpeed = enemyData.moveSpeed;

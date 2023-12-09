@@ -55,7 +55,7 @@ public class SaveLevelState : MonoBehaviour{
             EnemyData enemyData = new EnemyData{
                 position = enemy.transform.position,
                 health = enemy.GetComponent<EnemyHealth>().currentHealth,
-                startPosition = enemy.GetComponent<EnemyAI>().chaseStartPosition,
+                startPosition = enemy.GetComponent<EnemyAI>().startPosition,
                 aiState = (int)enemy.GetComponent<EnemyAI>().aiType,
                 moveSpeed = enemy.GetComponent<EnemyAI>().moveSpeed,
                 patrolDistance = enemy.GetComponent<EnemyAI>().patrolDistance,

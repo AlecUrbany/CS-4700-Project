@@ -12,6 +12,7 @@ public class AlertPhase : MonoBehaviour
     public bool inAlertPhase;
     public double timeRemaining = 0;
     private double alertDuration = 5;
+    public Vector3 lastKnownPosition; 
 
     public void updateCanSeePlayer(bool canSeePlayer) 
     {

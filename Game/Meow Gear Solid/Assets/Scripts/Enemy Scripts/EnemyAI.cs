@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed;
     public EnemyAIType aiType;
     public float patrolDistance = 10.0f;
-    public Vector3 chaseStartPosition;
+    public Vector3 startPosition;
     public int rotationSpeed;
     public NavMeshAgent agent;
     private float currentPatrolDistance;
@@ -33,6 +33,9 @@ public class EnemyAI : MonoBehaviour
     private bool coroutineRunning = false;
     private Coroutine chaseCoroutine;
     public Quaternion startRotation;
+    private GameObject gameStateManagerObject;
+    private AlertPhase alertPhaseScript; 
+    private Vector3 lastKnownPosition;
 
 //These six lines are for the exclamation point upon noticing the player
     public Transform enemyMouth;
@@ -50,38 +53,42 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
+        gameStateManagerObject = GameObject.Find("Game State Manager");
+        alertPhaseScript = gameStateManagerObject.GetComponent<AlertPhase>();
+        alert = alertPhaseScript.inAlertPhase;
     }
     void Start(){
-        chaseStartPosition = transform.position;
+        startPosition = transform.position;
         startRotation = transform.rotation;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-    void Update()
-    {
+    void Update(){
+        Debug.Log("Alert " + alert + ",  Chasing " + chasing + ",  Patrol " + patrol + ",   Event " + EventBus.Instance.enemyCanMove);
+        alert = alertPhaseScript.inAlertPhase;
+        lastKnownPosition = alertPhaseScript.lastKnownPosition;
         if(EventBus.Instance.enemyCanMove == false)
         {
             return;
         }
         Vector3 distanceFromPlayer = player.position - transform.position;
         bool canSeePlayer = childObject.GetComponentInChildren<visionCone>().canSeePlayer;
-        if(distanceFromPlayer.magnitude <playerRange && canSeePlayer)
+        if(distanceFromPlayer.magnitude < playerRange && canSeePlayer)
         {
             if(!hasBeenAlerted)
             {
                 ShowAlertSound();
                 hasBeenAlerted = true;
             }
-            if(!chasing && !alert){
-                chaseStartPosition = transform.position;
-            }
             chasing = true;
+            alertPhaseScript.inAlertPhase = true;
+            alertPhaseScript.lastKnownPosition = player.position;
             patrol = false;
-            FollowPlayer(distanceFromPlayer);
+            FollowPlayer(player.position);
         }
 
         else if(chasing && canSeePlayer){
             chasing = true;
-            FollowPlayer(distanceFromPlayer);
+            FollowPlayer(player.position);
         }
 
         else if(chasing && !canSeePlayer){
@@ -89,12 +96,13 @@ public class EnemyAI : MonoBehaviour
                 StopCoroutine(chaseCoroutine);
             }
             alert = true;
+            alertPhaseScript.inAlertPhase = true;
             chasing = false;
             chaseCoroutine = StartCoroutine(ContinueChase());
         }
 
         else if(alert){
-            FollowPlayer(distanceFromPlayer);
+            FollowPlayer(lastKnownPosition);
         }
 
         else if (patrol){
@@ -114,8 +122,8 @@ public class EnemyAI : MonoBehaviour
             }
         }
         else{
-            agent.SetDestination(chaseStartPosition);
-            if(chaseStartPosition.x == transform.position.x && chaseStartPosition.z == transform.position.z){
+            agent.SetDestination(startPosition);
+            if(startPosition.x == transform.position.x && startPosition.z == transform.position.z){
                 transform.rotation = startRotation;
                 patrol = true;
                 agent.ResetPath();
@@ -124,15 +132,22 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    void FollowPlayer(Vector3 distanceFromPlayer){
-        distanceFromPlayer.Normalize();
-        rb.velocity = distanceFromPlayer * moveSpeed;
-        if (rb.velocity != Vector3.zero){
-            Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
-            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);        
+    void FollowPlayer(Vector3 playerPosition){
+        agent.ResetPath();
+         if (chasing){
+            agent.SetDestination(playerPosition);
         }
+        else{
+            Vector3 distanceFromPlayer = playerPosition - transform.position;
+            distanceFromPlayer.Normalize();
+            rb.velocity = distanceFromPlayer * moveSpeed;
 
-
+            if (rb.velocity != Vector3.zero)
+            {
+                Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+            }
+        }
     }
     void PatrolHorizontal()
     {
@@ -216,6 +231,7 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(5f);
         if(!chasing){
             alert = false;
+            alertPhaseScript.inAlertPhase = false;
         }
         chaseCoroutine = null;
         hasBeenAlerted = false;
