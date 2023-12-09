@@ -138,14 +138,16 @@ public class EnemyAI : MonoBehaviour
             agent.SetDestination(playerPosition);
         }
         else{
-            Vector3 distanceFromPlayer = playerPosition - transform.position;
-            distanceFromPlayer.Normalize();
-            rb.velocity = distanceFromPlayer * moveSpeed;
+            if(alert){
+                Vector3 distanceFromPlayer = playerPosition - transform.position;
+                distanceFromPlayer.Normalize();
+                rb.velocity = distanceFromPlayer * moveSpeed;
 
-            if (rb.velocity != Vector3.zero)
-            {
-                Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
-                transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+                if (rb.velocity != Vector3.zero)
+                {
+                    Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
+                }
             }
         }
     }
