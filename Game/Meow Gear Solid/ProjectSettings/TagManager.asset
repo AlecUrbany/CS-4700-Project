@@ -17,6 +17,7 @@ TagManager:
   - Head
   - PlayerModel
   - PlayerStatic
+  - PlayerFollowCam
   layers:
   - Default
   - TransparentFX

@@ -6,28 +6,32 @@ using UnityEngine;
 public class DoorFunction : MonoBehaviour
 {
     public bool doorOpen;
+    public bool inAnimation;
     [SerializeField] private bool needKey;
     [SerializeField] private bool doorLR;
     [SerializeField] private Transform door;
-    [SerializeField] private AnimationCurve curve;
-    [SerializeField] private Vector3 endPosition;
+    [SerializeField] private Transform doorHitbox;
+    [SerializeField] private AnimationCurve curve, curveReturn;
+    [SerializeField] private Vector3 endPosition, startPosition;
     [SerializeField] private float speed = .5f;
-    private float current, target;
+    private float current, currentReturn, target;
     // Start is called before the first frame update
     void Start()
     {
         doorOpen = false;
+        inAnimation = false;
         var myValue = Mathf.Lerp(0,10,.5f);
+        startPosition = door.transform.position;
         switch(doorLR)
         {
             case false:
             {
-                endPosition = new Vector3(0,0,-5) + door.transform.position;
+                endPosition = new Vector3(0,0,-6.7f) + door.transform.position;
                 break;
             }
             case true:
             {
-                endPosition = new Vector3(-5,0,0) + door.transform.position;
+                endPosition = new Vector3(-6.7f,0,0) + door.transform.position;
                 break;
             }
         }
@@ -39,7 +43,8 @@ public class DoorFunction : MonoBehaviour
         if(doorOpen == true)
         {        
             current = Mathf.MoveTowards(current, 5, speed * Time.deltaTime);
-            door.transform.position = Vector3.Lerp(door.transform.position, endPosition, curve.Evaluate(current));
+            door.transform.position = Vector3.Lerp(startPosition, endPosition, curve.Evaluate(current));
+            doorHitbox.transform.position = startPosition; 
         }
     }
     private void OnTriggerEnter(Collider other)
