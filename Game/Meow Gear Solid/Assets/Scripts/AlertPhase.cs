@@ -18,18 +18,37 @@ public class AlertPhase : MonoBehaviour
     {
         if (canSeePlayer) 
         {
-            // if (inAlertPhase == false) {
-            //     // We are entering alert phase
-            //     // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
-            // }
+            if (!inAlertPhase) {
+                // We are entering alert phase
+                EnterAlertPhase();
+                
+            }
 
-            inAlertPhase = true;
-            miniMap.SetActive(false);
-            AlertInfo.SetActive(true);
-            // Maybe set timeRemaining with a constant variable (useful for multiple game difficulties)
-            timeRemaining = Math.Max(timeRemaining, alertDuration);
-            TimerText.text = string.Format("{0:00}", timeRemaining);
+            if (!EventBus.Instance.hasMacguffin) 
+            {
+                timeRemaining = alertDuration;
+                TimerText.text = string.Format("{0:00}", timeRemaining);
+            }
         }
+    }
+
+    public void MacguffinAquired()
+    {
+        if (!inAlertPhase) {
+            EnterAlertPhase();
+        }
+
+        timeRemaining = 999;
+        TimerText.text = "∞";
+    }
+
+    private void EnterAlertPhase() 
+    {
+        EventBus.Instance.EnterAlertPhase();
+        inAlertPhase = true;
+        miniMap.SetActive(false);
+        AlertInfo.SetActive(true);
+        // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
     }
 
     // Start is called before the first frame update
@@ -43,18 +62,24 @@ public class AlertPhase : MonoBehaviour
     {
         if (inAlertPhase) 
         {
-            if (timeRemaining > 0) 
+            if (!EventBus.Instance.hasMacguffin) 
             {
                 timeRemaining -= Time.deltaTime;
                 TimerText.text = string.Format("{0:00}", timeRemaining);
             }
-            else
+
+            if (timeRemaining <= 0)
             {
+                // Exit AlertPhase
                 timeRemaining = 0;
                 inAlertPhase = false;
                 miniMap.SetActive(true);
                 AlertInfo.SetActive(false);
+                // TODO: Implement destroy AlertPhase enemies
+                return;
             }
+
+            // TODO: Implement update of AlertPhase enemies to ensure there are always 4 of them
         }
     }
 }

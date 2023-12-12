@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
     private bool coroutineRunning = false;
     private Coroutine chaseCoroutine;
     public Quaternion startRotation;
-    private GameObject gameStateManagerObject;
+    // private GameObject gameStateManagerObject;
     private AlertPhase alertPhaseScript; 
     private Vector3 lastKnownPosition;
     private double timeRemaining;
@@ -54,8 +54,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
-        gameStateManagerObject = GameObject.Find("Game State Manager");
-        alertPhaseScript = gameStateManagerObject.GetComponent<AlertPhase>();
+        // gameStateManagerObject = GameObject.Find("Game State Manager");
+        alertPhaseScript = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>();
         alert = alertPhaseScript.inAlertPhase;
     }
     void Start(){

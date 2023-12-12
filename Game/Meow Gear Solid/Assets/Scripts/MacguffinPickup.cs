@@ -31,11 +31,9 @@ public class MacguffinPickup : MonoBehaviour
                 itemData.inInventory = true;
                 ShowText(itemNameText);
                 EventBus.Instance.PickUpItem(itemData);
+                EventBus.Instance.PickUpMacguffin();
                 Destroy(gameObject);
-                GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().updateCanSeePlayer(true);
-                GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().inAlertPhase = true;
-                GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().timeRemaining = 999;
-
+                GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().MacguffinAquired();
         }
     }
     void ShowText(string itemNameText)

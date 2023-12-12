@@ -7,6 +7,8 @@ public class EventBus
 {
     public bool canMove = true;
     public bool enemyCanMove = true;
+    public bool hasMacguffin = false;
+    public int numTimesAlertPhaseEntered = 0;
     public static EventBus Instance { get { if (theInstance == null) theInstance = new EventBus(); return theInstance; } }
 
     static EventBus theInstance;
@@ -14,6 +16,10 @@ public class EventBus
     public event Action onCloseInventory;
 
     public event Action<ItemData> onPickUpItem;
+
+    public event Action onPickUpMacguffin;
+
+    public event Action onEnterAlertPhase;
 
     public event Action onAnimationStart;
 
@@ -42,6 +48,17 @@ public class EventBus
     {
         //When function is invoked, it takes the item data.
         onPickUpItem?.Invoke(itemData);
+    }
+
+    public void PickUpMacguffin()
+    {
+        Debug.Log("Macguffin picked up");
+        hasMacguffin = true;
+    }
+
+    public void EnterAlertPhase()
+    {
+        numTimesAlertPhaseEntered++;
     }
 
     public void AnimationStart()
