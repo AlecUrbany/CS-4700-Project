@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 317864878540441360}
   - component: {fileID: 5554151287948443961}
   - component: {fileID: 2023815128769273078}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: KeyCard_Equippable
   m_TagString: Key1
   m_Icon: {fileID: 0}

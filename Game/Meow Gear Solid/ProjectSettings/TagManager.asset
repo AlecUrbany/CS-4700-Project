@@ -17,6 +17,7 @@ TagManager:
   - Head
   - PlayerModel
   - PlayerStatic
+  - PlayerFollowCam
   layers:
   - Default
   - TransparentFX
@@ -48,7 +49,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Key1
   - MiniMap
   m_SortingLayers:
   - name: Default
