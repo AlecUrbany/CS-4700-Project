@@ -53,6 +53,7 @@ public class AlertPhase : MonoBehaviour
             EnterAlertPhase();
         }
 
+        lastKnownPosition = player.position;
         timeRemaining = 999;
         TimerText.text = "∞";
     }
@@ -66,14 +67,10 @@ public class AlertPhase : MonoBehaviour
         // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
     }
 
-    void Awake() {
-    	player = GameObject.FindGameObjectWithTag("Player").transform;
-	}
-
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
