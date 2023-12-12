@@ -36,16 +36,17 @@ public class AlertPhase : MonoBehaviour
         {
             lastKnownPosition = player.position;
 
-            if (!inAlertPhase) {
-                // We are entering alert phase
-                EnterAlertPhase();
-            }
-
             if (!EventBus.Instance.hasMacguffin) 
             {
                 timeRemaining = alertDuration;
                 TimerText.text = string.Format("{0:00}", timeRemaining);
             }
+            
+            if (!inAlertPhase) {
+                // We are entering alert phase
+                EnterAlertPhase();
+            }
+
         }
     }
 
