@@ -6,14 +6,14 @@ using System.Runtime.InteropServices;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    public GameObject primaryCamera;
-    public GameObject targetCamera;
+    public CinemachineVirtualCamera primaryCamera;
+    public CinemachineVirtualCamera  targetCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        primaryCamera = GameObject.FindWithTag("PlayerFollowCam").GetComponent<GameObject>();
-        targetCamera.SetActive(false);
+        primaryCamera = GameObject.FindWithTag("PlayerFollowCam").GetComponent<CinemachineVirtualCamera>();
+        targetCamera.Priority = 9;
     }
 
     // Update is called once per frame
@@ -31,14 +31,14 @@ public class CameraSwitcher : MonoBehaviour
                 SwitchBackToCamera(targetCamera);
             }
     }
-    private void SwitchToCamera(GameObject targetCamera)
+    private void SwitchToCamera(CinemachineVirtualCamera targetCamera)
     {
-        targetCamera.SetActive(true);
-        primaryCamera.SetActive(false);
+        targetCamera.enabled = true;
+        targetCamera.Priority = 11;
     }
-    private void SwitchBackToCamera(GameObject targetCamera)
+    private void SwitchBackToCamera(CinemachineVirtualCamera targetCamera)
     {
-        targetCamera.SetActive(false);
-        primaryCamera.SetActive(true);
+        targetCamera.enabled = false;
+        targetCamera.Priority = 9;
     }
 }
