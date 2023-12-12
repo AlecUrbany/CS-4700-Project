@@ -6,9 +6,12 @@ using TMPro;
 
 public class AlertPhase : MonoBehaviour
 {
+    public GameObject enemyPrefab;
     public GameObject miniMap;
     public GameObject AlertInfo;
     public TextMeshProUGUI TimerText;
+    public Vector3 enemySpawnPosition;
+    private List<GameObject> alertEnemies;
     private bool inAlertPhase;
     private double timeRemaining = 0;
     private double alertDuration = 5;
@@ -65,12 +68,36 @@ public class AlertPhase : MonoBehaviour
         miniMap.SetActive(false);
         AlertInfo.SetActive(true);
         // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
+        alertEnemies = new List<GameObject>();
+        alertEnemies.Add(createEnemy());
+        alertEnemies.Add(createEnemy());
+        alertEnemies.Add(createEnemy());
+        alertEnemies.Add(createEnemy());
+    }
+
+    private GameObject createEnemy() {
+        return Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity);
+    }
+
+    private void updateEnemies() {
+        alertEnemies.RemoveAll(enemyPrefab => enemyPrefab == null);
+        while (alertEnemies.Count < 4) {
+            alertEnemies.Add(createEnemy());
+        }
+    }
+
+    private void destroyEnemies() {
+        foreach (GameObject enemy in alertEnemies) {
+            Destroy(enemy);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        // TODO: Determine better way to set enemySpawnPosition (will likely be differnt for each level)
+        enemySpawnPosition = new Vector3(0, 5, 0);
     }
 
     // Update is called once per frame
@@ -92,10 +119,12 @@ public class AlertPhase : MonoBehaviour
                 miniMap.SetActive(true);
                 AlertInfo.SetActive(false);
                 // TODO: Implement destroy AlertPhase enemies
+                destroyEnemies();
                 return;
             }
 
             // TODO: Implement update of AlertPhase enemies to ensure there are always 4 of them
+            updateEnemies();
         }
     }
 }
