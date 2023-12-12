@@ -14,6 +14,8 @@ public class ConsumableItemPickup : MonoBehaviour
     public float nameLifeSpan = .5f;
     [SerializeField] private ItemData itemData;
     [SerializeField] private ItemData gunAmmo;
+    public AudioClip pickUpSound;
+    public bool textShown;
     private void OnTriggerStay(Collider other)
     {
         //Checks to see if object colliding has player tag
@@ -26,6 +28,7 @@ public class ConsumableItemPickup : MonoBehaviour
             if(gunAmmo.currentAmmo < gunAmmo.maxAmmo)
             {
                 Debug.Log("picked up " + itemData.ShortName);
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
                 if(itemData.currentAmmo + gunAmmo.currentAmmo <= gunAmmo.maxAmmo)
                 {
                     gunAmmo.currentAmmo = itemData.currentAmmo + gunAmmo.currentAmmo;
@@ -41,8 +44,13 @@ public class ConsumableItemPickup : MonoBehaviour
             }
             else
             {
-                itemNameText = "FULL";
-                ShowText(itemNameText);
+                if(textShown == false)
+                {
+                    itemNameText = "FULL";
+                    ShowText(itemNameText);
+                    textShown = true;
+                    StartCoroutine("Timeout");
+                }
             }
         }
     }
@@ -54,5 +62,11 @@ public class ConsumableItemPickup : MonoBehaviour
             prefab.GetComponentInChildren<TMP_Text>().text = itemNameText;
             Destroy(prefab, nameLifeSpan);
         }
+    }
+    IEnumerator Timeout()
+    {
+        yield return new WaitForSeconds(1.5f);
+        textShown = false;
+
     }
 }

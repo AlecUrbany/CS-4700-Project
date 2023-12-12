@@ -12,6 +12,7 @@ public class ItemPickUp : MonoBehaviour
 
     public float nameLifeSpan = .5f;
     [SerializeField] private ItemData itemData;
+    public AudioClip pickUpSound;
     void Start()
     {
         itemData.inInventory = false;
@@ -27,6 +28,7 @@ public class ItemPickUp : MonoBehaviour
         {
             if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
             {
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
                 Debug.Log("picked up " + itemData.ShortName);
                 itemData.currentAmmo = itemData.maxAmmo;
                 itemData.magazine = itemData.magazineSize;
@@ -43,6 +45,7 @@ public class ItemPickUp : MonoBehaviour
                 {
                     if (itemData.currentAmmo < itemData.MaxAmmo)
                     {
+                        AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
                         itemData.currentAmmo += 1;
                         Destroy(gameObject);
                     }
@@ -54,6 +57,7 @@ public class ItemPickUp : MonoBehaviour
                 }
                 else
                 {
+                    AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
                     itemData.currentAmmo = 1;
                     itemNameText = itemData.ShortName;
                     ShowText(itemNameText);
@@ -64,6 +68,7 @@ public class ItemPickUp : MonoBehaviour
             }
             if(itemData.weaponType == WeaponType.Wearable)
             {
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
                 Debug.Log("picked up " + itemData.ShortName);
                 itemNameText = itemData.ShortName;
                 itemData.inInventory = true;

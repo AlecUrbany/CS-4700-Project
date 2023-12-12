@@ -13,6 +13,11 @@ public class EnemyGunFunctions : MonoBehaviour
 
     public bool isReloading;
     public GameObject sightline;
+
+    //Shooting sounds
+    public AudioSource source;
+    public AudioClip shootingSound;
+
     void Start()
     {
         isReloading = false;
@@ -32,10 +37,13 @@ public class EnemyGunFunctions : MonoBehaviour
 
     IEnumerator Shoot3()
     {
+        source.PlayOneShot(shootingSound, .65f);
         Shoot();
         yield return new WaitForSeconds(burstSpeed);
+        source.PlayOneShot(shootingSound, .65f);
         Shoot();
         yield return new WaitForSeconds(burstSpeed);
+        source.PlayOneShot(shootingSound, .65f);
         Shoot();
         yield return new WaitForSeconds(reloadSpeed);
         isReloading = false;

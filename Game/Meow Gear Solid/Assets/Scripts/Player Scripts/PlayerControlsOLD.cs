@@ -20,6 +20,12 @@ public class PlayerControlsOLD : MonoBehaviour
 
 	public ItemData currentlyEquipped;
 
+	//Sound nonsense is below
+	public AudioSource source;
+    public AudioClip footStep1;
+    public AudioClip footStep2;
+	public bool footSound;
+
 	void Start ()
     {
 		rigid = GetComponent<Rigidbody> ();
@@ -38,6 +44,23 @@ public class PlayerControlsOLD : MonoBehaviour
         }
 		if(horizInput > 0 || horizInput < 0 || vertInput > 0 || vertInput < 0)
 		{
+			if(footSound == false)
+			{
+				if(Random.Range(0, 2) == 0 )
+				{
+					footSound = true;
+					source.PlayOneShot(footStep2, .75f);
+					StartCoroutine("Timeout");	
+				}
+				else
+				{
+					footSound = true;
+					source.PlayOneShot(footStep1, .75f);
+					StartCoroutine("Timeout");	
+				}
+				
+			}
+			
 			isMoving = true;
 			animator.SetBool("IsMoving", isMoving);
 		}
@@ -65,4 +88,10 @@ public class PlayerControlsOLD : MonoBehaviour
 			transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
 		}
 	}
+	IEnumerator Timeout()
+    {
+			yield return new WaitForSeconds(.3f);	
+			footSound = false;
+        
+    }
 }

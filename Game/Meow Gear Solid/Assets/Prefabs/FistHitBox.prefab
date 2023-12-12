@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591172589875485061}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -110,3 +110,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 591172589875485061}
   damage: 15
+  punchSound1: {fileID: 8300000, guid: 4b459dfed6f5a644bb6c75bf68d15a85, type: 3}
+  punchSound2: {fileID: 8300000, guid: b771881cb93066f4bac7a4440a1ae715, type: 3}

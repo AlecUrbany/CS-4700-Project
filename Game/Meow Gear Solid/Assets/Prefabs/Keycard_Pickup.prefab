@@ -126,3 +126,4 @@ MonoBehaviour:
     type: 3}
   nameLifeSpan: 1.5
   itemData: {fileID: 11400000, guid: 940fe6582f2f2924c9948f8d6eaa24d7, type: 2}
+  pickUpSound: {fileID: 8300000, guid: a33365d8e9ca98c438ef2b95ba4430c8, type: 3}

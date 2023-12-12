@@ -17,6 +17,10 @@ public class PunchFunction : MonoBehaviour
     [SerializeField] private ItemData gunData;
     public PlayerInventoryControls gunMagazine;
     public bool isReloading;
+
+    public AudioSource source;
+    public AudioClip punchSound1;
+    public AudioClip punchSound2;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,7 @@ public class PunchFunction : MonoBehaviour
         {
             if((punchNumber == 1) && inAnimation == false)
             {
+                source.PlayOneShot(punchSound1);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(rightArm);
                 punchNumber = 2;
@@ -49,6 +54,7 @@ public class PunchFunction : MonoBehaviour
             }
             if((punchNumber == 2) && inAnimation == false)
             {
+                source.PlayOneShot(punchSound1);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(leftArm);
                 StartCoroutine("Timeout");
@@ -56,6 +62,7 @@ public class PunchFunction : MonoBehaviour
             }
             if((punchNumber == 3) && inAnimation == false)
             {
+                source.PlayOneShot(punchSound2);
                 playerAnimator.SetInteger("MeleeAttack", punchNumber);
                 Punch(rightLeg);
                 punchNumber = 1;

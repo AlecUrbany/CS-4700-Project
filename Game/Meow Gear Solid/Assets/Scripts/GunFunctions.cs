@@ -17,6 +17,10 @@ public class GunFunctions : MonoBehaviour
     public PlayerInventoryControls gunMagazine;
     public bool isReloading;
 
+    //Lines below deal with sound
+    public AudioSource source;
+    public AudioClip shootingSound;
+
     void Start()
     {
         gunData = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<InventoryMenu>().equipedItem;
@@ -36,6 +40,7 @@ public class GunFunctions : MonoBehaviour
             {
                 if (gunData.magazine > 0)
                 {
+                    source.PlayOneShot(shootingSound, .75f);
                     Shoot();
                     gunMagazine.DecreaseMagazine();
                     gunData.magazine --;
