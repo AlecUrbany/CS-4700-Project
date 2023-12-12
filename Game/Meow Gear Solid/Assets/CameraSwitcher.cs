@@ -6,37 +6,39 @@ using System.Runtime.InteropServices;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    public string triggerTag;
-    public CinemachineVirtualCamera primaryCamera;
-    public CinemachineVirtualCamera[] virtualCameras;
+    public GameObject primaryCamera;
+    public GameObject targetCamera;
+
     // Start is called before the first frame update
     void Start()
     {
-        primaryCamera = GameObject.FindWithTag("PlayerFollowCam").GetComponent<CinemachineVirtualCamera>();
-        SwitchToCamera(primaryCamera);
+        primaryCamera = GameObject.FindWithTag("PlayerFollowCam").GetComponent<GameObject>();
+        targetCamera.SetActive(false);
     }
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
-            {
-                CinemachineVirtualCamera targetCamera = other.GetComponentInChildren<CinemachineVirtualCamera>();
+            if(other.CompareTag("Player"))
+            { 
                 SwitchToCamera(targetCamera);
             }
     }
     private void OnTriggerExit(Collider other)
     {
-            if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if(other.CompareTag("Player"))
             {
-                SwitchToCamera(primaryCamera);
+                SwitchBackToCamera(targetCamera);
             }
     }
-    private void SwitchToCamera(CinemachineVirtualCamera targetCamera)
+    private void SwitchToCamera(GameObject targetCamera)
     {
-        foreach(CinemachineVirtualCamera camera in virtualCameras)
-        {
-            camera.enabled = camera == targetCamera;
-        }
+        targetCamera.SetActive(true);
+        primaryCamera.SetActive(false);
+    }
+    private void SwitchBackToCamera(GameObject targetCamera)
+    {
+        targetCamera.SetActive(false);
+        primaryCamera.SetActive(true);
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8012302908270062347}
   - component: {fileID: 1203964609779005197}
   - component: {fileID: 7784942774611922636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SlidingDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3649682832218865342}
   - component: {fileID: 5498381597775539891}
   - component: {fileID: 9157368168617438795}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorOpen: 0
+  inAnimation: 0
   needKey: 0
   doorLR: 0
   door: {fileID: 4200834465816310655}
