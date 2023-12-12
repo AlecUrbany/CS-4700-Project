@@ -44,7 +44,6 @@ public class SpawnFromSave : MonoBehaviour{
         string fileName = sceneName + ".json";
         string filePath = Path.Combine(folderPath, fileName);
         if(File.Exists(filePath)){
-            Debug.Log("File exists");
             DestroyGameObjectsWithTag("Enemy");
             //DestroyGameObjectsWithTag("Drop");
             string jsonText = System.IO.File.ReadAllText(filePath);
