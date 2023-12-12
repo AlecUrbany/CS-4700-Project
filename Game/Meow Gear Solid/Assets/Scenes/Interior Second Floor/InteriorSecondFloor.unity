@@ -263,7 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af42f12a01eb94fbba74a004b7d12859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 3980568658035178430, guid: f3bf2986cb2204840ad990373ccb7a0b,
+    type: 3}
   miniMap: {fileID: 2117643341}
   AlertInfo: {fileID: 637396022}
   TimerText: {fileID: 869288833}
@@ -8361,8 +8362,8 @@ MonoBehaviour:
   targetSceneName: Interior&Exterior
   targetPortal: InteriorExit1
   thisPortalsSpawnSide: 0
-  thisPortalsSpawnOffset: 14
-  thisPortalsHortizontalOffset: 5
+  thisPortalsSpawnOffset: 15
+  thisPortalsHortizontalOffset: -5
 --- !u!65 &814345861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8433,7 +8434,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814345859}
   m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
-  m_LocalPosition: {x: 45.53, y: -4.2, z: 29.569994}
+  m_LocalPosition: {x: 45.53, y: -4.12, z: 29.78}
   m_LocalScale: {x: 22.31, y: 3.54, z: 6.5}
   m_Children: []
   m_Father: {fileID: 0}
