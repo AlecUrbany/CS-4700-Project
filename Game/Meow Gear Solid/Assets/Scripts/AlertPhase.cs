@@ -9,15 +9,30 @@ public class AlertPhase : MonoBehaviour
     public GameObject miniMap;
     public GameObject AlertInfo;
     public TextMeshProUGUI TimerText;
-    public bool inAlertPhase;
-    public double timeRemaining = 0;
+    private bool inAlertPhase;
+    private double timeRemaining = 0;
     private double alertDuration = 5;
-    public Vector3 lastKnownPosition; 
+    private Transform player;
+    private Vector3 lastKnownPosition; 
+
+    public bool getInAlertPhase() {
+        return inAlertPhase;
+    }
+
+    public double getTimeRemaining() {
+        return timeRemaining;
+    }
+
+    public Vector3 getLastKnownPosition() {
+        return lastKnownPosition;
+    }
 
     public void updateCanSeePlayer(bool canSeePlayer) 
     {
         if (canSeePlayer) 
         {
+            lastKnownPosition = player.position;
+
             if (!inAlertPhase) {
                 // We are entering alert phase
                 EnterAlertPhase();
@@ -50,6 +65,10 @@ public class AlertPhase : MonoBehaviour
         AlertInfo.SetActive(true);
         // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
     }
+
+    void Awake() {
+    	player = GameObject.FindGameObjectWithTag("Player").transform;
+	}
 
     // Start is called before the first frame update
     void Start()

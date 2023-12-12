@@ -16,7 +16,7 @@ public class CardBoardBoxFunction : MonoBehaviour
     void Update()
     {
         playerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Animator>();
-        alertPhase = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().inAlertPhase;
+        alertPhase = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>().getInAlertPhase();
 
 
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))

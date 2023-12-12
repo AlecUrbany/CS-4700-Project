@@ -14,7 +14,6 @@ public class EnemyAI : MonoBehaviour
     
     public Transform player;
     public float playerRange;
-    private Vector3 distanceFromPlayer;
     public GameObject childObject;
     public Rigidbody rb;
     public float moveSpeed;
@@ -30,13 +29,10 @@ public class EnemyAI : MonoBehaviour
     private bool patrol = true;
     private bool alert = false;
     private bool chasing = false;
-    private bool coroutineRunning = false;
-    private Coroutine chaseCoroutine;
+    // private bool coroutineRunning = false;
+    // private Coroutine chaseCoroutine;
     public Quaternion startRotation;
-    // private GameObject gameStateManagerObject;
     private AlertPhase alertPhaseScript; 
-    private Vector3 lastKnownPosition;
-    private double timeRemaining;
 
 //These six lines are for the exclamation point upon noticing the player
     public Transform enemyMouth;
@@ -54,9 +50,8 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Awake(){
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
-        // gameStateManagerObject = GameObject.Find("Game State Manager");
         alertPhaseScript = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>();
-        alert = alertPhaseScript.inAlertPhase;
+        alert = alertPhaseScript.getInAlertPhase();
     }
     void Start(){
         startPosition = transform.position;
@@ -64,9 +59,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
     void Update(){
-        alert = alertPhaseScript.inAlertPhase;
-        lastKnownPosition = alertPhaseScript.lastKnownPosition;
-        timeRemaining = alertPhaseScript.timeRemaining;
+        alert = alertPhaseScript.getInAlertPhase();
         if(EventBus.Instance.enemyCanMove == false)
         {
             return;
@@ -81,38 +74,31 @@ public class EnemyAI : MonoBehaviour
                 hasBeenAlerted = true;
             }
             chasing = true;
-            alertPhaseScript.inAlertPhase = true;
-            alertPhaseScript.lastKnownPosition = player.position;
-            alertPhaseScript.timeRemaining = 5;
             patrol = false;
             FollowPlayer(player.position);
         }
 
         else if(chasing && canSeePlayer){
-            chasing = true;
-            alertPhaseScript.timeRemaining = 5;
             FollowPlayer(player.position);
         }
 
         else if(chasing && !canSeePlayer){
-            if(timeRemaining > 0){
+            chasing = false;
+            if(alertPhaseScript.getTimeRemaining() > 0){
                 alert = true;
-                alertPhaseScript.inAlertPhase = true;
-                chasing = false;
             }
             else{
                 alert = false;
-                alertPhaseScript.inAlertPhase = false;
-                chasing = false;
                 patrol = true;
             }
         }
 
-        else if(alert && timeRemaining > 0){
+        else if(alert && alertPhaseScript.getTimeRemaining() > 0){
+            // Go to player's last known location
+            Vector3 lastKnownPosition = alertPhaseScript.getLastKnownPosition();
             float threshold = 0.1f;
             if(Vector3.Distance(lastKnownPosition, transform.position) < threshold){
                 rb.velocity = Vector3.zero;
-                Debug.Log("reached location");
             }
             else{
                 FollowPlayer(lastKnownPosition);
@@ -137,11 +123,12 @@ public class EnemyAI : MonoBehaviour
             }
         }
         else{
+            // Go back to start in order to resume patrol
             if(!agent.pathPending){
                 agent.SetDestination(startPosition);
-                Debug.Log("returning to start");
             }
-            if(startPosition.x == transform.position.x && startPosition.z == transform.position.z){
+            float threshold = 0.2f;
+            if(Vector3.Distance(startPosition, transform.position) < threshold) {
                 rb.velocity = Vector3.zero;
                 transform.rotation = startRotation;
                 patrol = true;
@@ -240,16 +227,17 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-    IEnumerator ContinueChase(){
-        yield return new WaitForSeconds(5f);
-        if(!chasing){
-            alert = false;
-            alertPhaseScript.inAlertPhase = false;
-            hasBeenAlerted = false;
-            patrol = true;
-        }
-        chaseCoroutine = null;
-    }
+    // IEnumerator ContinueChase(){
+    //     yield return new WaitForSeconds(5f);
+    //     if(!chasing){
+    //         alert = false;
+    //         // TODO: Figure out what to do with bellow line
+    //         // alertPhaseScript.inAlertPhase = false;
+    //         hasBeenAlerted = false;
+    //         patrol = true;
+    //     }
+    //     chaseCoroutine = null;
+    // }
     void ShowAlertSound()
     {
         if(floatingTextBox)
