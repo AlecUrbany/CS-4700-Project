@@ -29,10 +29,9 @@ public class EnemyAI : MonoBehaviour
     private bool patrol = true;
     private bool alert = false;
     private bool chasing = false;
-    // private bool coroutineRunning = false;
-    // private Coroutine chaseCoroutine;
     public Quaternion startRotation;
     private AlertPhase alertPhaseScript; 
+    private double timeRemaining;
 
 //These six lines are for the exclamation point upon noticing the player
     public Transform enemyMouth;
@@ -45,21 +44,24 @@ public class EnemyAI : MonoBehaviour
 
 
 
-
-
-    // Update is called once per frame
     void Awake(){
+        if(startPosition == Vector3.zero){
+            startPosition = transform.position;        
+        }
+        else{
+            transform.position = startPosition;  
+        }
+        startRotation = transform.rotation;
         GameObject childObject = transform.Find("Enemy Sightline").gameObject;
         alertPhaseScript = GameObject.FindGameObjectWithTag("GameStateManager").GetComponent<AlertPhase>();
-        alert = alertPhaseScript.getInAlertPhase();
+        hasBeenAlerted = alertPhaseScript.getInAlertPhase();
     }
     void Start(){
-        startPosition = transform.position;
-        startRotation = transform.rotation;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
     void Update(){
-        alert = alertPhaseScript.getInAlertPhase();
+        hasBeenAlerted = alertPhaseScript.getInAlertPhase();
+        timeRemaining = alertPhaseScript.getTimeRemaining(); 
         if(EventBus.Instance.enemyCanMove == false)
         {
             return;
@@ -75,28 +77,33 @@ public class EnemyAI : MonoBehaviour
             }
             chasing = true;
             patrol = false;
+            alertPhaseScript.setInAlertPhase(hasBeenAlerted);
+            alertPhaseScript.setLastKnownPosition(player.position);
+            alertPhaseScript.setTimeRemaining(5);
             FollowPlayer(player.position);
         }
 
         else if(chasing && canSeePlayer){
+            alertPhaseScript.setLastKnownPosition(player.position);
+            alertPhaseScript.setTimeRemaining(5);
             FollowPlayer(player.position);
         }
 
         else if(chasing && !canSeePlayer){
             chasing = false;
             if(alertPhaseScript.getTimeRemaining() > 0){
-                alert = true;
+                hasBeenAlerted = true;
             }
             else{
-                alert = false;
+                hasBeenAlerted = false;
                 patrol = true;
             }
         }
 
-        else if(alert && alertPhaseScript.getTimeRemaining() > 0){
+        else if(hasBeenAlerted && alertPhaseScript.getTimeRemaining() > 0){
             // Go to player's last known location
             Vector3 lastKnownPosition = alertPhaseScript.getLastKnownPosition();
-            float threshold = 0.1f;
+            float threshold = 0.2f;
             if(Vector3.Distance(lastKnownPosition, transform.position) < threshold){
                 rb.velocity = Vector3.zero;
             }
@@ -125,13 +132,15 @@ public class EnemyAI : MonoBehaviour
         else{
             // Go back to start in order to resume patrol
             if(!agent.pathPending){
+                rb.velocity = Vector3.zero;
                 agent.SetDestination(startPosition);
             }
-            float threshold = 0.2f;
-            if(Vector3.Distance(startPosition, transform.position) < threshold) {
-                rb.velocity = Vector3.zero;
+            // Using distance included y which varied when enemies collided.
+            if(startPosition.x == transform.position.x && startPosition.z == transform.position.z) {
                 transform.rotation = startRotation;
                 patrol = true;
+                movingStage1 = false;
+                movingStage2 = false;
                 agent.ResetPath();
             }
         }
