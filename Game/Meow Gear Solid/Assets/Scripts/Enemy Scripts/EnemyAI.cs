@@ -27,11 +27,9 @@ public class EnemyAI : MonoBehaviour
     private bool movingStage2 = false;
     private int phase = 1;
     private bool patrol = true;
-    private bool alert = false;
     private bool chasing = false;
     public Quaternion startRotation;
     private AlertPhase alertPhaseScript; 
-    private double timeRemaining;
 
 //These six lines are for the exclamation point upon noticing the player
     public Transform enemyMouth;
@@ -61,7 +59,6 @@ public class EnemyAI : MonoBehaviour
     }
     void Update(){
         hasBeenAlerted = alertPhaseScript.getInAlertPhase();
-        timeRemaining = alertPhaseScript.getTimeRemaining(); 
         if(EventBus.Instance.enemyCanMove == false)
         {
             return;
@@ -77,15 +74,12 @@ public class EnemyAI : MonoBehaviour
             }
             chasing = true;
             patrol = false;
-            alertPhaseScript.setInAlertPhase(hasBeenAlerted);
-            alertPhaseScript.setLastKnownPosition(player.position);
-            alertPhaseScript.setTimeRemaining(5);
+            alertPhaseScript.updateCanSeePlayer(canSeePlayer);
             FollowPlayer(player.position);
         }
 
         else if(chasing && canSeePlayer){
-            alertPhaseScript.setLastKnownPosition(player.position);
-            alertPhaseScript.setTimeRemaining(5);
+            alertPhaseScript.updateCanSeePlayer(canSeePlayer);
             FollowPlayer(player.position);
         }
 
