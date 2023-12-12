@@ -36,6 +36,7 @@ public class EnemyAI : MonoBehaviour
     private GameObject gameStateManagerObject;
     private AlertPhase alertPhaseScript; 
     private Vector3 lastKnownPosition;
+    private double timeRemaining;
 
 //These six lines are for the exclamation point upon noticing the player
     public Transform enemyMouth;
@@ -63,9 +64,9 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
     void Update(){
-        Debug.Log("Alert " + alert + ",  Chasing " + chasing + ",  Patrol " + patrol + ",   Event " + EventBus.Instance.enemyCanMove);
         alert = alertPhaseScript.inAlertPhase;
         lastKnownPosition = alertPhaseScript.lastKnownPosition;
+        timeRemaining = alertPhaseScript.timeRemaining;
         if(EventBus.Instance.enemyCanMove == false)
         {
             return;
@@ -82,27 +83,41 @@ public class EnemyAI : MonoBehaviour
             chasing = true;
             alertPhaseScript.inAlertPhase = true;
             alertPhaseScript.lastKnownPosition = player.position;
+            alertPhaseScript.timeRemaining = 5;
             patrol = false;
             FollowPlayer(player.position);
         }
 
         else if(chasing && canSeePlayer){
             chasing = true;
+            alertPhaseScript.timeRemaining = 5;
             FollowPlayer(player.position);
         }
 
         else if(chasing && !canSeePlayer){
-            if (chaseCoroutine != null){
-                StopCoroutine(chaseCoroutine);
+            if(timeRemaining > 0){
+                alert = true;
+                alertPhaseScript.inAlertPhase = true;
+                chasing = false;
             }
-            alert = true;
-            alertPhaseScript.inAlertPhase = true;
-            chasing = false;
-            chaseCoroutine = StartCoroutine(ContinueChase());
+            else{
+                alert = false;
+                alertPhaseScript.inAlertPhase = false;
+                chasing = false;
+                patrol = true;
+            }
         }
 
-        else if(alert){
-            FollowPlayer(lastKnownPosition);
+        else if(alert && timeRemaining > 0){
+            float threshold = 0.1f;
+            if(Vector3.Distance(lastKnownPosition, transform.position) < threshold){
+                rb.velocity = Vector3.zero;
+                Debug.Log("reached location");
+            }
+            else{
+                FollowPlayer(lastKnownPosition);
+            }
+            
         }
 
         else if (patrol){
@@ -122,8 +137,12 @@ public class EnemyAI : MonoBehaviour
             }
         }
         else{
-            agent.SetDestination(startPosition);
+            if(!agent.pathPending){
+                agent.SetDestination(startPosition);
+                Debug.Log("returning to start");
+            }
             if(startPosition.x == transform.position.x && startPosition.z == transform.position.z){
+                rb.velocity = Vector3.zero;
                 transform.rotation = startRotation;
                 patrol = true;
                 agent.ResetPath();
@@ -133,22 +152,14 @@ public class EnemyAI : MonoBehaviour
 
 
     void FollowPlayer(Vector3 playerPosition){
-        agent.ResetPath();
-         if (chasing){
-            agent.SetDestination(playerPosition);
-        }
-        else{
-            if(alert){
-                Vector3 distanceFromPlayer = playerPosition - transform.position;
-                distanceFromPlayer.Normalize();
-                rb.velocity = distanceFromPlayer * moveSpeed;
+        Vector3 distanceFromPlayer = playerPosition - transform.position;
+        distanceFromPlayer.Normalize();
+        rb.velocity = distanceFromPlayer * moveSpeed;
 
-                if (rb.velocity != Vector3.zero)
-                {
-                    Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
-                }
-            }
+        if (rb.velocity != Vector3.zero)
+        {
+            Quaternion desiredRotation = Quaternion.LookRotation(rb.velocity);
+            transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
         }
     }
     void PatrolHorizontal()
@@ -234,9 +245,10 @@ public class EnemyAI : MonoBehaviour
         if(!chasing){
             alert = false;
             alertPhaseScript.inAlertPhase = false;
+            hasBeenAlerted = false;
+            patrol = true;
         }
         chaseCoroutine = null;
-        hasBeenAlerted = false;
     }
     void ShowAlertSound()
     {
