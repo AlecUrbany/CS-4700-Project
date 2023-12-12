@@ -29,6 +29,17 @@ public class AlertPhase : MonoBehaviour
     public Vector3 getLastKnownPosition() {
         return lastKnownPosition;
     }
+    public void setInAlertPhase(bool enemyAlert) {
+        inAlertPhase = enemyAlert;
+    }
+
+    public void setTimeRemaining(double timeLeft) {
+        timeRemaining = timeLeft;
+    }
+
+    public void setLastKnownPosition(Vector3 playersLastLocation) {
+        lastKnownPosition  = playersLastLocation;
+    }
 
     public void updateCanSeePlayer(bool canSeePlayer) 
     {
