@@ -29,17 +29,6 @@ public class AlertPhase : MonoBehaviour
     public Vector3 getLastKnownPosition() {
         return lastKnownPosition;
     }
-    public void setInAlertPhase(bool enemyAlert) {
-        inAlertPhase = enemyAlert;
-    }
-
-    public void setTimeRemaining(double timeLeft) {
-        timeRemaining = timeLeft;
-    }
-
-    public void setLastKnownPosition(Vector3 playersLastLocation) {
-        lastKnownPosition  = playersLastLocation;
-    }
 
     public void updateCanSeePlayer(bool canSeePlayer) 
     {
@@ -47,17 +36,17 @@ public class AlertPhase : MonoBehaviour
         {
             lastKnownPosition = player.position;
 
-            if (!inAlertPhase) {
-                // We are entering alert phase
-                EnterAlertPhase();
-                
-            }
-
             if (!EventBus.Instance.hasMacguffin) 
             {
                 timeRemaining = alertDuration;
                 TimerText.text = string.Format("{0:00}", timeRemaining);
             }
+            
+            if (!inAlertPhase) {
+                // We are entering alert phase
+                EnterAlertPhase();
+            }
+
         }
     }
 
@@ -78,8 +67,10 @@ public class AlertPhase : MonoBehaviour
         inAlertPhase = true;
         miniMap.SetActive(false);
         AlertInfo.SetActive(true);
-        // TODO: Add Enemy spawn and other stuff that happens when first entering alert phase
-        alertEnemies = new List<GameObject>();
+        if (alertEnemies.Count != 0) {
+            // Destory old enemies (that should have already been destroyed before creating new enemies)
+            destroyEnemies();
+        }
         alertEnemies.Add(createEnemy());
         alertEnemies.Add(createEnemy());
         alertEnemies.Add(createEnemy());
@@ -107,6 +98,7 @@ public class AlertPhase : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        alertEnemies = new List<GameObject>();
         // TODO: Determine better way to set enemySpawnPosition (will likely be differnt for each level)
         enemySpawnPosition = new Vector3(0, 5, 0);
     }
@@ -129,12 +121,10 @@ public class AlertPhase : MonoBehaviour
                 inAlertPhase = false;
                 miniMap.SetActive(true);
                 AlertInfo.SetActive(false);
-                // TODO: Implement destroy AlertPhase enemies
                 destroyEnemies();
                 return;
             }
 
-            // TODO: Implement update of AlertPhase enemies to ensure there are always 4 of them
             updateEnemies();
         }
     }
