@@ -78,7 +78,9 @@ public class AlertPhase : MonoBehaviour
     }
 
     private GameObject createEnemy() {
-        return Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity);
+        enemy.tag = "EnemyReinforce";
+        return enemy;
     }
 
     private void updateEnemies() {
