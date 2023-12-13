@@ -88,4 +88,8 @@ public class ItemPickUp : MonoBehaviour
             Destroy(prefab, nameLifeSpan);
         }
     }
+
+    public ItemData GetItemData(){
+        return itemData;
+    }
 }
