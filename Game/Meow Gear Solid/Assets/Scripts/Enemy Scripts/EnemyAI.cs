@@ -44,7 +44,8 @@ public class EnemyAI : MonoBehaviour
 
     void Awake(){
         if(startPosition == Vector3.zero){
-            startPosition = transform.position;        
+            startPosition = transform.position;  
+            patrol = false;      
         }
         else{
             transform.position = startPosition;  
