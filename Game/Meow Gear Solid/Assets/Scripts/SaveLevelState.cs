@@ -6,7 +6,7 @@ using System.IO;
 public class LevelState
 {
     public List<EnemyData> enemies = new List<EnemyData>();
-    // Other level state properties...
+    public List<ItemInformation> items = new List<ItemInformation>();
 }
 
 [System.Serializable]
@@ -18,6 +18,11 @@ public class EnemyData{
     public float moveSpeed;
     public float patrolDistance;
     public float viewRadius;
+}
+[System.Serializable]
+public class ItemInformation{
+    public ItemData itemData;
+    public ItemData? gunType;
 }
 public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
@@ -66,6 +71,23 @@ public class SaveLevelState : MonoBehaviour{
     }
 
     public void GetDrops(){
+        foreach(GameObject drops in GameObject.FindGameObjectsWithTag("Drops")){
+            ItemPickUp itemPickUp = drops.GetComponent<ItemPickUp>();
+            if (itemPickUp != null){
+                ItemInformation itemInfo = new ItemInformation{
+                    itemData = itemPickUp.GetItemData()
+                };
+                state.items.Add(itemInfo);
+
+            }
+            else{
+                ItemInformation itemInfo = new ItemInformation{
+                    itemData = drops.GetComponent<ConsumableItemPickup>().GetItemData(),
+                    gunType = drops.GetComponent<ConsumableItemPickup>().GetGunAmmo()
+                };
+                state.items.Add(itemInfo);
+            }
+        }
         
     }
 

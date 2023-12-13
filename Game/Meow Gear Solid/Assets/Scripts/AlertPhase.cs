@@ -71,10 +71,10 @@ public class AlertPhase : MonoBehaviour
             // Destory old enemies (that should have already been destroyed before creating new enemies)
             destroyEnemies();
         }
-        alertEnemies.Add(createEnemy());
-        alertEnemies.Add(createEnemy());
-        alertEnemies.Add(createEnemy());
-        alertEnemies.Add(createEnemy());
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
+            enemySpawnPosition = enemy.transform.position;
+            alertEnemies.Add(createEnemy());   
+        }
     }
 
     private GameObject createEnemy() {
@@ -83,7 +83,7 @@ public class AlertPhase : MonoBehaviour
 
     private void updateEnemies() {
         alertEnemies.RemoveAll(enemyPrefab => enemyPrefab == null);
-        while (alertEnemies.Count < 4) {
+        while (alertEnemies.Count < GameObject.FindGameObjectsWithTag("Enemy").Length) {
             alertEnemies.Add(createEnemy());
         }
     }

@@ -18,6 +18,8 @@ TagManager:
   - PlayerModel
   - PlayerStatic
   - PlayerFollowCam
+  - Drops
+  - EnemyReinforce
   layers:
   - Default
   - TransparentFX

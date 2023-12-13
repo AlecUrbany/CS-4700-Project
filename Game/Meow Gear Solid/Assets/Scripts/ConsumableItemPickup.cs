@@ -69,4 +69,10 @@ public class ConsumableItemPickup : MonoBehaviour
         textShown = false;
 
     }
+    public ItemData GetItemData(){
+        return itemData;
+    }
+    public ItemData GetGunAmmo(){
+        return gunAmmo;
+    }
 }
