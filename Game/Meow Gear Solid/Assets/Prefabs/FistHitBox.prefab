@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8170366906995923898}
   - component: {fileID: 4331440474771786095}
   - component: {fileID: 9070099064293645767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FistHitBox
   m_TagString: lethal bullet
   m_Icon: {fileID: 0}

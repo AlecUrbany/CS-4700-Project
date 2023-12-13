@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class MeleeCollision : MonoBehaviour
@@ -15,15 +16,23 @@ public class MeleeCollision : MonoBehaviour
         
         if(other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            AudioSource.PlayClipAtPoint(punchSound1, transform.position, 1f);
-            Destroy(bullet);
-            Debug.Log("destroy");
-
             EnemyHealth enemyScript = other.gameObject.GetComponent<EnemyHealth>();
+            Transform camLocation = GameObject.FindWithTag("MainCamera").GetComponent<Transform>();
             if(enemyScript != null)
             {
-                enemyScript.TakeDamage(damage);
-                Destroy(bullet);
+                if(Random.Range(0, 2) == 0)
+                {
+                    AudioSource.PlayClipAtPoint(punchSound2, camLocation.transform.position, 1.0f);
+                    enemyScript.TakeDamage(damage);
+                    Destroy(bullet);
+                }
+                else
+                {
+                    AudioSource.PlayClipAtPoint(punchSound2, transform.position, 1.0f);
+                    enemyScript.TakeDamage(damage);
+                    Destroy(bullet);
+                }
+                
             }
         }
     
