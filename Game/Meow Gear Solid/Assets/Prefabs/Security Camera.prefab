@@ -479,7 +479,7 @@ MonoBehaviour:
     type: 3}
   nameLifeSpan: 0.5
   source: {fileID: 7693310176962968187}
-  alertSound: {fileID: 8300000, guid: 17e09ac8debeb5c458308f0c1d62eda3, type: 3}
+  alertSound: {fileID: 8300000, guid: 634dea2697aa9f540923330b623f3c56, type: 3}
   hasBeenAlerted: 0
 --- !u!1 &6563551937771442974
 GameObject:
@@ -546,7 +546,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 17e09ac8debeb5c458308f0c1d62eda3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 634dea2697aa9f540923330b623f3c56, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
