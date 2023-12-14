@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameEnd : MonoBehaviour
 {
-    GameObject exitTruck;
-    GameObject exitText;
+    public GameObject exitTruck;
+    public GameObject exitText;
     public ScreenFader fader;
     // Start is called before the first frame update
     void Start()
     {
-        exitTruck = GetComponent<GameObject>();
         exitTruck.SetActive(false);
     }
 
