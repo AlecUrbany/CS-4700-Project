@@ -73,20 +73,6 @@ public class SaveLevelState : MonoBehaviour{
     public void GetDrops(){
         foreach(GameObject drops in GameObject.FindGameObjectsWithTag("Drops")){
             ItemPickUp itemPickUp = drops.GetComponent<ItemPickUp>();
-            if (itemPickUp != null){
-                ItemInformation itemInfo = new ItemInformation{
-                    itemData = itemPickUp.GetItemData()
-                };
-                state.items.Add(itemInfo);
-
-            }
-            else{
-                ItemInformation itemInfo = new ItemInformation{
-                    itemData = drops.GetComponent<ConsumableItemPickup>().GetItemData(),
-                    gunType = drops.GetComponent<ConsumableItemPickup>().GetGunAmmo()
-                };
-                state.items.Add(itemInfo);
-            }
         }
         
     }
