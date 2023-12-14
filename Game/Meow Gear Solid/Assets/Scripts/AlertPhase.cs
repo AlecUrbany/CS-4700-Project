@@ -14,7 +14,7 @@ public class AlertPhase : MonoBehaviour
     private List<GameObject> alertEnemies;
     private bool inAlertPhase;
     private double timeRemaining = 0;
-    private double alertDuration = 5;
+    private double alertDuration = 30;
     private Transform player;
     private Vector3 lastKnownPosition; 
 
@@ -67,23 +67,18 @@ public class AlertPhase : MonoBehaviour
         inAlertPhase = true;
         miniMap.SetActive(false);
         AlertInfo.SetActive(true);
-        if (alertEnemies.Count != 0) {
-            // Destory old enemies (that should have already been destroyed before creating new enemies)
-            destroyEnemies();
-        }
-        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
-            enemySpawnPosition = enemy.transform.position;
-            alertEnemies.Add(createEnemy());   
-        }
+        // Creates 4 new reinforcement enemies
+        updateEnemies();
     }
 
     private GameObject createEnemy() {
+        enemySpawnPosition = GameObject.FindGameObjectWithTag("EnemyReinforcementLocation").transform.position;
         return Instantiate(enemyPrefab, enemySpawnPosition, Quaternion.identity);
     }
 
     private void updateEnemies() {
         alertEnemies.RemoveAll(enemyPrefab => enemyPrefab == null);
-        while (alertEnemies.Count < GameObject.FindGameObjectsWithTag("Enemy").Length) {
+        while (alertEnemies.Count < 4) {
             alertEnemies.Add(createEnemy());
         }
     }
