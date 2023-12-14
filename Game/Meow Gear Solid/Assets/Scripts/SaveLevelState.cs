@@ -21,7 +21,7 @@ public class EnemyData{
 }
 [System.Serializable]
 public class ItemInformation{
-    public ItemData itemData;
+    public Vector3 itemPosition;
     public ItemData? gunType;
 }
 public class SaveLevelState : MonoBehaviour{
