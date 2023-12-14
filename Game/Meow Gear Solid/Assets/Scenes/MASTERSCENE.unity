@@ -4699,6 +4699,16 @@ MonoBehaviour:
   player: {fileID: 1241731419}
   enemyPrefab: {fileID: 3980568658035178430, guid: f3bf2986cb2204840ad990373ccb7a0b,
     type: 3}
+  pistolPrefab: {fileID: 4576065799168568948, guid: f7b3fed382eef8f439d7d528da1a31df,
+    type: 3}
+  healthPrefab: {fileID: 7966922977636807793, guid: 1506e71efd099484aa39267f8829748a,
+    type: 3}
+  ammoPrefab: {fileID: 5118281003166920803, guid: badfcb81a2777c948a65425e4905514a,
+    type: 3}
+  tranqPrefab: {fileID: 7966922977636807793, guid: 1506e71efd099484aa39267f8829748a,
+    type: 3}
+  wearPrefab: {fileID: 3513030157716724727, guid: 27cbc7e371f10f5419f73681c1d2305f,
+    type: 3}
 --- !u!4 &703677159
 Transform:
   m_ObjectHideFlags: 0
