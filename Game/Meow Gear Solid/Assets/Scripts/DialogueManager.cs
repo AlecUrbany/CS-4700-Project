@@ -30,7 +30,6 @@ public class DialogueManager : MonoBehaviour
     }
 
     void DisplayMessage() { 
-         Time.timeScale = 0;
         Message messageToDisplay = currentMessages[activeMessage];
         messageText.text = messageToDisplay.message;
 
@@ -61,7 +60,6 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Conversation ended!");
             backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo();
             isActive = false;
-             Time.timeScale = 1;
             EventBus.Instance.LevelLoadEnd();
         }
     }

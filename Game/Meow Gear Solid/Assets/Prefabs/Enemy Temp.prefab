@@ -969,7 +969,7 @@ MonoBehaviour:
     type: 3}
   barrel: {fileID: 9083830313813887147}
   reloadSpeed: 2
-  bulletSpeed: 35
+  bulletSpeed: 40
   burstSpeed: 0.1
   isReloading: 0
   sightline: {fileID: 3980568657886112265}

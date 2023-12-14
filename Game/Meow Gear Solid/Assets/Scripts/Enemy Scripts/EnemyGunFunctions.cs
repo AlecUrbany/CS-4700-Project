@@ -10,6 +10,7 @@ public class EnemyGunFunctions : MonoBehaviour
     public float reloadSpeed = 2f;
     public float bulletSpeed = 25.0f;
     public float burstSpeed = .01f;
+        public float damage = 15f;
 
     public bool isReloading;
     public GameObject sightline;
@@ -61,7 +62,7 @@ public class EnemyGunFunctions : MonoBehaviour
         Rigidbody bulletRigidbody = newBullet.GetComponent<Rigidbody>();
         bulletRigidbody.velocity = Vector3.zero;
         bulletRigidbody.velocity = barrel.forward * bulletSpeed;
-        StartCoroutine(BulletLife(2, newBullet));
+        StartCoroutine(BulletLife(5, newBullet));
     }
     
     IEnumerator BulletLife(float timer, GameObject newBullet)

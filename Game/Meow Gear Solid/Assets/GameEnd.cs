@@ -37,12 +37,13 @@ public class GameEnd : MonoBehaviour
             return;
         }
         exitText.SetActive(false);
-        if( EventBus.Instance.hasMacguffin == true);
+        if( EventBus.Instance.hasMacguffin == true)
         {            
 
             exitText.SetActive(true);
             if (Input.GetButtonDown("Interact") && EventBus.Instance.hasMacguffin == true)
             {
+                exitText.SetActive(false);
                 EventBus.Instance.LevelLoadStart();
                 EventBus.Instance.GameEnd();
                 StartCoroutine("Delay");

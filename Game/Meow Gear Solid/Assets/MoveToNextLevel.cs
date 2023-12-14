@@ -8,7 +8,7 @@ public class MoveToNextLevel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene(2);
+        //.LoadScene(2);
     }
 
     // Update is called once per frame

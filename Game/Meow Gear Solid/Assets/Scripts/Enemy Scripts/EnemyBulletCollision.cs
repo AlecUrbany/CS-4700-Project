@@ -9,9 +9,9 @@ public class EnemyBulletCollision : MonoBehaviour
     public float damage = 20f;
     private void OnTriggerEnter(Collider other)
     {
-            Destroy(bullet);
             if(other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
+                Destroy(bullet);
                 PlayerHealth playerScript = other.gameObject.GetComponent<PlayerHealth>();
                 if(playerScript != null)
                 {
