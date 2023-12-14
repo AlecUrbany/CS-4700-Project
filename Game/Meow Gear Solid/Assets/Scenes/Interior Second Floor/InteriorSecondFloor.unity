@@ -7633,7 +7633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 1445790779}
-  targetSceneName: Interior&Exterior
+  targetSceneName: InteriorFirstFloor
   targetPortal: InteriorExit1
   thisPortalsSpawnSide: 0
   thisPortalsSpawnOffset: 15
