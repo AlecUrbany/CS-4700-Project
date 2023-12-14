@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5118281003166920801}
   m_Layer: 0
   m_Name: Socom Ammo
-  m_TagString: Untagged
+  m_TagString: Drops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 5b37ddf542045bd49a315b81a8c8b844, type: 2}
   gunAmmo: {fileID: 11400000, guid: 07b658069e18bf74098a7851cfbd3874, type: 2}
   pickUpSound: {fileID: 8300000, guid: a33365d8e9ca98c438ef2b95ba4430c8, type: 3}
+  textShown: 0
 --- !u!114 &5118281003166920801
 MonoBehaviour:
   m_ObjectHideFlags: 0

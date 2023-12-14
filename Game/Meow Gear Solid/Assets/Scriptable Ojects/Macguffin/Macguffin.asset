@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421b056e97d8a29439cdb455c430ac74, type: 3}
   m_Name: Macguffin
   m_EditorClassIdentifier: 
-  weaponType: 5
+  weaponType: 0
   shortName: Heart
   itemName: '{{HEART OF HUMANITY}}'
   itemDesc:

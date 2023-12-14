@@ -11542,6 +11542,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Keycard_Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 6698516449369722996, guid: 097d7fb0ce6c2de4babd943f358010ee,
+        type: 3}
+      propertyPath: m_TagString
+      value: Drops
+      objectReference: {fileID: 0}
     - target: {fileID: 6698516449369723790, guid: 097d7fb0ce6c2de4babd943f358010ee,
         type: 3}
       propertyPath: m_RootOrder
@@ -11550,7 +11555,7 @@ PrefabInstance:
     - target: {fileID: 6698516449369723790, guid: 097d7fb0ce6c2de4babd943f358010ee,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.421
+      value: -0.528
       objectReference: {fileID: 0}
     - target: {fileID: 6698516449369723790, guid: 097d7fb0ce6c2de4babd943f358010ee,
         type: 3}

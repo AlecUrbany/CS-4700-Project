@@ -66,6 +66,12 @@ public class PlayerInventoryControls : MonoBehaviour
             }
             CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
             dispalyIcon.texture = itemData.Sprite.mainTexture;
+            if((itemData.weaponType == WeaponType.Melee) || (itemData.weaponType == WeaponType.Wearable))
+            {
+            MaxAmmoText.SetText("");
+            CurrentAmmoText.SetText("");
+            divided.SetText("");
+            }
             dispalyIcon.color = new Color(255,255,255, 1);
 
             if((hasBullets == false && magazineCount.Capacity > 0) || itemData == null)
@@ -161,7 +167,6 @@ public class PlayerInventoryControls : MonoBehaviour
                     DisplayItem(itemData, hasBullets);
                     holdingGun = true;
                     playerAnimator.SetBool("HoldingGun", holdingGun);
-
                 }
 
                 if(itemData.weaponType == WeaponType.Wearable)
@@ -175,6 +180,17 @@ public class PlayerInventoryControls : MonoBehaviour
                     DisplayItem(itemData, hasBullets);
                     wearingBox = true;
                     playerAnimator.SetBool("WearingBox", wearingBox);
+                }
+
+                if(itemData.weaponType == WeaponType.Melee)
+                {
+                    Destroy(viewController.spawnedItem);
+                    // This gun is not yet equiped, so we need to create it
+                    viewController.spawnedItem = Instantiate(itemData.itemModel, playerHead, false);
+                    viewController.equipedItem = itemData;
+                    equipped = true;
+                    hasBullets = false;
+                    DisplayItem(itemData, hasBullets);
                 }
                 
                 if(itemData.weaponType == WeaponType.Healing)

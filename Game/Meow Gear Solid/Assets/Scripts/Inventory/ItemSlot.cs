@@ -98,13 +98,18 @@ public class ItemSlot : MonoBehaviour, ISelectHandler
         {
             return;
         }
-        
         MaxAmmoText.SetText(itemData.maxAmmo.ToString());
         if (MaxAmmoText && CurrentAmmoText != null)
         {
             divided.SetText("/");
         }
         CurrentAmmoText.SetText(itemData.currentAmmo.ToString());
+        if((itemData.weaponType == WeaponType.Melee) || (itemData.weaponType == WeaponType.Wearable))
+        {
+            MaxAmmoText.SetText("");
+            CurrentAmmoText.SetText("");
+            divided.SetText("");
+        }
     }
 
     private void Awake()

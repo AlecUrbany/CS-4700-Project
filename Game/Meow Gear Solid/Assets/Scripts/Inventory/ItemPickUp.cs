@@ -28,7 +28,7 @@ public class ItemPickUp : MonoBehaviour
         {
             if((itemData.weaponType == WeaponType.Pistol) || (itemData.weaponType == WeaponType.Tranquilizer))
             {
-                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
                 Debug.Log("picked up " + itemData.ShortName);
                 itemData.currentAmmo = itemData.maxAmmo;
                 itemData.magazine = itemData.magazineSize;
@@ -38,14 +38,15 @@ public class ItemPickUp : MonoBehaviour
                 Destroy(gameObject);
             }
 
-            if((itemData.weaponType == WeaponType.Healing) || (itemData.weaponType == WeaponType.Throwable) || (itemData.weaponType == WeaponType.Consumable))
+            if((itemData.weaponType == WeaponType.Healing) || (itemData.weaponType == WeaponType.Throwable))
             {
                 Debug.Log("picked up " + itemData.ShortName);
                 if(itemData.inInventory == true)
                 {
                     if (itemData.currentAmmo < itemData.MaxAmmo)
                     {
-                        AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
+                        AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
+                        AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
                         itemData.currentAmmo += 1;
                         Destroy(gameObject);
                     }
@@ -57,7 +58,8 @@ public class ItemPickUp : MonoBehaviour
                 }
                 else
                 {
-                    AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
+                    AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
+                    AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
                     itemData.currentAmmo = 1;
                     itemNameText = itemData.ShortName;
                     ShowText(itemNameText);
@@ -66,9 +68,21 @@ public class ItemPickUp : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+            if (itemData.weaponType == WeaponType.Melee)
+            {
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
+                Debug.Log("picked up " + itemData.ShortName);
+                itemNameText = itemData.ShortName;
+                itemData.inInventory = true;
+                ShowText(itemNameText);
+                EventBus.Instance.PickUpItem(itemData);
+                Destroy(gameObject);
+            }
             if(itemData.weaponType == WeaponType.Wearable)
             {
-                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 2f);
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
+                AudioSource.PlayClipAtPoint(pickUpSound, transform.position, 1f);
                 Debug.Log("picked up " + itemData.ShortName);
                 itemNameText = itemData.ShortName;
                 itemData.inInventory = true;
