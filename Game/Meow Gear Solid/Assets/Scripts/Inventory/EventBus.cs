@@ -13,6 +13,7 @@ public class EventBus
     public bool canMove = true;
     public bool enemyCanMove = true;
     public bool hasMacguffin = false;
+    public float timeElapsed = 0;
     public int numTimesAlertPhaseEntered = 0;
     public int numKilledEnemies = 0;
     public static EventBus Instance { get { if (theInstance == null) theInstance = new EventBus(); return theInstance; } }
@@ -71,6 +72,7 @@ public class EventBus
 
     public void PickUpMacguffin()
     {
+        onPickUpMacguffin?.Invoke();
         hasMacguffin = true;
     }
 
