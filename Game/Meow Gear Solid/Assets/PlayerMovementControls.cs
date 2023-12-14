@@ -42,6 +42,7 @@ public class PlayerMovementControls : MonoBehaviour
 		float horizInput = Input.GetAxisRaw ("Horizontal");
 		float vertInput = Input.GetAxisRaw ("Vertical");
 		playerVelocity = new Vector3 (horizInput, 0, vertInput).normalized * moveSpeed * Time.fixedDeltaTime;
+
 		if(EventBus.Instance.enemyCanMove == false)
         {
             return;
@@ -115,7 +116,9 @@ public class PlayerMovementControls : MonoBehaviour
 		//Handles rigid body movement
         if(tankControls == true)
         {
-            rigid.velocity = transform.forward*Input.GetAxis("Vertical")*tankMoveSpeed;
+            Vector3 vel = transform.forward*Input.GetAxis("Vertical")*tankMoveSpeed;
+            vel.y = rigid.velocity.y;
+            rigid.velocity = vel;
             
             transform.Rotate(0,Input.GetAxis("Horizontal")*tankRotationSpeed*.25f*Time.deltaTime,0);
             
@@ -125,7 +128,13 @@ public class PlayerMovementControls : MonoBehaviour
         {
             if(isCrouching == true)
             {
-                rigid.velocity = playerVelocity *.5f;
+                //The variable vel lets us extract the y velocity value from player velocity
+                //We then set that y value to take from the rigid body's natural y value (gravity)
+                //This is all just to fix a slow falling glitch.
+                Vector3 vel = playerVelocity;
+                vel.y = rigid.velocity.y;
+                rigid.velocity = vel*.5f;
+
                 //Handles Rotation
                 if(rotationVelo.magnitude >= 0.1f)
                 {
@@ -137,7 +146,12 @@ public class PlayerMovementControls : MonoBehaviour
 
             else
             {
-                rigid.velocity = playerVelocity;
+                //The variable vel lets us extract the y velocity value from player velocity
+                //We then set that y value to take from the rigid body's natural y value (gravity)
+                //This is all just to fix a slow falling glitch.
+                Vector3 vel = playerVelocity;
+                vel.y = rigid.velocity.y;
+                rigid.velocity = vel;
                 if(rotationVelo.magnitude >= 0.1f)
                 {
                     float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;

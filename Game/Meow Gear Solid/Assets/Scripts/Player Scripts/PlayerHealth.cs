@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         player = GetComponentInChildren<SkinnedMeshRenderer>();
         player.enabled = true;
         isInvulnerable = false;
-        currentHealth = healthBar.slider.value;
+        currentHealth = maxHealth;
         healthBar.SetHealth(currentHealth);
         GameOverScreen.SetActive(false);
 
