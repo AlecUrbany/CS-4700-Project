@@ -92,6 +92,8 @@ public class SpawnFromSave : MonoBehaviour{
         spawnSide = loadLevelScript.thisPortalsSpawnSide;
         spawnOffset = loadLevelScript.thisPortalsSpawnOffset;
         hortizontalOffset = loadLevelScript.thisPortalsHortizontalOffset;
+        PlayerPrefs.SetString("TargetSpawnPoint", " ");
+
         switch (spawnSide){
             case SpawnSide.Left:
                 player.position = targetSpawnPoint.position - new Vector3(spawnOffset, hortizontalOffset, 0);
