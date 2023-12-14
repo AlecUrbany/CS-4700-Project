@@ -24,6 +24,7 @@ TagManager:
   - GameOverVideoPlayer
   - fader
   - CodecTrigger
+  - CodecFunction
   layers:
   - Default
   - TransparentFX

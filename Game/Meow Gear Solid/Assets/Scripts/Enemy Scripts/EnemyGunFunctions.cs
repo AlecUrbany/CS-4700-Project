@@ -27,6 +27,11 @@ public class EnemyGunFunctions : MonoBehaviour
     void Update()
     {
         bool canSeePlayer = sightline.GetComponent<visionCone>().canSeePlayer;
+        if(EventBus.Instance.enemyCanMove == false)
+        {
+            return;
+        }
+
         if(canSeePlayer == true && isReloading == false)
         {
             StartCoroutine(Shoot3());

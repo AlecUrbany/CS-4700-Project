@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
         currentActors = actors;
         activeMessage = 0;
         isActive = true;
+        EventBus.Instance.LevelLoadStart();
 
         Debug.Log("Started conversation! Loaded messages: " + messages.Length);
         DisplayMessage();
@@ -46,6 +47,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log("Conversation ended!");
             backgroundBox.LeanScale(Vector3.zero, 0.5f).setEaseInOutExpo();
             isActive = false;
+            EventBus.Instance.LevelLoadEnd();
         }
     }
 
@@ -63,7 +65,8 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isActive == true) {
+        if ((Input.GetButtonDown("Fire1")&& isActive == true) || (Input.GetButtonDown("Interact")&& isActive == true))
+        {
             NextMessage();
         }
     }

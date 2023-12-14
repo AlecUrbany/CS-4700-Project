@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class CodecTrigger : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip callSound;
+    public GameObject codecButton;
+    
     /*[SerializeField] private Image Image;
     
     void OnTriggerEnter(Collider other)
@@ -24,8 +28,14 @@ public class CodecTrigger : MonoBehaviour
     }*/
     public DialogueTrigger trigger;
 
-    private void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Player") == true)
+    private void  OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player") == true)
             trigger.StartDialogue();
+            source.PlayOneShot(callSound, 1f);
+    }
+    public void Start()
+    {
+        source = GameObject.FindWithTag("CodecFunction").GetComponent<AudioSource>();
     }
 }
