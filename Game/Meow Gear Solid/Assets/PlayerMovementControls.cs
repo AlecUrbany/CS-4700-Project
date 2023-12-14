@@ -10,7 +10,9 @@ public class PlayerMovementControls : MonoBehaviour
 	public bool isMoving;
     public bool isCrouching;
 	public float moveSpeed = 450;
+    public float tankMoveSpeed = 4;
 	public float rotationSpeed = 720;
+    public float tankRotationSpeed = 360;
 
 	Rigidbody rigid;
 
@@ -20,6 +22,7 @@ public class PlayerMovementControls : MonoBehaviour
 	float Myfloat;
 
 	public ItemData currentlyEquipped;
+    public bool tankControls;
 
 	//Sound nonsense is below
 	public AudioSource source;
@@ -43,6 +46,16 @@ public class PlayerMovementControls : MonoBehaviour
         {
             return;
         }
+
+        if(Input.GetButton("Aim"))
+        {
+            tankControls = true;
+        }
+        else
+        {
+            tankControls = false;
+        }
+
         if(Input.GetButtonDown("Crouch"))
         {
             ToggleCrouch();
@@ -100,25 +113,40 @@ public class PlayerMovementControls : MonoBehaviour
             return;
         }
 		//Handles rigid body movement
-
-        if(isCrouching == true)
+        if(tankControls == true)
         {
-            rigid.velocity = playerVelocity *.5f;
+            rigid.velocity = transform.forward*Input.GetAxis("Vertical")*tankMoveSpeed;
+            
+            transform.Rotate(0,Input.GetAxis("Horizontal")*tankRotationSpeed*.25f*Time.deltaTime,0);
+            
         }
 
         else
-		{
-            rigid.velocity = playerVelocity;
-        }
-        
+        {
+            if(isCrouching == true)
+            {
+                rigid.velocity = playerVelocity *.5f;
+                //Handles Rotation
+                if(rotationVelo.magnitude >= 0.1f)
+                {
+                    float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;
+                    float SmoothRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, Angle, ref Myfloat, 0.1f);
+                    transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
+                }
+            }
 
-		//Handles Rotation
-		if(rotationVelo.magnitude >= 0.1f)
-		{
-			float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;
-			float SmoothRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, Angle, ref Myfloat, 0.1f);
-			transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
-		}
+            else
+            {
+                rigid.velocity = playerVelocity;
+                if(rotationVelo.magnitude >= 0.1f)
+                {
+                    float Angle = Mathf.Atan2(rotationVelo.x, rotationVelo.z) * Mathf.Rad2Deg;
+                    float SmoothRotation = Mathf.SmoothDampAngle(transform.localEulerAngles.y, Angle, ref Myfloat, 0.1f);
+                    transform.rotation = Quaternion.Euler(0, SmoothRotation, 0);
+                }
+            }            
+        }
+
 	}
     public void ToggleCrouch()
     {

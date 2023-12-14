@@ -11224,6 +11224,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4106522319421763799, guid: 7f52275b96233d8498eac4a12906ba70,
+        type: 3}
+      propertyPath: tankControls
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4999419160338783440, guid: 7f52275b96233d8498eac4a12906ba70,
         type: 3}
       propertyPath: m_Name

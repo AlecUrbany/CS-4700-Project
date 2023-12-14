@@ -16,6 +16,7 @@ public class GunFunctions : MonoBehaviour
     [SerializeField] private ItemData gunData;
     public PlayerInventoryControls gunMagazine;
     public bool isReloading;
+    public bool tankControls;
 
     //Lines below deal with sound
     public AudioSource source;
@@ -33,7 +34,7 @@ public class GunFunctions : MonoBehaviour
         {
             return;
         }
-        
+
         if(Input.GetButtonDown("Fire1")&& isReloading == false)
         {
             if (gunData.currentAmmo > 0)
