@@ -38,6 +38,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     public void onDeath(){
         //gameObject.SetActive(false);
+        EventBus.Instance.EnemyKilled();
         Destroy(gameObject);
     }
     IEnumerator BloodTimer(GameObject splatter)

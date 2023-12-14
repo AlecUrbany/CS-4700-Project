@@ -9,6 +9,7 @@ public class EventBus
     public bool enemyCanMove = true;
     public bool hasMacguffin = false;
     public int numTimesAlertPhaseEntered = 0;
+    public int numKilledEnemies = 0;
     public static EventBus Instance { get { if (theInstance == null) theInstance = new EventBus(); return theInstance; } }
 
     static EventBus theInstance;
@@ -20,6 +21,8 @@ public class EventBus
     public event Action onPickUpMacguffin;
 
     public event Action onEnterAlertPhase;
+
+    public event Action onEnemyKilled;
 
     public event Action onAnimationStart;
 
@@ -59,6 +62,11 @@ public class EventBus
     public void EnterAlertPhase()
     {
         numTimesAlertPhaseEntered++;
+    }
+
+    public void EnemyKilled()
+    {
+        numKilledEnemies++;
     }
 
     public void AnimationStart()
