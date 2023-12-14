@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System.IO;
 public class GameData{
     public EnemyDataLoad[] enemies;
-    public DropData[] drops;
+    public DropData[] items;
 }
 
 [System.Serializable]
@@ -21,14 +21,19 @@ public class EnemyDataLoad{
 
 [System.Serializable]
 public class DropData{
-    public Vector3 position;
-    public string itemName;
+    public Vector3 itemPosition;
+    public WeaponType type;
 }
 
 public class SpawnFromSave : MonoBehaviour{
     public string defaultSpawnPointName = "DefaultSpawn"; //Default location
     public Transform player;
     public GameObject enemyPrefab;
+    public GameObject pistolPrefab;
+    public GameObject healthPrefab;
+    public GameObject ammoPrefab;
+    public GameObject tranqPrefab;
+    public GameObject wearPrefab;
     private SpawnSide spawnSide;
     private float spawnOffset;
     private float hortizontalOffset;
@@ -36,18 +41,17 @@ public class SpawnFromSave : MonoBehaviour{
 
     private void Start(){
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        if(GameObject.FindGameObjectsWithTag("Player").Length > 1){
-            
-        }
         string sceneName = SceneManager.GetActiveScene().name;
         string folderPath = Path.Combine(Application.dataPath, "../LevelStates");
         string fileName = sceneName + ".json";
         string filePath = Path.Combine(folderPath, fileName);
         if(File.Exists(filePath)){
             DestroyGameObjectsWithTag("Enemy");
+            DestroyGameObjectsWithTag("Drops");
             //DestroyGameObjectsWithTag("Drop");
             string jsonText = System.IO.File.ReadAllText(filePath);
             GameData gameData = JsonUtility.FromJson<GameData>(jsonText);
+            Debug.Log(gameData.items);
             foreach (EnemyDataLoad enemyData in gameData.enemies){
                 GameObject enemy = Instantiate(enemyPrefab, enemyData.position, Quaternion.identity);
                 EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
@@ -60,6 +64,25 @@ public class SpawnFromSave : MonoBehaviour{
                 cone.viewRadius = enemyData.viewRadius;
                 EnemyHealth health = enemy.GetComponent<EnemyHealth>();
                 health.currentHealth = enemyData.health;
+            }
+            foreach(DropData dropData in gameData.items){
+                switch(dropData.type){
+                    case WeaponType.Pistol:
+                        GameObject PistolDrop = Instantiate(pistolPrefab, dropData.itemPosition, Quaternion.identity);
+                        break;
+                    case WeaponType.Tranquilizer:
+                        GameObject TranqDrop = Instantiate(tranqPrefab, dropData.itemPosition, Quaternion.identity);
+                        break;
+                    case WeaponType.Healing:
+                        GameObject HealthDrop = Instantiate(healthPrefab, dropData.itemPosition, Quaternion.identity);
+                        break;
+                    case WeaponType.Wearable:
+                        GameObject WearDrop = Instantiate(wearPrefab, dropData.itemPosition, Quaternion.identity);
+                        break;
+                    case WeaponType.Consumable:
+                        GameObject AmmoDrop = Instantiate(ammoPrefab, dropData.itemPosition, Quaternion.identity);
+                        break;
+                    }
             }
 
         }

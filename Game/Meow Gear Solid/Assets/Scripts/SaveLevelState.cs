@@ -21,8 +21,8 @@ public class EnemyData{
 }
 [System.Serializable]
 public class ItemInformation{
-    public ItemData itemData;
-    public ItemData? gunType;
+    public Vector3 itemPosition;
+    public WeaponType type;
 }
 public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
@@ -73,20 +73,21 @@ public class SaveLevelState : MonoBehaviour{
     public void GetDrops(){
         foreach(GameObject drops in GameObject.FindGameObjectsWithTag("Drops")){
             ItemPickUp itemPickUp = drops.GetComponent<ItemPickUp>();
-            if (itemPickUp != null){
-                ItemInformation itemInfo = new ItemInformation{
-                    itemData = itemPickUp.GetItemData()
-                };
-                state.items.Add(itemInfo);
-
-            }
-            else{
-                ItemInformation itemInfo = new ItemInformation{
-                    itemData = drops.GetComponent<ConsumableItemPickup>().GetItemData(),
-                    gunType = drops.GetComponent<ConsumableItemPickup>().GetGunAmmo()
-                };
-                state.items.Add(itemInfo);
-            }
+                if(itemPickUp == null){
+                    ConsumableItemPickup CitemPickUp = drops.GetComponent<ConsumableItemPickup>();
+                    ItemInformation itemInformation = new ItemInformation{
+                    itemPosition = drops.transform.position,
+                    type = CitemPickUp.GetItemData().weaponType
+                    };
+                    state.items.Add(itemInformation);
+                }
+                else{
+                    ItemInformation itemInformation = new ItemInformation{
+                    itemPosition = drops.transform.position,
+                    type = itemPickUp.GetItemData().weaponType
+                    };
+                    state.items.Add(itemInformation);
+                }
         }
         
     }

@@ -6,8 +6,11 @@ using UnityEngine.Video;
 public class PlayerHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private GameObject bloodSplat;
+    [SerializeField] private GameObject playerModel;
+    [SerializeField] private Animator animator;
     private GameObject splatter;
     public Transform playerHead;
+    public bool isDead;
     
     public float maxHealth = 100f;
     public float currentHealth;
@@ -25,13 +28,14 @@ public class PlayerHealth : MonoBehaviour, IHealth
         
     }
     void Start(){
+        currentHealth = maxHealth;
         healthBar = GameObject.FindWithTag("Healthbar").GetComponent<HealthBar>();
         player = GameObject.FindWithTag("GameOverVideoPlayer").GetComponent<Renderer>();
         fader = GameObject.FindWithTag("fader").GetComponent<VideoFader>();
         player = GetComponentInChildren<SkinnedMeshRenderer>();
         player.enabled = true;
         isInvulnerable = false;
-        currentHealth = maxHealth;
+        isDead = false;
         healthBar.SetHealth(currentHealth);
         GameOverScreen.SetActive(false);
 
@@ -66,8 +70,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void onDeath()
     {
-        float timer = 1f;
-        GameOverScreen.SetActive(true);
+        StartCoroutine(DeathTimer(playerModel));
+        float timer = 2f;
         fader.FadeToBlack(timer);
         Debug.Log("GAME OVER");
         
@@ -76,14 +80,14 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     void Update()
     {//tests our damage function. Must remove later
-		if (Input.GetKeyDown(KeyCode.G))
-		{
-			TakeDamage(100);
-		}
-        if (Input.GetKeyDown(KeyCode.H))
-		{
-			HealHealth(20);
-		}
+		//if (Input.GetKeyDown(KeyCode.G))
+		//{
+		//	TakeDamage(100);
+		//}
+        //if (Input.GetKeyDown(KeyCode.H))
+		//{
+		//	HealHealth(20);
+		//}
     }
     IEnumerator GetInvulnerable()
     {
@@ -108,6 +112,17 @@ public class PlayerHealth : MonoBehaviour, IHealth
             yield return new WaitForSeconds(.25f);
             x++;
         }
+    }
+    IEnumerator DeathTimer(GameObject player)
+    {
+        EventBus.Instance.LevelLoadStart();
+        isDead = true;
+        animator.SetBool("IsDead", isDead);
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine("FlashColor");
+        yield return new WaitForSeconds(1.5f);
+        GameOverScreen.SetActive(true);
+        Destroy(player);
     }
     IEnumerator BloodTimer(GameObject splatter)
     {
