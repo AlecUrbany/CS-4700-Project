@@ -25,10 +25,13 @@ public class PlayerHealth : MonoBehaviour, IHealth
         
     }
     void Start(){
+        healthBar = GameObject.FindWithTag("Healthbar").GetComponent<HealthBar>();
+        player = GameObject.FindWithTag("GameOverVideoPlayer").GetComponent<Renderer>();
+        fader = GameObject.FindWithTag("fader").GetComponent<VideoFader>();
         player = GetComponentInChildren<SkinnedMeshRenderer>();
         player.enabled = true;
         isInvulnerable = false;
-        currentHealth = maxHealth;
+        currentHealth = healthBar.slider.value;
         healthBar.SetHealth(currentHealth);
         GameOverScreen.SetActive(false);
 

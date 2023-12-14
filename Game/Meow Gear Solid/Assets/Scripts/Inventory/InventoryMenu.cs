@@ -22,9 +22,13 @@ public class InventoryMenu : MonoBehaviour
     public ItemData equipedItem;
     public GameObject spawnedItem;
 
+    public AudioSource source;
+    public AudioClip pauseSound;
+
     //Makes sure inventory doesnt spawn in when we start the game
     void Start()
     {
+        playerControls = GameObject.FindWithTag("Player").GetComponent<PlayerControls>();
         inventoryViewObject.SetActive(false);
     }
     
@@ -45,6 +49,7 @@ public class InventoryMenu : MonoBehaviour
             else
             {
                 EventBus.Instance.OpenInventory();
+                source.PlayOneShot(pauseSound, .75f);
                 Time.timeScale = 0;
                 slots[0].OnSelect(null);
             }

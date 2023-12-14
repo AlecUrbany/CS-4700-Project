@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     float previousTimeScale = 1;
     public static bool isPaused;
+    public AudioSource source;
+    public AudioClip pauseSound;
 
     void Start()
     {
@@ -28,7 +30,7 @@ public class PauseMenu : MonoBehaviour
         {
             previousTimeScale = Time.timeScale;
             Time.timeScale = 0;
-            AudioListener.pause = true;
+            source.PlayOneShot(pauseSound, .75f);
             isPaused = true;
             pauseMenu.SetActive(true);
             EventBus.Instance.OpenInventory();

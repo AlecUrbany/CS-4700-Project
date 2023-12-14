@@ -20,6 +20,9 @@ TagManager:
   - PlayerFollowCam
   - Drops
   - EnemyReinforce
+  - Healthbar
+  - GameOverVideoPlayer
+  - fader
   layers:
   - Default
   - TransparentFX

@@ -28,7 +28,7 @@ public class MeleeCollision : MonoBehaviour
                 }
                 else
                 {
-                    AudioSource.PlayClipAtPoint(punchSound2, transform.position, 1.0f);
+                    AudioSource.PlayClipAtPoint(punchSound2, camLocation.transform.position, 1.0f);
                     enemyScript.TakeDamage(damage);
                     Destroy(bullet);
                 }
