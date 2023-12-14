@@ -8120,7 +8120,7 @@ GameObject:
   - component: {fileID: 814345862}
   - component: {fileID: 814345861}
   - component: {fileID: 814345860}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: InteriorExit1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8144,7 +8144,7 @@ MonoBehaviour:
   targetPortal: InteriorEntrance2
   thisPortalsSpawnSide: 0
   thisPortalsSpawnOffset: 9
-  thisPortalsHortizontalOffset: -6
+  thisPortalsHortizontalOffset: 0
 --- !u!65 &814345861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15637,7 +15637,7 @@ MonoBehaviour:
   targetSceneName: ExteriorNODANGER
   targetPortal: InteriorEntrance1
   thisPortalsSpawnSide: 2
-  thisPortalsSpawnOffset: 3
+  thisPortalsSpawnOffset: 4.5
   thisPortalsHortizontalOffset: 0.5
 --- !u!65 &1615732469
 BoxCollider:
