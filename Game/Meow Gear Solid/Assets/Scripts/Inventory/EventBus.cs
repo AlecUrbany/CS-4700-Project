@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Diagnostics;
 
 public class EventBus
 {
+    // elapsed_time = timer.ElapsedMilliseconds;
+    // Format and display the TimeSpan value.
+    //   string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+    public Stopwatch timer = new Stopwatch();
     public bool canMove = true;
     public bool enemyCanMove = true;
     public bool hasMacguffin = false;
@@ -13,6 +18,9 @@ public class EventBus
     public static EventBus Instance { get { if (theInstance == null) theInstance = new EventBus(); return theInstance; } }
 
     static EventBus theInstance;
+
+    public event Action onGameStart;
+    public event Action onGameEnd;
     public event Action onOpenInventory;
     public event Action onCloseInventory;
 
@@ -31,6 +39,14 @@ public class EventBus
     public event Action onLevelLoadStart;
 
     public event Action onLevelLoadEnd;
+
+    public void GameStart() {
+        timer.Start();
+    }
+
+    public void GameEnd() {
+        timer.Stop();
+    }
     
     public void OpenInventory()
     {
@@ -55,7 +71,6 @@ public class EventBus
 
     public void PickUpMacguffin()
     {
-        Debug.Log("Macguffin picked up");
         hasMacguffin = true;
     }
 

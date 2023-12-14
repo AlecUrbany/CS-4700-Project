@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Loading Next Level");
         float timer = 2;
         EventBus.Instance.LevelLoadStart();
+        EventBus.Instance.GameStart();
         StartCoroutine(Delay(timer));
     }
     public void QuitGame ()

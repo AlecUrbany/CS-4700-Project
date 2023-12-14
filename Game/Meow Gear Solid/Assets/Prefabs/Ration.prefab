@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7966922977636807794}
   - component: {fileID: 7966922977636807795}
   - component: {fileID: 7966922977636807792}
+  - component: {fileID: 4665383410567612258}
   m_Layer: 0
   m_Name: Ration
   m_TagString: Untagged
@@ -114,6 +115,19 @@ MonoBehaviour:
   nameLifeSpan: 0.5
   itemData: {fileID: 11400000, guid: 00df72f5cc2c59c4c918d1101f1a7058, type: 2}
   pickUpSound: {fileID: 8300000, guid: a33365d8e9ca98c438ef2b95ba4430c8, type: 3}
+--- !u!114 &4665383410567612258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966922977636807793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7104775703f262e448deaf332d3ed965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinSpeed: 50
 --- !u!1 &8066222617759134961
 GameObject:
   m_ObjectHideFlags: 0
