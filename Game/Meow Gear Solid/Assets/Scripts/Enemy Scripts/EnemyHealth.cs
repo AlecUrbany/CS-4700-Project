@@ -5,8 +5,12 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IHealth
 {
     [SerializeField] private GameObject bloodSplat;
+    [SerializeField] private GameObject enemyBody;
     private GameObject splatter;
     public Transform enemyHead;
+    public Renderer enemy;
+    public Animator animator;
+    public bool isDead;
     public float maxHealth = 100f;
     public float currentHealth;
     public float MaxHealth{
@@ -16,6 +20,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         get { return CurrentHealth; }
     }
     void Start(){
+        isDead = false;
         currentHealth = maxHealth;
     }
     public void TakeDamage(float damageAmount){
@@ -39,11 +44,36 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void onDeath(){
         //gameObject.SetActive(false);
         EventBus.Instance.EnemyKilled();
-        Destroy(gameObject);
+        StartCoroutine(DeathTimer(enemyBody));
     }
     IEnumerator BloodTimer(GameObject splatter)
     {
         yield return new WaitForSeconds(.5f);
         Destroy(splatter);
+    }
+    IEnumerator DeathTimer(GameObject enemy)
+    {
+        isDead = true;
+        animator.SetBool("IsDead", isDead);
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine("FlashColor");
+        yield return new WaitForSeconds(1.5f);
+        Destroy(enemy);
+    }
+    IEnumerator FlashColor()
+    {
+        Color invisible;
+        invisible = enemy.material.color;
+        int x = 0;
+        while(x <= 10)
+        {
+            invisible.a = .25f;
+            enemy.material.color = invisible;
+            yield return new WaitForSeconds(.25f);
+            invisible.a = 1f;
+            enemy.material.color = invisible;
+            yield return new WaitForSeconds(.25f);
+            x++;
+        }
     }
 }

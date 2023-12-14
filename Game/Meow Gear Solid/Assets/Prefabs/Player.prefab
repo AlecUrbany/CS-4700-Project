@@ -513,7 +513,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bloodSplat: {fileID: 2599874350400582794, guid: 44489d2be0ab58040bed91b2a8af2069,
     type: 3}
+  playerModel: {fileID: 4999419160338783440}
+  animator: {fileID: 2449448393841605376}
   playerHead: {fileID: 9212213211920739550}
+  isDead: 0
   maxHealth: 100
   currentHealth: 0
   isInvulnerable: 0
@@ -572,11 +575,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2449448393841605376}
   isMoving: 0
+  isCrouching: 0
   moveSpeed: 450
+  tankMoveSpeed: 4
   rotationSpeed: 720
+  tankRotationSpeed: 360
   playerVelocity: {x: 0, y: 0, z: 0}
   rotationVelo: {x: 0, y: 0, z: 0}
   currentlyEquipped: {fileID: 0}
+  tankControls: 0
   source: {fileID: 6999264280008590301}
   footStep1: {fileID: 8300000, guid: 85e64f739e24d3b4da4e7de4d9ff09b9, type: 3}
   footStep2: {fileID: 8300000, guid: c4526cf4d26d5654ebd4a57aaf3b92d3, type: 3}
@@ -948,6 +955,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cat Rigged
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7c9838cba6d09e845ae3712157fe6029,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7c9838cba6d09e845ae3712157fe6029,
         type: 3}
