@@ -51,6 +51,7 @@ public class CodecTrigger : MonoBehaviour
                 StopCoroutine("Timeout");
                 source.PlayOneShot(pickUpSound, 1f);
                 trigger.StartDialogue();
+                isCalling = false;
                 
             }
     }

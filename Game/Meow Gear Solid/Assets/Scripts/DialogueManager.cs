@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public AudioSource source;
+    public AudioClip talking;
     public Image actorImage;
     public Text actorName;
     public Text messageText;
@@ -28,6 +30,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     void DisplayMessage() {
+        StartCoroutine("Talking");
         Message messageToDisplay = currentMessages[activeMessage];
         messageText.text = messageToDisplay.message;
 
@@ -40,8 +43,10 @@ public class DialogueManager : MonoBehaviour
 
     public void NextMessage() {
         activeMessage++;
+        StopCoroutine("Talking");
         if (activeMessage < currentMessages.Length) {
             DisplayMessage();
+            
         }
         else {
             Debug.Log("Conversation ended!");
@@ -69,5 +74,19 @@ public class DialogueManager : MonoBehaviour
         {
             NextMessage();
         }
+    }
+    IEnumerator Talking()
+    {
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
     }
 }
