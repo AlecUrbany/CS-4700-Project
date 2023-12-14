@@ -7,6 +7,8 @@ using System.Diagnostics;
 public class EventBus
 {
     // elapsed_time = timer.ElapsedMilliseconds;
+    // Format and display the TimeSpan value.
+    //   string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
     public Stopwatch timer = new Stopwatch();
     public bool canMove = true;
     public bool enemyCanMove = true;

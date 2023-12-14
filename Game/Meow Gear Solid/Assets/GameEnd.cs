@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameEnd : MonoBehaviour
 {
-    public bool hasMacguffin;
     GameObject exitTruck;
     GameObject exitText;
     public ScreenFader fader;
@@ -12,19 +11,18 @@ public class GameEnd : MonoBehaviour
     void Start()
     {
         exitTruck = GetComponent<GameObject>();
-        hasMacguffin = EventBus.Instance.hasMacguffin;
         exitTruck.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(hasMacguffin == true)
+        if(EventBus.Instance.hasMacguffin == true)
         {
            exitTruck.SetActive(true);
         }
-
     }
+
     private void OnTriggerStay(Collider other)
     {
         //Checks to see if object colliding has player tag
@@ -39,6 +37,7 @@ public class GameEnd : MonoBehaviour
         {
             float timer = 1;
             EventBus.Instance.LevelLoadStart();
+            EventBus.Instance.GameEnd();
             StartCoroutine(Delay(timer));
         }
     }
