@@ -7,8 +7,12 @@ public class CodecTrigger : MonoBehaviour
 {
     public AudioSource source;
     public AudioClip callSound;
-    public GameObject codecButton;
+    public AudioClip pickUpSound;
+    public GameObject callButton;
     
+    public bool isCalling;
+
+    public bool hasCalled;
     /*[SerializeField] private Image Image;
     
     void OnTriggerEnter(Collider other)
@@ -30,12 +34,43 @@ public class CodecTrigger : MonoBehaviour
 
     private void  OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") == true)
-            trigger.StartDialogue();
-            source.PlayOneShot(callSound, 1f);
+        if (other.gameObject.CompareTag("Player") == true && hasCalled == false)
+        {
+            hasCalled = true;
+            isCalling = true;
+            callButton.SetActive(true);
+            StartCoroutine("Timeout");
+        }
+
+    }
+    public void Update()
+    {
+            if(Input.GetButtonDown("Codec") && isCalling == true)
+            {
+                callButton.SetActive(false);
+                StopCoroutine("Timeout");
+                source.PlayOneShot(pickUpSound, 1f);
+                trigger.StartDialogue();
+                
+            }
     }
     public void Start()
     {
         source = GameObject.FindWithTag("CodecFunction").GetComponent<AudioSource>();
+        callButton.SetActive(false);
+        hasCalled = false;
+        isCalling = false;
+
+    }
+    IEnumerator Timeout()
+    {
+        source.PlayOneShot(callSound, 1f);
+        yield return new WaitForSeconds(1.2f);
+        source.PlayOneShot(callSound, 1f);
+        yield return new WaitForSeconds(1.2f);
+        source.PlayOneShot(callSound, 1f);
+        yield return new WaitForSeconds(3f);
+        callButton.SetActive(false);
+        isCalling = false;
     }
 }

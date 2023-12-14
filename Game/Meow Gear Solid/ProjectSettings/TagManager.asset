@@ -25,6 +25,7 @@ TagManager:
   - fader
   - CodecTrigger
   - CodecFunction
+  - CallButton
   layers:
   - Default
   - TransparentFX
