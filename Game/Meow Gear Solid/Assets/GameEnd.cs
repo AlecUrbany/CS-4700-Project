@@ -17,6 +17,7 @@ public class GameEnd : MonoBehaviour
         exitTruck.SetActive(false);
         hasGuffin = EventBus.Instance.hasMacguffin;
         player = GameObject.FindWithTag("Player").GetComponent<GameObject>();
+        exitText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,16 +34,19 @@ public class GameEnd : MonoBehaviour
         //Checks to see if object colliding has player tag
         if (!other.CompareTag("Player"))
         {
-            //exitText.SetActive(false);
             return;
         }
+        exitText.SetActive(false);
+        if( EventBus.Instance.hasMacguffin == true);
+        {            
 
-       //exitText.SetActive(true);
-        if (Input.GetButtonDown("Interact") && EventBus.Instance.hasMacguffin == true)
-        {
-            EventBus.Instance.LevelLoadStart();
-            EventBus.Instance.GameEnd();
-            StartCoroutine("Delay");
+            exitText.SetActive(true);
+            if (Input.GetButtonDown("Interact") && EventBus.Instance.hasMacguffin == true)
+            {
+                EventBus.Instance.LevelLoadStart();
+                EventBus.Instance.GameEnd();
+                StartCoroutine("Delay");
+            }
         }
     }
     private IEnumerator Delay()
