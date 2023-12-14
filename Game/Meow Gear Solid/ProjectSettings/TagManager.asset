@@ -23,6 +23,7 @@ TagManager:
   - Healthbar
   - GameOverVideoPlayer
   - fader
+  - CodecTrigger
   layers:
   - Default
   - TransparentFX
