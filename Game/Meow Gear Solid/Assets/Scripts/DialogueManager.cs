@@ -29,14 +29,21 @@ public class DialogueManager : MonoBehaviour
         backgroundBox.LeanScale(Vector3.one, 0.5f).setEaseInOutExpo();
     }
 
-    void DisplayMessage() {
-        StartCoroutine("Talking");
+    void DisplayMessage() {  
         Message messageToDisplay = currentMessages[activeMessage];
         messageText.text = messageToDisplay.message;
 
         Actor actorToDisplay = currentActors[messageToDisplay.actorId];
         actorName.text = actorToDisplay.name;
         actorImage.sprite = actorToDisplay.sprite;
+        if(actorName.text == "Paws")
+        {
+            StartCoroutine("TalkingCat");
+        }
+        else
+        {
+            StartCoroutine("Talking");
+        }
 
         AnimateTextColor();
     }
@@ -44,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     public void NextMessage() {
         activeMessage++;
         StopCoroutine("Talking");
+        StopCoroutine("TalkingCat");
         if (activeMessage < currentMessages.Length) {
             DisplayMessage();
             
@@ -85,6 +93,12 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(.05f);
         source.PlayOneShot(talking, .75f);
         yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+        yield return new WaitForSeconds(.05f);
+        source.PlayOneShot(talking, .75f);
+    }
+    IEnumerator TalkingCat()
+    {
         source.PlayOneShot(talking, .75f);
         yield return new WaitForSeconds(.05f);
         source.PlayOneShot(talking, .75f);
