@@ -22,7 +22,7 @@ public class EnemyData{
 [System.Serializable]
 public class ItemInformation{
     public Vector3 itemPosition;
-    public ItemData? gunType;
+    public WeaponType type;
 }
 public class SaveLevelState : MonoBehaviour{
     public string levelToSave;
@@ -73,6 +73,21 @@ public class SaveLevelState : MonoBehaviour{
     public void GetDrops(){
         foreach(GameObject drops in GameObject.FindGameObjectsWithTag("Drops")){
             ItemPickUp itemPickUp = drops.GetComponent<ItemPickUp>();
+                if(itemPickUp == null){
+                    ConsumableItemPickup CitemPickUp = drops.GetComponent<ConsumableItemPickup>();
+                    ItemInformation itemInformation = new ItemInformation{
+                    itemPosition = drops.transform.position,
+                    type = CitemPickUp.GetItemData().weaponType
+                    };
+                    state.items.Add(itemInformation);
+                }
+                else{
+                    ItemInformation itemInformation = new ItemInformation{
+                    itemPosition = drops.transform.position,
+                    type = itemPickUp.GetItemData().weaponType
+                    };
+                    state.items.Add(itemInformation);
+                }
         }
         
     }
