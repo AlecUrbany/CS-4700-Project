@@ -360,7 +360,7 @@ MonoBehaviour:
   enemy: {fileID: 6595671522378198123}
   animator: {fileID: 6487061845568965901}
   isDead: 0
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
 --- !u!114 &3980568658035178421
 MonoBehaviour:
@@ -971,6 +971,7 @@ MonoBehaviour:
   reloadSpeed: 2
   bulletSpeed: 40
   burstSpeed: 0.1
+  damage: 15
   isReloading: 0
   sightline: {fileID: 3980568657886112265}
   source: {fileID: 3989599525335088236}

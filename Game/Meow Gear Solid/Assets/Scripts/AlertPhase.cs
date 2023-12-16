@@ -14,7 +14,7 @@ public class AlertPhase : MonoBehaviour
     private List<GameObject> alertEnemies;
     private bool inAlertPhase;
     private double timeRemaining = 0;
-    private double alertDuration = 30;
+    private double alertDuration = 15;
     private Transform player;
     private Vector3 lastKnownPosition; 
 

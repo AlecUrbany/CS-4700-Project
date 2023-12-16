@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public Renderer enemy;
     public Animator animator;
     public bool isDead;
-    public float maxHealth = 100f;
+    public float maxHealth = 50f;
     public float currentHealth;
     public float MaxHealth{
         get { return MaxHealth; }
