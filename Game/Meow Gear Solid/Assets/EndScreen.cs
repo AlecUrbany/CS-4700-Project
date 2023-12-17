@@ -17,7 +17,7 @@ public class EndScreen : MonoBehaviour
     void Start()
     {
         alertStats.SetText(EventBus.Instance.numTimesAlertPhaseEntered.ToString());
-        timeStats.SetText(EventBus.Instance.timeElapsed.ToString());
+        timeStats.SetText(Time.time.ToString());
         killsStats.SetText(EventBus.Instance.numKilledEnemies.ToString());
         thanksScreen.SetActive(false);
     }
@@ -25,6 +25,10 @@ public class EndScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if(EventBus.Instance.canMove == false)
+       {
+            return;
+       }
        if(Input.anyKey && endScreen == false)
        {
             StartCoroutine("Delay");

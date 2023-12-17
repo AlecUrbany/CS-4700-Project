@@ -455,7 +455,6 @@ GameObject:
   - component: {fileID: 393837005}
   - component: {fileID: 393837008}
   - component: {fileID: 393837007}
-  - component: {fileID: 393837006}
   m_Layer: 5
   m_Name: Anchor
   m_TagString: Untagged
@@ -481,24 +480,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -24.990814, y: 0.775177}
+  m_AnchoredPosition: {x: -48, y: -414}
   m_SizeDelta: {x: 640, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &393837006
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393837004}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &393837007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +649,6 @@ GameObject:
   - component: {fileID: 579023248}
   - component: {fileID: 579023251}
   - component: {fileID: 579023250}
-  - component: {fileID: 579023249}
   m_Layer: 5
   m_Name: Roles
   m_TagString: Untagged
@@ -692,22 +675,6 @@ RectTransform:
   m_AnchoredPosition: {x: -278.7092, y: 124.62482}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &579023249
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 579023247}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5a38ee3d908dcb64986e0200f8c60004, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 5a38ee3d908dcb64986e0200f8c60004, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &579023250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,46 +720,86 @@ MonoBehaviour:
     Average Debugger
 
 
-    Professional Debugger
+    Professional
+
+    Debugger
+
+
+    Professional
+
+    Landscaper
 
 
     Head
-    of 3D Modeling
+    of 3D
+
+    Modeling
 
 
     Cat Training
 
 
-    Talking Head Animator
+    Green Talking
+
+    Head Animator
+
+
+    Asset
+    Store
+
+    Consumer
 
 
     Craft Services
 
 
-    Cursed
-    by Null
+    Champion of
 
-    ReferenceException
-
-
-    Gaurd Patrol Training
+    the Kittens
 
 
-    Security Cam
+    Tree
+    Wizard
+
+
+    Cursed by Null
+
+    Reference
+
+    Exception
+
+
+    Gaurd Patrol
+
+    Training
+
+
+    Security
+    Cam
+
     Enthusiast
 
 
-    Warehouse Renovator
+    Warehouse
+
+    Renovator
 
 
-    Reinforcement Summoner
+    Reinforcement
+
+    Summoner
 
 
     Portal
     Summoner
 
 
-    Alert Phase Architect
+    SFX Artist
+
+
+    Alert Phase
+
+    Architect
 
 
     Arms Dealer
@@ -801,11 +808,31 @@ MonoBehaviour:
     Statistician
 
 
-    Dog
-    Person
+    Meteorologist
+
+
+    Comms
+    Operator
+
+
+    Dreamer
+
+
+    Dog Person
+
+
+    Git Desktop Rookie
 
 
     Git Wrangler
+
+
+    Spent
+    14 hours
+
+    coding before
+
+    the due date
 
 
     Special Thanks'
@@ -1583,7 +1610,6 @@ GameObject:
   - component: {fileID: 1363630093}
   - component: {fileID: 1363630096}
   - component: {fileID: 1363630095}
-  - component: {fileID: 1363630094}
   m_Layer: 5
   m_Name: People
   m_TagString: Untagged
@@ -1610,22 +1636,6 @@ RectTransform:
   m_AnchoredPosition: {x: 111.990814, y: 124.624825}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!111 &1363630094
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363630092}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5a38ee3d908dcb64986e0200f8c60004, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 5a38ee3d908dcb64986e0200f8c60004, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &1363630095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,11 +1684,69 @@ MonoBehaviour:
     Kate Johnson
 
 
+
+    Vincent
+    Rivera
+
+
+
+    Alec Urbany
+
+
+
+    Jose Pavon
+
+
+    Kate Johnson
+
+
+
+    Vincent
+    Rivera
+
+
+
+    Jose Pavon
+
+
+    Alec Urbany
+
+
+
+    Vincent Rivera
+
+
+    Kate Johnson
+
+
+
+
     Jose
     Pavon
 
 
+
     Kate Johnson
+
+
+
+    Jose Pavon
+
+
+
+    Kate Johnson
+
+
+
+    Jose Pavon
+
+
+    Alec
+    Urbany
+
+
+    Kate Johnson
+
 
 
     Jose Pavon
@@ -1687,37 +1755,29 @@ MonoBehaviour:
     Kate Johnson
 
 
+    Vincent
+    Rivera
+
 
     Jose Pavon
+
+
+    Alec Urbany
+
+
+    Jose Pavon
+
+
+    Vincent Rivera
 
 
     Kate
     Johnson
 
 
-    Jose Pavon
+    Alec Urbany
 
 
-    Kate Johnson
-
-
-    Jose Pavon
-
-
-    Kate Johnson
-
-
-    Jose
-    Pavon
-
-
-    Kate Johnson
-
-
-    Jose Pavon
-
-
-    Kate Johnson
 
 
     Markus Eger'
@@ -1807,6 +1867,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1424999392}
+  - component: {fileID: 1424999393}
+  - component: {fileID: 1424999394}
   m_Layer: 0
   m_Name: CREDITS
   m_TagString: Untagged
@@ -1822,13 +1884,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424999391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.990814, y: -367.69, z: 30.128002}
+  m_LocalPosition: {x: 92, y: -409.51, z: 30.128002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 393837005}
   m_Father: {fileID: 2050033155}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1424999393
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424999391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 527c6af874de39142a9f23d64c50ab46, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 527c6af874de39142a9f23d64c50ab46, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &1424999394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424999391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239b2b5fbbdd40c45a7bbf7966c40082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsPage: {fileID: 552197032}
+  fader: {fileID: 548621422}
 --- !u!1 &1618944666
 GameObject:
   m_ObjectHideFlags: 0
