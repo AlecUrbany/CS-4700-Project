@@ -27,8 +27,10 @@ This project was made for our game development class. We thought of many options
 - Simply hit play when on the Main Menu scene
 
 ## Authors
-
-
+- AlecUrbany
+- AthenaMinerva 
+- NovaCastaway
+- RannerJP 
 ## License
 
 This project uses the [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/) license
