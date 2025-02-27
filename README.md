@@ -20,7 +20,7 @@ This project was made for our game development class. We thought of many options
 **exe to be added soon!** 
 - Download this project either by 
     - Downloading the source code as a zip and unzipping to your desired location
-    - Using `git clone https://github.com/RannerJP/Dog-Image-Classifier.git`. Make sure you have [git](https://git-scm.com/downloads) installed
+    - Using `git clone https://github.com/AlecUrbany/CS-4700-Project.git`. Make sure you have [git](https://git-scm.com/downloads) installed
 - Open the project in unity navigate to the "Main Menu" scence in Assets/Scenes/ALL LEVELS IN THE FINAL GAME HERE
 
 ## Usage
