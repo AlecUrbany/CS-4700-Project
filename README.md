@@ -1,5 +1,5 @@
 # Meow Gear Solid
-![image](./ReadMeAssets/MainMenu)
+![image](./ReadMeImages/MainMenu)
 
 This is an action-stealth game made in Unity where Agent Paw must retrieve the "Heart of Humanity" from the huskys.
 
