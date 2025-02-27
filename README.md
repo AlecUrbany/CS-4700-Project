@@ -1,7 +1,7 @@
 # Meow Gear Solid
 ![image](./ReadMeImages/MainMenu.png)
 
-This is an action-stealth game made in Unity where Agent Paw must retrieve the "Heart of Humanity" from the huskys.
+This is an action-stealth game made in Unity (written in C#) where Agent Paw must retrieve the "Heart of Humanity" from the huskys.
 
 ## Motivation
 This project was made for our game development class. We thought of many options (A fighting game) but the one that seemed most realistic and piqued our intrest the most was a game based on Metal Gear Solid.
